@@ -20,9 +20,10 @@ class OnboardingItem extends StatelessWidget {
     );
 
     return Container(
-      margin: EdgeInsets.symmetric(
-        vertical: size.height * 0.05,
-        horizontal: size.height * 0.05,
+      margin: EdgeInsets.only(
+        bottom: size.height * 0.03,
+        left: size.height * 0.05,
+        right: size.height * 0.05,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
