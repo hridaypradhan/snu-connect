@@ -13,23 +13,24 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.2
+  google_fonts: ^2.1.0
+  introduction_screen: ^2.1.0
 
 dev_dependencies:
+  flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
 
 flutter:
 
   uses-material-design: true
 
   assets:
-    - assets/
-
+    - assets/images/
+    
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
