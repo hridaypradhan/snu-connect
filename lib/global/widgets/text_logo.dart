@@ -11,26 +11,10 @@ class TextLogo extends StatelessWidget {
         border: Border.all(color: primaryPink),
         borderRadius: BorderRadius.circular(25.0),
       ),
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
-            'snu',
-            style: TextStyle(fontSize: 25.0),
-          ),
-          SizedBox(width: 10.0),
-          Icon(
-            Icons.link,
-            color: primaryPink,
-          ),
-          SizedBox(width: 10.0),
-          Text(
-            'connect',
-            style: TextStyle(fontSize: 25.0),
-          ),
-        ],
+      padding: const EdgeInsets.all(15.0),
+      child: Image.asset(
+        'assets/images/logo_name.png',
+        height: 80.0,
       ),
     );
   }

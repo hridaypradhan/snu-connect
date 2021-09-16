@@ -21,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
         ),
         rawPages: [
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -70,7 +70,7 @@ class OnboardingScreen extends StatelessWidget {
                 child: const TextLogo(),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

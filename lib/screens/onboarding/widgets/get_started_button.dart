@@ -15,7 +15,6 @@ class GetStartedButton extends StatelessWidget {
       ),
       splashColor: Colors.grey,
       child: Container(
-        margin: const EdgeInsets.all(5.0),
         padding: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
           color: primaryPink,
