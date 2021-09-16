@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:snu_connect/constants/colors.dart';
-import 'package:snu_connect/screens/login/login_screen.dart';
 
-class GetStartedButton extends StatelessWidget {
-  const GetStartedButton({Key? key}) : super(key: key);
+class LargeButton extends StatelessWidget {
+  final Function onPressed;
+  final String text;
+  const LargeButton({
+    Key? key,
+    required this.onPressed,
+    required this.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(20.0),
-      onTap: () => Navigator.pushReplacementNamed(
-        context,
-        LoginScreen.id,
-      ),
+      onTap: () {
+        onPressed();
+      },
       splashColor: Colors.grey,
       child: Container(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
           color: primaryPink,
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
-              'GET STARTED',
-              style: TextStyle(
+              text,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0,

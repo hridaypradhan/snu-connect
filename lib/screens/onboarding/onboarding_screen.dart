@@ -3,7 +3,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:snu_connect/constants/colors.dart';
 import 'package:snu_connect/global/widgets/text_logo.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
-import 'package:snu_connect/screens/onboarding/widgets/get_started_button.dart';
+import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/onboarding/widgets/onboarding_item.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -12,7 +12,6 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: IntroductionScreen(
         color: primaryPink,
@@ -20,27 +19,36 @@ class OnboardingScreen extends StatelessWidget {
           activeColor: primaryPink,
         ),
         rawPages: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/welcome.png'),
-                const Text(
-                  'to snu connect.',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
+          Stack(
+            children: [
+              Container(
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.only(top: 20.0),
+                child: const TextLogo(height: 80.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/welcome.png'),
+                    const Text(
+                      'to snu connect.',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Stack(
             children: [
               Container(
                 alignment: Alignment.topCenter,
                 margin: const EdgeInsets.only(top: 20.0),
-                child: const TextLogo(),
+                child: const TextLogo(height: 80.0),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +75,10 @@ class OnboardingScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.topCenter,
                 margin: const EdgeInsets.only(top: 20.0),
-                child: const TextLogo(),
+                child: const Hero(
+                  child: TextLogo(height: 80.0),
+                  tag: 'icon',
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -84,7 +95,13 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    const GetStartedButton(),
+                    LargeButton(
+                      text: 'GET STARTED',
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        LoginScreen.id,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -92,7 +109,7 @@ class OnboardingScreen extends StatelessWidget {
           ),
         ],
         showDoneButton: false,
-        onSkip: () => Navigator.pushReplacementNamed(
+        onSkip: () => Navigator.pushNamed(
           context,
           LoginScreen.id,
         ),
@@ -104,7 +121,7 @@ class OnboardingScreen extends StatelessWidget {
               color: primaryPink,
             ),
           ),
-          onPressed: () => Navigator.pushReplacementNamed(
+          onPressed: () => Navigator.pushNamed(
             context,
             LoginScreen.id,
           ),

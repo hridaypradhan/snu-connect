@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:snu_connect/constants/colors.dart';
+import 'package:snu_connect/global/widgets/large_button.dart';
+import 'package:snu_connect/global/widgets/text_logo.dart';
+import 'package:snu_connect/screens/login/widgets/email_field.dart';
+import 'package:snu_connect/screens/login/widgets/password_field.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'login_screen';
-  const LoginScreen({Key? key}) : super(key: key);
+  final TextEditingController _netIdController = TextEditingController(),
+      _passwordController = TextEditingController();
+
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    var size = MediaQuery.of(context).size;
+    SizedBox division = SizedBox(height: size.height * 0.06);
+    return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Text('Login Screen'),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () {
+              if (Navigator.canPop(context)) Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.chevron_left,
+              color: primaryPink,
+              size: 40.0,
+            ),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Hero(
+                  tag: 'icon',
+                  child: Image.asset('assets/images/logo_name.png'),
+                ),
+                division,
+                EmailField(controller: _netIdController),
+                division,
+                PasswordField(controller: _passwordController),
+                division,
+                LargeButton(
+                  onPressed: () {},
+                  text: 'LOG IN',
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
