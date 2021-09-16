@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.snu_connect">
    <application
-        android:label="snu_connect"
+        android:label="SNU Connect"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
