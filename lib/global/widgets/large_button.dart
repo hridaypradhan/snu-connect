@@ -1,3 +1,4 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/constants/colors.dart';
 
@@ -12,12 +13,11 @@ class LargeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(20.0),
-      onTap: () {
+    return BouncingWidget(
+      scaleFactor: 1.5,
+      onPressed: () {
         onPressed();
       },
-      splashColor: Colors.grey,
       child: Container(
         padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
