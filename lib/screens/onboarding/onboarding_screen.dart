@@ -1,3 +1,4 @@
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:snu_connect/constants/colors.dart';
@@ -31,11 +32,16 @@ class OnboardingScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/welcome.png'),
-                    const Text(
-                      'to snu connect.',
-                      style: TextStyle(
-                        fontSize: 30.0,
+                    DelayedDisplay(
+                      child: Image.asset('assets/images/welcome.png'),
+                    ),
+                    const DelayedDisplay(
+                      delay: Duration(milliseconds: 1),
+                      child: Text(
+                        'to snu connect.',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                        ),
                       ),
                     ),
                   ],
@@ -53,18 +59,27 @@ class OnboardingScreen extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  OnboardingItem(
-                    text: 'register for events with a single swipe',
-                    imagePath: 'assets/images/register_for_events.png',
+                  DelayedDisplay(
+                    child: OnboardingItem(
+                      text: 'register for events with a single swipe',
+                      imagePath: 'assets/images/register_for_events.png',
+                    ),
                   ),
-                  OnboardingItem(
-                    text: 'make teams for events, competitions and more',
-                    imagePath: 'assets/images/make_teams.png',
-                    leftText: false,
+                  DelayedDisplay(
+                    delay: Duration(seconds: 1),
+                    child: OnboardingItem(
+                      text: 'make teams for events, competitions and more',
+                      imagePath: 'assets/images/make_teams.png',
+                      leftText: false,
+                    ),
                   ),
-                  OnboardingItem(
-                    text: 'find someone to play, carpool, or run errands with',
-                    imagePath: 'assets/images/find_someone.png',
+                  DelayedDisplay(
+                    delay: Duration(seconds: 2),
+                    child: OnboardingItem(
+                      text:
+                          'find someone to play, carpool, or run errands with',
+                      imagePath: 'assets/images/find_someone.png',
+                    ),
                   ),
                 ],
               ),
@@ -94,12 +109,15 @@ class OnboardingScreen extends StatelessWidget {
                         fontSize: 20.0,
                       ),
                     ),
-                    const SizedBox(height: 20.0),
-                    LargeButton(
-                      text: 'GET STARTED',
-                      onPressed: () => Navigator.pushNamed(
-                        context,
-                        LoginScreen.id,
+                    const SizedBox(height: 50.0),
+                    DelayedDisplay(
+                      delay: const Duration(seconds: 1),
+                      child: LargeButton(
+                        text: 'GET STARTED',
+                        onPressed: () => Navigator.pushNamed(
+                          context,
+                          LoginScreen.id,
+                        ),
                       ),
                     ),
                   ],
