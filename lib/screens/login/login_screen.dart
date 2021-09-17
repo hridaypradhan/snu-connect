@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snu_connect/constants/colors.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
-import 'package:snu_connect/global/widgets/text_logo.dart';
+import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/widgets/email_field.dart';
 import 'package:snu_connect/screens/login/widgets/password_field.dart';
 
@@ -47,7 +47,13 @@ class LoginScreen extends StatelessWidget {
                 PasswordField(controller: _passwordController),
                 division,
                 LargeButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      BaseScreen.id,
+                      (route) => false,
+                    );
+                  },
                   text: 'LOG IN',
                 ),
               ],
