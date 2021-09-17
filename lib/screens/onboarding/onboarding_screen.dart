@@ -24,7 +24,7 @@ class OnboardingScreen extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topCenter,
-                margin: const EdgeInsets.only(top: 20.0),
+                margin: const EdgeInsets.only(top: 15.0),
                 child: const TextLogo(height: 80.0),
               ),
               Padding(
@@ -53,12 +53,13 @@ class OnboardingScreen extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topCenter,
-                margin: const EdgeInsets.only(top: 20.0),
+                margin: const EdgeInsets.only(top: 15.0),
                 child: const TextLogo(height: 80.0),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
+                  SizedBox(height: 40.0),
                   DelayedDisplay(
                     child: OnboardingItem(
                       text: 'register for events with a single swipe',
@@ -89,7 +90,7 @@ class OnboardingScreen extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topCenter,
-                margin: const EdgeInsets.only(top: 20.0),
+                margin: const EdgeInsets.only(top: 15.0),
                 child: const Hero(
                   child: TextLogo(height: 80.0),
                   tag: 'icon',
