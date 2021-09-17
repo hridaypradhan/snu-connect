@@ -1,9 +1,10 @@
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:snu_connect/constants/colors.dart';
 import 'package:snu_connect/global/widgets/text_logo.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
-import 'package:snu_connect/screens/onboarding/widgets/get_started_button.dart';
+import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/onboarding/widgets/onboarding_item.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -12,7 +13,6 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: IntroductionScreen(
         color: primaryPink,
@@ -20,43 +20,67 @@ class OnboardingScreen extends StatelessWidget {
           activeColor: primaryPink,
         ),
         rawPages: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/welcome.png'),
-                const Text(
-                  'to snu connect.',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                  ),
+          Stack(
+            children: [
+              Container(
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.only(top: 15.0),
+                child: const TextLogo(height: 80.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DelayedDisplay(
+                      child: Image.asset('assets/images/welcome.png'),
+                    ),
+                    const DelayedDisplay(
+                      delay: Duration(milliseconds: 1),
+                      child: Text(
+                        'to snu connect.',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Stack(
             children: [
               Container(
                 alignment: Alignment.topCenter,
-                margin: const EdgeInsets.only(top: 20.0),
-                child: const TextLogo(),
+                margin: const EdgeInsets.only(top: 15.0),
+                child: const TextLogo(height: 80.0),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  OnboardingItem(
-                    text: 'register for events with a single swipe',
-                    imagePath: 'assets/images/register_for_events.png',
+                  SizedBox(height: 40.0),
+                  DelayedDisplay(
+                    child: OnboardingItem(
+                      text: 'register for events with a single swipe',
+                      imagePath: 'assets/images/register_for_events.png',
+                    ),
                   ),
-                  OnboardingItem(
-                    text: 'make teams for events, competitions and more',
-                    imagePath: 'assets/images/make_teams.png',
-                    leftText: false,
+                  DelayedDisplay(
+                    delay: Duration(seconds: 1),
+                    child: OnboardingItem(
+                      text: 'make teams for events, competitions and more',
+                      imagePath: 'assets/images/make_teams.png',
+                      leftText: false,
+                    ),
                   ),
-                  OnboardingItem(
-                    text: 'find someone to play, carpool, or run errands with',
-                    imagePath: 'assets/images/find_someone.png',
+                  DelayedDisplay(
+                    delay: Duration(seconds: 2),
+                    child: OnboardingItem(
+                      text:
+                          'find someone to play, carpool, or run errands with',
+                      imagePath: 'assets/images/find_someone.png',
+                    ),
                   ),
                 ],
               ),
@@ -66,8 +90,11 @@ class OnboardingScreen extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topCenter,
-                margin: const EdgeInsets.only(top: 20.0),
-                child: const TextLogo(),
+                margin: const EdgeInsets.only(top: 15.0),
+                child: const Hero(
+                  child: TextLogo(height: 80.0),
+                  tag: 'icon',
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -83,8 +110,17 @@ class OnboardingScreen extends StatelessWidget {
                         fontSize: 20.0,
                       ),
                     ),
-                    const SizedBox(height: 20.0),
-                    const GetStartedButton(),
+                    const SizedBox(height: 50.0),
+                    DelayedDisplay(
+                      delay: const Duration(seconds: 1),
+                      child: LargeButton(
+                        text: 'GET STARTED',
+                        onPressed: () => Navigator.pushNamed(
+                          context,
+                          LoginScreen.id,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -92,7 +128,7 @@ class OnboardingScreen extends StatelessWidget {
           ),
         ],
         showDoneButton: false,
-        onSkip: () => Navigator.pushReplacementNamed(
+        onSkip: () => Navigator.pushNamed(
           context,
           LoginScreen.id,
         ),
@@ -104,7 +140,7 @@ class OnboardingScreen extends StatelessWidget {
               color: primaryPink,
             ),
           ),
-          onPressed: () => Navigator.pushReplacementNamed(
+          onPressed: () => Navigator.pushNamed(
             context,
             LoginScreen.id,
           ),

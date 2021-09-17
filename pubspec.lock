@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  bouncing_widget:
+    dependency: "direct main"
+    description:
+      name: bouncing_widget
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   characters:
     dependency: transitive
     description:
@@ -57,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  delayed_display:
+    dependency: "direct main"
+    description:
+      name: delayed_display
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   dots_indicator:
     dependency: transitive
     description:

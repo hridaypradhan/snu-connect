@@ -13,7 +13,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bouncing_widget: ^2.0.0
   cupertino_icons: ^1.0.2
+  delayed_display: ^2.0.0
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0
@@ -30,7 +32,6 @@ flutter:
 
   assets:
     - assets/images/
-    
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
