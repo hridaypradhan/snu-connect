@@ -2,8 +2,9 @@ import 'package:bottom_sheet_expandable_bar/bottom_sheet_bar_icon.dart';
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_expandable_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/constants/colors.dart';
+import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/base_provider.dart';
+import 'package:snu_connect/screens/base/widgets/create_event_form.dart';
 
 class BaseScreen extends StatefulWidget {
   static const String id = 'base_screen';
@@ -17,11 +18,13 @@ class _BaseScreenState extends State<BaseScreen> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     var baseProvider = Provider.of<BaseProvider>(context);
     return SafeArea(
       child: Scaffold(
         extendBody: true,
         bottomNavigationBar: BottomBarSheet(
+          bottomSheetHeight: size.height,
           currentIndex: baseProvider.currentPage,
           bottomBarHeight: 70.0,
           backgroundColor: lightPink,
@@ -32,6 +35,7 @@ class _BaseScreenState extends State<BaseScreen> {
           ),
           iconColor: primaryPink,
           buttonPosition: ButtonBottomBarPosition.end,
+          innerChild: const CreateEventForm(),
           children: [
             BottomSheetBarIcon(
               icon: const Icon(Icons.home),
@@ -48,10 +52,17 @@ class _BaseScreenState extends State<BaseScreen> {
               },
             ),
             BottomSheetBarIcon(
-              icon: const Icon(Icons.person),
+              icon: const Icon(Icons.chat),
               color: primaryPink,
               onTap: () {
                 baseProvider.changePage(2);
+              },
+            ),
+            BottomSheetBarIcon(
+              icon: const Icon(Icons.person),
+              color: primaryPink,
+              onTap: () {
+                baseProvider.changePage(3);
               },
             ),
           ],

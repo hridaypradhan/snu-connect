@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/constants/colors.dart';
+import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/widgets/email_field.dart';

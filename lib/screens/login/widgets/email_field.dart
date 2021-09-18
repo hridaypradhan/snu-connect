@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/constants/colors.dart';
+import 'package:snu_connect/global/constants/colors.dart';
 
 class EmailField extends StatelessWidget {
   final TextEditingController controller;
@@ -20,14 +20,14 @@ class EmailField extends StatelessWidget {
           Icons.email,
           color: primaryPink,
         ),
-        counterText: "",
+        counterText: '',
         contentPadding: const EdgeInsets.all(18.0),
         labelText: 'Net ID',
         labelStyle: const TextStyle(
           color: Colors.black,
           fontSize: 18.0,
         ),
-        hintText: 'For example: ab123',
+        hintText: 'Ex: ab123',
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.0),
           borderSide: const BorderSide(
