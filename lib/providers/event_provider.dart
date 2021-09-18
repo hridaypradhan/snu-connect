@@ -6,12 +6,14 @@ class EventProvider extends ChangeNotifier {
   String? _venue = '';
   String? _eventName = '';
   int _peopleCount = 1;
+  DateTime? _selectedDateTime;
 
   Category? get selectedCategory => _selectedCategory;
   int get peopleCount => _peopleCount;
   String? get eventName => _eventName;
   String? get venue => _venue;
-
+  DateTime? get selectedDateTime => _selectedDateTime;
+  
   pickCategory(Category? newCategory) {
     _selectedCategory = newCategory;
     notifyListeners();

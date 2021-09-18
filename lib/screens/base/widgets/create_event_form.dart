@@ -1,6 +1,8 @@
+import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/base/widgets/category_card.dart';
 import 'package:snu_connect/screens/base/widgets/description_field.dart';
 import 'package:snu_connect/screens/base/widgets/event_name_field.dart';
@@ -51,55 +53,78 @@ class _CreateEventFormState extends State<CreateEventForm> {
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
-      child: Column(
-        children: [
-          const Text(
-            'Create Event',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Text(
+              'Create Event',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
             ),
-          ),
-          divider,
-          thin,
-          const Text('Category'),
-          thin,
-          SizedBox(
-            height: size.width * 0.27,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: List.generate(
-                _categories.length,
-                (index) => CategoryCard(
-                  category: _categories[index],
+            divider,
+            thin,
+            const Text('Category'),
+            thin,
+            SizedBox(
+              height: size.width * 0.27,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: List.generate(
+                  _categories.length,
+                  (index) => CategoryCard(
+                    category: _categories[index],
+                  ),
                 ),
               ),
             ),
-          ),
-          thin,
-          divider,
-          thin,
-          EventNameField(
-            controller: _eventNameController,
-          ),
-          thin,
-          VenueField(
-            controller: _venueController,
-          ),
-          thin,
-          DescriptionField(
-            controller: _descriptionController,
-          ),
-          thin,
-          divider,
-          thin,
-          const Text('People Count'),
-          thin,
-          const PersonCounter(),
-          thin,
-          divider,
-          thin,
-        ],
+            thin,
+            divider,
+            thin,
+            EventNameField(
+              controller: _eventNameController,
+            ),
+            thin,
+            VenueField(
+              controller: _venueController,
+            ),
+            thin,
+            DescriptionField(
+              controller: _descriptionController,
+            ),
+            thin,
+            divider,
+            thin,
+            const Text('People Count'),
+            thin,
+            const PersonCounter(),
+            thin,
+            divider,
+            thin,
+            DateTimePicker(
+              datePickerTitle: 'Date',
+              startDate: DateTime.now(),
+              endDate: DateTime.now().add(
+                const Duration(days: 10),
+              ),
+              type: DateTimePickerType.Date,
+              onDateChanged: (newDate) {},
+            ),
+            DateTimePicker(
+              timePickerTitle: 'Time',
+              timeInterval: const Duration(minutes: 15),
+              type: DateTimePickerType.Time,
+              onTimeChanged: (newTime) {},
+            ),
+            divider,
+            thin,
+            LargeButton(
+              onPressed: () {},
+              text: 'CREATE EVENT',
+            ),
+          ],
+        ),
       ),
     );
   }

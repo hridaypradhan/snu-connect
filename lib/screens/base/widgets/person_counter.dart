@@ -17,13 +17,13 @@ class PersonCounter extends StatelessWidget {
           onTap: () {
             eventProvider.changePeopleCount(-1);
           },
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 26.0,
             backgroundColor: Colors.black,
             child: CircleAvatar(
               radius: 25.0,
-              backgroundColor: primaryPink,
-              child: Icon(
+              backgroundColor: Colors.pink[300],
+              child: const Icon(
                 Icons.remove,
                 color: Colors.black,
               ),
@@ -34,7 +34,7 @@ class PersonCounter extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
-            color: primaryPink,
+            color: Colors.pink[300],
             borderRadius: BorderRadius.circular(20.0),
           ),
           height: 70.0,
@@ -56,13 +56,13 @@ class PersonCounter extends StatelessWidget {
           onTap: () {
             eventProvider.changePeopleCount(1);
           },
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 26.0,
             backgroundColor: Colors.black,
             child: CircleAvatar(
               radius: 25.0,
-              backgroundColor: primaryPink,
-              child: Icon(
+              backgroundColor: Colors.pink[300],
+              child: const Icon(
                 Icons.add,
                 color: Colors.black,
               ),
