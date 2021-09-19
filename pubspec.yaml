@@ -21,6 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0
+  intl: ^0.17.0
   introduction_screen: ^2.1.0
   provider: ^5.0.0
 

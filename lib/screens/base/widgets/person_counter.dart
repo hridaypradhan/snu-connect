@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 
 class PersonCounter extends StatelessWidget {
@@ -37,14 +36,14 @@ class PersonCounter extends StatelessWidget {
             color: Colors.pink[300],
             borderRadius: BorderRadius.circular(20.0),
           ),
-          height: 70.0,
-          width: 70.0,
+          height: 105.0,
+          width: 105.0,
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: Text(
               '${eventProvider.peopleCount}',
               style: const TextStyle(
-                fontSize: 20.0,
+                fontSize: 25.0,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
