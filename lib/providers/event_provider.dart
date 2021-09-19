@@ -68,7 +68,8 @@ class EventProvider extends ChangeNotifier {
         phone: '1234567890',
         name: 'Hriday',
       ),
-      name: 'TEDxShivNadarUniversity',
+      // TODO Set text limit for event name
+      name: 'TEDxSNU',
     ),
     Event(
       maxPeople: 1,
