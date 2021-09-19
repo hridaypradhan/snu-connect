@@ -31,26 +31,25 @@ class CategoryCard extends StatelessWidget {
           color: getCategoryColor(category),
         ),
         width: size.width * 0.4,
-        child: Stack(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Image.asset('assets/images/welcome.png'),
+            Flexible(
+              child: getCategoryImage(category),
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                categoryToText(category),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  categoryToText(category),
+                ),
+                Icon(
+                  eventProvider.selectedCategory == category
+                      ? Icons.check_box_rounded
+                      : Icons.check_box_outline_blank_rounded,
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Icon(
-                eventProvider.selectedCategory == category
-                    ? Icons.check_box_rounded
-                    : Icons.check_box_outline_blank_rounded,
-              ),
-            )
           ],
         ),
       ),

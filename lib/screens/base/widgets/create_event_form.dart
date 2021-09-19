@@ -1,8 +1,10 @@
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
+import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/base/widgets/category_card.dart';
 import 'package:snu_connect/screens/base/widgets/description_field.dart';
 import 'package:snu_connect/screens/base/widgets/event_name_field.dart';
@@ -47,8 +49,9 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
   @override
   Widget build(BuildContext context) {
+    var eventProvider = Provider.of<EventProvider>(context);
     Divider divider = const Divider(thickness: 1);
-    SizedBox thin = const SizedBox(height: 10.0);
+    SizedBox thin = const SizedBox(height: 15.0);
 
     var size = MediaQuery.of(context).size;
     return Padding(
@@ -68,7 +71,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
             const Text('Category'),
             thin,
             SizedBox(
-              height: size.width * 0.27,
+              height: size.width * 0.4,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: List.generate(
@@ -120,7 +123,12 @@ class _CreateEventFormState extends State<CreateEventForm> {
             divider,
             thin,
             LargeButton(
-              onPressed: () {},
+              onPressed: () {
+                eventProvider.clearFields();
+                _eventNameController?.clear();
+                _descriptionController?.clear();
+                _venueController?.clear();
+              },
               text: 'CREATE EVENT',
             ),
           ],

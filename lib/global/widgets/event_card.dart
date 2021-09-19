@@ -15,8 +15,6 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      width: size.width * 0.95,
-      height: size.height * 0.31,
       padding: const EdgeInsets.all(10.0),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -122,7 +120,7 @@ class EventCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: size.height * 0.16,
+                    height: size.height * 0.18,
                     width: size.width * 0.5,
                     child: getCategoryImage(event.category),
                   ),

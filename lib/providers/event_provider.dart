@@ -5,8 +5,8 @@ import 'package:snu_connect/models/user.dart';
 
 class EventProvider extends ChangeNotifier {
   Category? _selectedCategory;
-  String? _venue = '';
-  String? _eventName = '';
+  String? _venue;
+  String? _eventName;
   int _peopleCount = 1;
   DateTime? _selectedDateTime;
 
@@ -15,6 +15,15 @@ class EventProvider extends ChangeNotifier {
   String? get eventName => _eventName;
   String? get venue => _venue;
   DateTime? get selectedDateTime => _selectedDateTime;
+
+  clearFields() {
+    _selectedCategory = null;
+    _venue = null;
+    _eventName = null;
+    _peopleCount = 1;
+    _selectedDateTime = null;
+    notifyListeners();
+  }
 
   pickCategory(Category? newCategory) {
     _selectedCategory = newCategory;

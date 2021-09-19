@@ -32,39 +32,23 @@ String categoryToText(Category? category) {
   }
 }
 
-
-
-Image getCategoryImage(Category category) {
+Image getCategoryImage(Category? category) {
   switch (category) {
     case Category.sports:
-      return Image.asset(
-        'assets/images/sports.png',
-      );
+      return Image.asset('assets/images/sports.png');
     case Category.studies:
-      return Image.asset(
-        'assets/images/make_teams.png',
-      );
+      return Image.asset('assets/images/make_teams.png');
     case Category.transport:
-      return Image.asset(
-        'assets/images/transport.png',
-      );
+      return Image.asset('assets/images/transport.png');
     case Category.events:
-      return Image.asset(
-        'assets/images/hackathon_event.png',
-      );
+      return Image.asset('assets/images/hackathon_event.png');
     case Category.lostFound:
-      return Image.asset(
-        'assets/images/lost_and_found.png',
-      );
+      return Image.asset('assets/images/lost_and_found.png');
     case Category.items:
-      return Image.asset(
-        'assets/images/exchange.png',
-      );
+      return Image.asset('assets/images/exchange.png');
     case Category.errands:
-      return Image.asset(
-        'assets/images/exchange.png',
-      );
+      return Image.asset('assets/images/exchange.png');
+    default:
+      return Image.asset('assets/images/welcome.png');
   }
 }
-
-
