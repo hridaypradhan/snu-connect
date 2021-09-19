@@ -7,19 +7,19 @@ Color? lightPink = Colors.pink[100];
 Color getCategoryColor(Category? category) {
   switch (category) {
     case Category.sports:
-      return const Color(0xfffdf6de);
+      return const Color(0xfffffdf5);
     case Category.studies:
-      return const Color(0xffd7e8ff);
+      return const Color(0xfff5f9ff);
     case Category.transport:
-      return const Color(0xffffdfdf);
+      return const Color(0xfffffbfb);
     case Category.events:
-      return const Color(0xffb5fcff);
+      return const Color(0xfff1ffff);
     case Category.lostFound:
-      return const Color(0xffeeffa8);
+      return const Color(0xfffcfff2);
     case Category.items:
-      return const Color(0xfff6d8ff);
+      return const Color(0xfffff0fd);
     case Category.errands:
-      return const Color(0xffffe2c8);
+      return const Color(0xfffff5ed);
     default:
       return Colors.white;
   }
