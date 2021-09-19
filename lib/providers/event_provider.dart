@@ -9,12 +9,24 @@ class EventProvider extends ChangeNotifier {
   String? _eventName;
   int _peopleCount = 1;
   DateTime? _selectedDateTime;
+  bool _buttonIsPressed = false;
 
+  bool get buttonIsPressed => _buttonIsPressed;
   Category? get selectedCategory => _selectedCategory;
   int get peopleCount => _peopleCount;
   String? get eventName => _eventName;
   String? get venue => _venue;
   DateTime? get selectedDateTime => _selectedDateTime;
+
+  pressButton() {
+    _buttonIsPressed = true;
+    notifyListeners();
+  }
+
+  unpressButton() {
+    _buttonIsPressed = false;
+    notifyListeners();
+  }
 
   clearFields() {
     _selectedCategory = null;

@@ -13,6 +13,16 @@ class PersonCounter extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
+          onLongPress: () async {
+            eventProvider.pressButton();
+            do {
+              eventProvider.changePeopleCount(-1);
+              await Future.delayed(
+                const Duration(milliseconds: 200),
+              );
+            } while (eventProvider.buttonIsPressed);
+          },
+          onLongPressEnd: (details) => eventProvider.unpressButton(),
           onTap: () {
             eventProvider.changePeopleCount(-1);
           },
@@ -52,6 +62,16 @@ class PersonCounter extends StatelessWidget {
         ),
         const SizedBox(width: 20.0),
         GestureDetector(
+          onLongPress: () async {
+            eventProvider.pressButton();
+            do {
+              eventProvider.changePeopleCount(1);
+              await Future.delayed(
+                const Duration(milliseconds: 200),
+              );
+            } while (eventProvider.buttonIsPressed);
+          },
+          onLongPressEnd: (details) => eventProvider.unpressButton(),
           onTap: () {
             eventProvider.changePeopleCount(1);
           },

@@ -10,12 +10,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventProvider>(context);
-    return Scaffold(
-      body: ListView(
-        children: List.generate(
-          eventProvider.dummyEvents.length,
-          (index) => EventCard(event: eventProvider.dummyEvents[index]),
-        ),
+    return ListView(
+      children: List.generate(
+        eventProvider.dummyEvents.length,
+        (index) => EventCard(event: eventProvider.dummyEvents[index]),
       ),
     );
   }
