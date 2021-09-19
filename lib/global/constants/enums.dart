@@ -11,7 +11,7 @@ enum Category {
 }
 
 String categoryToText(Category? category) {
-  String snippet = category.toString().substring(9);
+  String? snippet = category?.toString().substring(9);
   switch (snippet) {
     case 'sports':
       return 'Sports';

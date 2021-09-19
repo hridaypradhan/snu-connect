@@ -31,7 +31,7 @@ class EventCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
-                    event.name,
+                    event.name ?? '',
                     style: const TextStyle(
                       fontSize: 30.0,
                     ),
@@ -77,7 +77,7 @@ class EventCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        event.venue,
+                        event.venue ?? '',
                         style: const TextStyle(
                           fontSize: 15.0,
                         ),

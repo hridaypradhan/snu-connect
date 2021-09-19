@@ -25,7 +25,7 @@ Color getCategoryColor(Category? category) {
   }
 }
 
-Color getCodeColor(Category category) {
+Color getCodeColor(Category? category) {
   switch (category) {
     case Category.sports:
       return const Color(0xffffefb9);
@@ -41,5 +41,7 @@ Color getCodeColor(Category category) {
       return const Color(0xffec91ff);
     case Category.errands:
       return const Color(0xfff6c97b);
+    default:
+      return Colors.white;
   }
 }

@@ -5,18 +5,41 @@ import 'package:snu_connect/models/user.dart';
 
 class EventProvider extends ChangeNotifier {
   Category? _selectedCategory;
-  String? _venue;
-  String? _eventName;
+  String? _venue = 'N/A';
+  String? _eventName = 'N/A';
+  String? _eventDescription = '';
   int _peopleCount = 1;
-  DateTime? _selectedDateTime;
+  DateTime _selectedDateTime = DateTime.now();
   bool _buttonIsPressed = false;
+  Event? _toUpload;
 
   bool get buttonIsPressed => _buttonIsPressed;
   Category? get selectedCategory => _selectedCategory;
   int get peopleCount => _peopleCount;
   String? get eventName => _eventName;
   String? get venue => _venue;
+  String? get eventDescription => _eventDescription;
   DateTime? get selectedDateTime => _selectedDateTime;
+
+  Event createEvent() {
+    Event newEvent = Event(
+      category: _selectedCategory,
+      dateTime: _selectedDateTime,
+      host: User(
+        email: 'hp103',
+        phone: '1234567890',
+        name: 'Hriday',
+      ),
+      maxPeople: _peopleCount,
+      venue: _venue,
+      peopleCount: 0,
+      name: _eventName,
+      description: _eventDescription,
+    );
+    print(newEvent);
+    _toUpload = newEvent;
+    return newEvent;
+  }
 
   pressButton() {
     _buttonIsPressed = true;
@@ -30,10 +53,11 @@ class EventProvider extends ChangeNotifier {
 
   clearFields() {
     _selectedCategory = null;
-    _venue = null;
-    _eventName = null;
+    _venue = '';
+    _eventName = '';
     _peopleCount = 1;
-    _selectedDateTime = null;
+    _selectedDateTime = DateTime.now();
+    _toUpload = null;
     notifyListeners();
   }
 
@@ -48,12 +72,17 @@ class EventProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  setDescription(String? newDescription) {
+    _eventDescription = newDescription;
+    notifyListeners();
+  }
+
   setVenue(String? newVenue) {
     _venue = newVenue;
     notifyListeners();
   }
 
-  setEventName(String newEventName) {
+  setEventName(String? newEventName) {
     _eventName = newEventName;
     notifyListeners();
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/providers/event_provider.dart';
 
 class DescriptionField extends StatelessWidget {
   final TextEditingController? controller;
@@ -10,7 +12,11 @@ class DescriptionField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var eventProvider = Provider.of<EventProvider>(context);
     return TextField(
+      onEditingComplete: () {
+        eventProvider.setDescription(controller?.text);
+      },
       textCapitalization: TextCapitalization.sentences,
       textAlign: TextAlign.center,
       maxLines: null,

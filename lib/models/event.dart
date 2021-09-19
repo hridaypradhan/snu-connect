@@ -3,9 +3,8 @@ import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/user.dart';
 
 class Event {
-  String name, venue;
-  String? image, code;
-  Category category;
+  String? image, code, description, name, venue;
+  Category? category;
   DateTime dateTime;
   User host;
   int peopleCount, maxPeople;
@@ -18,6 +17,7 @@ class Event {
     required this.venue,
     required this.peopleCount,
     required this.maxPeople,
+    this.description,
     this.image,
   }) {
     code = generateCode(4);
@@ -28,5 +28,10 @@ class Event {
     const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     return List.generate(
         length, (index) => _chars[random.nextInt(_chars.length)]).join();
+  }
+
+  @override
+  String toString() {
+    return '$name - $venue - $category';
   }
 }
