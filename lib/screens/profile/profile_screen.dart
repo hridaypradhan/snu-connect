@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
+import 'package:snu_connect/screens/profile/widgets/registered_event_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var eventProvider = Provider.of<EventProvider>(context);
     return DefaultTabController(
       length: 2,
       child: Column(
@@ -33,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
               indicatorWeight: 2.5,
               labelPadding: const EdgeInsets.all(5.0),
               padding: const EdgeInsets.all(5.0),
-              tabs:const [
+              tabs: const [
                 ProfileTab(
                   label: 'REGISTERED',
                   icon: Icon(Icons.app_registration),
@@ -45,11 +48,29 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: TabBarView(
               children: [
-                Text('Hello'),
-                Text('Hello 2'),
+                GridView.count(
+                  childAspectRatio: 1.7,
+                  crossAxisCount: 2,
+                  children: List.generate(
+                    eventProvider.dummyEvents.length,
+                    (index) => RegisteredEventCard(
+                      event: eventProvider.dummyEvents[index],
+                    ),
+                  ),
+                ),
+                GridView.count(
+                  childAspectRatio: 1.7,
+                  crossAxisCount: 2,
+                  children: List.generate(
+                    eventProvider.dummyEvents.length,
+                    (index) => RegisteredEventCard(
+                      event: eventProvider.dummyEvents[index],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
