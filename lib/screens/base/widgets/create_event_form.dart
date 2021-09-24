@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/global/widgets/event_card.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/base/widgets/category_card.dart';
