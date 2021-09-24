@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/models/user.dart';
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
-  //what to pass? code + category for colour
-  //final Event e;
+  final Event e = Event(
+    name: "Name",
+    category: Category.sports,
+    dateTime: DateTime.now(),
+    host: User(
+      name: "ABC",
+      email: "abc223",
+      phone: "0009012",
+    ),
+    venue: "Lib",
+  );
   MoreInfoScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +30,7 @@ class MoreInfoScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          color: Color(0xfffdf6de), //getCategoryColor(e),
+          color: getCategoryColor(e.category),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min, //what
@@ -32,7 +42,7 @@ class MoreInfoScreen extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    "Event Title",
+                    e.name,
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -50,17 +60,17 @@ class MoreInfoScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text("Time",
+                  Text(e.dateTime.toString(),
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       )),
-                  Text("Venue",
+                  Text(e.venue,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       )),
-                  Text("People Count",
+                  Text("People Count", //e.peoplecount or whatever rqd
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -75,7 +85,7 @@ class MoreInfoScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  color: Color(0xffffefb9),
+                  color: getCategoryCode(e.category),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -102,7 +112,7 @@ class MoreInfoScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  color: Color(0xffffefb9),
+                  color: getCategoryCode(e.category),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -113,15 +123,15 @@ class MoreInfoScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           )),
                       Text(
-                        "Name",
+                        e.host.name,
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                        "SNU ID",
+                        e.host.email,
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                        "Phone Number",
+                        e.host.phone,
                         textAlign: TextAlign.left,
                       ),
                     ],
@@ -165,5 +175,45 @@ Color getCategoryColor(Category category) {
       return const Color(0xfff6d8ff);
     case Category.errands:
       return const Color(0xffffe2c8);
+  }
+}
+
+Color getCategoryCode(Category category) {
+  //update darker colors
+  switch (category) {
+    case Category.sports:
+      return const Color(0xffffefb9);
+    case Category.studies:
+      return const Color(0xff8dbdff);
+    case Category.transport:
+      return const Color(0xffffb3ce);
+    case Category.events:
+      return const Color(0xffbcff87);
+    case Category.lostFound:
+      return const Color(0xffeeffa8);
+    case Category.items:
+      return const Color(0xffec91ff);
+    case Category.errands:
+      return const Color(0xffffe2c8);
+  }
+}
+
+Image getCategoryImage(Category category) {
+  //change addresses for variety of images
+  switch (category) {
+    case Category.sports:
+      return Image.asset("assets/images/find_someone.png", width: 250);
+    case Category.studies:
+      return Image.asset("assets/images/find_someone.png", width: 250);
+    case Category.transport:
+      return Image.asset("assets/images/find_someone.png", width: 250);
+    case Category.events:
+      return Image.asset("assets/images/find_someone.png", width: 250);
+    case Category.lostFound:
+      return Image.asset("assets/images/find_someone.png", width: 250);
+    case Category.items:
+      return Image.asset("assets/images/find_someone.png", width: 250);
+    case Category.errands:
+      return Image.asset("assets/images/find_someone.png", width: 250);
   }
 }
