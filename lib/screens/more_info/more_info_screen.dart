@@ -188,16 +188,16 @@ class MoreInfoScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Text("Need partners? Team up!"),
-                      Icon(Icons.add),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: const [
+                  //     SizedBox(
+                  //       width: 40,
+                  //     ),
+                  //     Text("Need partners? Team up!"),
+                  //     Icon(Icons.add),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
