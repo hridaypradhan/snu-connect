@@ -14,8 +14,9 @@ class EventNameField extends StatelessWidget {
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventProvider>(context);
     return TextField(
-      onEditingComplete: () {
-        eventProvider.setEventName(controller?.text);
+      maxLength: 14,
+      onSubmitted: (text) {
+        eventProvider.setEventName(text);
       },
       textCapitalization: TextCapitalization.words,
       textAlign: TextAlign.center,
