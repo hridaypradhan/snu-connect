@@ -6,7 +6,6 @@ import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
-import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -42,7 +41,6 @@ class MyApp extends StatelessWidget {
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           BaseScreen.id: (context) => const BaseScreen(),
-          MoreInfoScreen.id: (context) => MoreInfoScreen(),
         },
       ),
     );

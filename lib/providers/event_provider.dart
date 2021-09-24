@@ -100,6 +100,7 @@ class EventProvider extends ChangeNotifier {
       category: Category.sports,
       dateTime: DateTime.now(),
       venue: 'Football Ground',
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       host: User(
         email: 'hp103',
         phone: '1234567890',
@@ -113,12 +114,12 @@ class EventProvider extends ChangeNotifier {
       category: Category.events,
       dateTime: DateTime.now(),
       venue: 'B315',
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       host: User(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
       ),
-      // TODO Set text limit for event name
       name: 'TEDxSNU',
     ),
     Event(
@@ -127,6 +128,7 @@ class EventProvider extends ChangeNotifier {
       category: Category.errands,
       dateTime: DateTime.now(),
       venue: 'Mini Mart',
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       host: User(
         email: 'hp103',
         phone: '1234567890',
@@ -139,6 +141,7 @@ class EventProvider extends ChangeNotifier {
       peopleCount: 0,
       category: Category.items,
       dateTime: DateTime.now(),
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       venue: '506 1A',
       host: User(
         email: 'hp103',
@@ -152,6 +155,7 @@ class EventProvider extends ChangeNotifier {
       peopleCount: 0,
       category: Category.lostFound,
       dateTime: DateTime.now(),
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       venue: '506 1A',
       host: User(
         email: 'hp103',
@@ -164,6 +168,7 @@ class EventProvider extends ChangeNotifier {
       maxPeople: 2,
       peopleCount: 0,
       category: Category.studies,
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       dateTime: DateTime.now(),
       venue: '1A Study Room',
       host: User(
@@ -177,6 +182,7 @@ class EventProvider extends ChangeNotifier {
       maxPeople: 10,
       peopleCount: 5,
       category: Category.transport,
+      description: 'Please join me. I need a team of 10. Match tomorrow',
       dateTime: DateTime.now(),
       venue: 'Inner Gate',
       host: User(

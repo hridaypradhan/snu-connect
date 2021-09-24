@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 
 class RegisteredEventCard extends StatelessWidget {
   final Event event;
@@ -24,9 +25,21 @@ class RegisteredEventCard extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onLongPress: () => cardKey.currentState?.toggleCard(),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return MoreInfoScreen(
+                    event: event,
+                  );
+                },
+              ),
+            );
+          },
           child: Card(
             elevation: 5.0,
-            color: Colors.orange[300],
+            color: Colors.orange[200],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
