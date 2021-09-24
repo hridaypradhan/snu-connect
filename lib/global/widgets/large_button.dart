@@ -1,6 +1,6 @@
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/constants/colors.dart';
+import 'package:snu_connect/global/constants/colors.dart';
 
 class LargeButton extends StatelessWidget {
   final Function onPressed;
