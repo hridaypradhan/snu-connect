@@ -14,8 +14,8 @@ class DescriptionField extends StatelessWidget {
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventProvider>(context);
     return TextField(
-      onEditingComplete: () {
-        eventProvider.setDescription(controller?.text);
+      onSubmitted: (text) {
+        eventProvider.setDescription(text);
       },
       textCapitalization: TextCapitalization.sentences,
       textAlign: TextAlign.center,

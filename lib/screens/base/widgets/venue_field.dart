@@ -14,8 +14,8 @@ class VenueField extends StatelessWidget {
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventProvider>(context);
     return TextField(
-      onEditingComplete: () {
-        eventProvider.setVenue(controller?.text);
+      onSubmitted: (text) {
+        eventProvider.setVenue(text);
       },
       textCapitalization: TextCapitalization.words,
       textAlign: TextAlign.center,
