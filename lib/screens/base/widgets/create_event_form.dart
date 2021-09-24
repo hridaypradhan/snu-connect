@@ -55,7 +55,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
     var size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
+      padding: const EdgeInsets.only(top: 45.0),
       child: SingleChildScrollView(
         child: Column(
           children: [

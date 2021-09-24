@@ -18,7 +18,7 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Slidable(
-      actionPane: const SlidableDrawerActionPane(),
+      actionPane: const SlidableScrollActionPane(),
       actions: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
