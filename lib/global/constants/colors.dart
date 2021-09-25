@@ -46,24 +46,24 @@ Color getCodeColor(Category? category) {
   }
 }
 
-Color getDarkerCodeColor(Category? category) {
-  // Update darker colors
-  switch (category) {
-    case Category.sports:
-      return const Color(0xffffefb9);
-    case Category.studies:
-      return const Color(0xff8dbdff);
-    case Category.transport:
-      return const Color(0xffffb3ce);
-    case Category.events:
-      return const Color(0xffbcff87);
-    case Category.lostFound:
-      return const Color(0xffeeffa8);
-    case Category.items:
-      return const Color(0xffec91ff);
-    case Category.errands:
-      return const Color(0xffffe2c8);
-    default:
-      return Colors.white;
-  }
-}
+// Color getDarkerCodeColor(Category? category) {
+//   // Update darker colors
+//   switch (category) {
+//     case Category.sports:
+//       return const Color(0xffffefb9);
+//     case Category.studies:
+//       return const Color(0xff8dbdff);
+//     case Category.transport:
+//       return const Color(0xffffb3ce);
+//     case Category.events:
+//       return const Color(0xffbcff87);
+//     case Category.lostFound:
+//       return const Color(0xffeeffa8);
+//     case Category.items:
+//       return const Color(0xffec91ff);
+//     case Category.errands:
+//       return const Color(0xffffe2c8);
+//     default:
+//       return Colors.white;
+//   }
+// }

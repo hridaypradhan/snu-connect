@@ -113,7 +113,7 @@ class MoreInfoScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    color: getDarkerCodeColor(event.category),
+                    color: getCodeColor(event.category),
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
@@ -138,12 +138,11 @@ class MoreInfoScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    color: getDarkerCodeColor(event.category),
+                    color: getCodeColor(event.category),
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(

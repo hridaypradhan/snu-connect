@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/event_provider.dart';
@@ -12,7 +10,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var eventProvider = Provider.of<EventProvider>(context);
     return DefaultTabController(
       length: 2,
@@ -20,17 +17,23 @@ class ProfileScreen extends StatelessWidget {
         children: [
           Image.asset('assets/images/name.png'),
           Image.asset('assets/images/profile_logo.png'),
-          Text(
+          const Text(
             'Shraddha Arora',
-            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            // ignore: prefer_const_constructors
-            Text(
-              'sa350@snu.edu.in | 9911211379',
-              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
             ),
-          ]),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              // ignore: prefer_const_constructors
+              Text(
+                'sa350@snu.edu.in | 9911211379',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
 
           // snu connect text
           // logo
@@ -94,5 +97,4 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 }

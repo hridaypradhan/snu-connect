@@ -49,7 +49,7 @@ class EventCard extends StatelessWidget {
                 );
               },
               child: CircleAvatar(
-                backgroundColor: getDarkerCodeColor(event.category),
+                backgroundColor: getCodeColor(event.category),
                 child: const Center(
                   child: Icon(
                     Icons.copy,
@@ -94,7 +94,7 @@ class EventCard extends StatelessWidget {
                 );
               },
               child: CircleAvatar(
-                backgroundColor: getDarkerCodeColor(event.category),
+                backgroundColor: getCodeColor(event.category),
                 child: const Center(
                   child: Icon(
                     Icons.app_registration,
