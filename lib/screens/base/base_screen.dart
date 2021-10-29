@@ -1,10 +1,14 @@
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_bar_icon.dart';
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_expandable_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/screens/base/widgets/create_event_form.dart';
+import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   static const String id = 'base_screen';
@@ -22,6 +26,23 @@ class _BaseScreenState extends State<BaseScreen> {
     var baseProvider = Provider.of<BaseProvider>(context);
     return SafeArea(
       child: Scaffold(
+        drawer: Drawer(
+          child: TextButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut().then(
+                (value) {
+                  GoogleSignIn().disconnect();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    OnboardingScreen.id,
+                    (route) => false,
+                  );
+                },
+              );
+            },
+            child: const Text('Log Out :('),
+          ),
+        ),
         extendBody: true,
         bottomNavigationBar: BottomBarSheet(
           bottomSheetHeight: size.height,

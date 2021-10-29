@@ -1,15 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/widgets/email_field.dart';
 import 'package:snu_connect/screens/login/widgets/password_field.dart';
+import 'package:snu_connect/services/auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'login_screen';
   final TextEditingController _netIdController = TextEditingController(),
       _passwordController = TextEditingController();
-
+  final AuthService _authService = AuthService();
   LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -48,10 +51,20 @@ class LoginScreen extends StatelessWidget {
                 division,
                 LargeButton(
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      BaseScreen.id,
-                      (route) => false,
+                    var result = _authService.signInWithGoogle().then(
+                      (loggedInUser) {
+                        String? email = loggedInUser.user?.email;
+                        if (email != null && !email.endsWith('@snu.edu.in')) {
+                          FirebaseAuth.instance.signOut();
+                          GoogleSignIn().disconnect();
+                        } else {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            BaseScreen.id,
+                            (route) => false,
+                          );
+                        }
+                      },
                     );
                   },
                   text: 'LOG IN',
