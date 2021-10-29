@@ -46,8 +46,9 @@ class AllChatsProvider extends ChangeNotifier {
     List<User> matchingUsers = [];
 
     for (User u in _dummyUsers) {
-      if (u.name.toLowerCase().startsWith(query.toLowerCase()))
+      if (u.name.toLowerCase().startsWith(query.toLowerCase())) {
         matchingUsers.add(u);
+      }
     }
     filteredList = matchingUsers;
     notifyListeners();
