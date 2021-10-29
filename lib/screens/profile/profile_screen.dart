@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/models/user.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
 import 'package:snu_connect/screens/profile/widgets/registered_event_card.dart';
@@ -10,27 +11,51 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = User(
+        name: 'Shraddha Arora', email: 'sa350@snu.edu.in', phone: '9911211379');
+
     var eventProvider = Provider.of<EventProvider>(context);
     return DefaultTabController(
       length: 2,
       child: Column(
         children: [
-          Image.asset('assets/images/name.png'),
-          Image.asset('assets/images/profile_logo.png'),
-          const Text(
-            'Shraddha Arora',
-            style: TextStyle(
-              fontSize: 26,
+          const SizedBox(
+            height: 10,
+          ),
+          // Image.asset('assets/images/name.png'),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset('assets/images/profilelogo.png'),
+              const CircleAvatar(
+                radius: 35,
+                //TODO fix logo, background image center
+                backgroundImage: NetworkImage(
+                    "https://th.bing.com/th/id/OIP.xzc47dQSt-cE3rX1BxxsNgHaFu?pid=ImgDet&rs=1"),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            user.name,
+            style: const TextStyle(
+              fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),
+          const SizedBox(
+            height: 5,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               // ignore: prefer_const_constructors
               Text(
-                'sa350@snu.edu.in | 9911211379',
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                user.email + ' | ' + user.phone,
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ],
           ),
