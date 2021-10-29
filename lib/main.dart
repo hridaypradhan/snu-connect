@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/providers/event_provider.dart';
+import 'package:snu_connect/screens/all_chats/all_chats_screen.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
@@ -36,11 +37,12 @@ class MyApp extends StatelessWidget {
               const BottomSheetThemeData(backgroundColor: Colors.transparent),
         ),
         // Initial route should depend on login status
-        initialRoute: OnboardingScreen.id,
+        initialRoute: BaseScreen.id,
         routes: {
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           BaseScreen.id: (context) => const BaseScreen(),
+          AllChatsScreen.id: (context) => AllChatsScreen(),
         },
       ),
     );
