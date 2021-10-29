@@ -37,14 +37,14 @@ class ProfileScreen extends StatelessWidget {
               labelPadding: const EdgeInsets.all(5.0),
               padding: const EdgeInsets.all(5.0),
               tabs: const [
-                ProfileTab(
+                Expanded(child:ProfileTab(
                   label: 'REGISTERED',
-                  icon: Icon(Icons.app_registration),
-                ),
-                ProfileTab(
+                  icon: Icon(Icons.app_registration, size:20.0),
+                ),),
+                Expanded(child: ProfileTab(
                   label: 'CREATED',
-                  icon: Icon(Icons.create),
-                ),
+                  icon: Icon(Icons.create, size:20.0),
+                ),) 
               ],
             ),
           ),
