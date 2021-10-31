@@ -3,7 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/global/widgets/alert_popup.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 
@@ -77,25 +77,7 @@ class CreatedEventCard extends StatelessWidget {
                     onPressed: () {
                       FlutterClipboard.copy(event.code.toString());
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: lightPink,
-                          behavior: SnackBarBehavior.floating,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                            vertical: 5.0,
-                          ),
-                          content: const Text(
-                            'EVENT CODE COPIED',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: primaryPink,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                        alertPopup('EVENT CODE COPIED'),
                       );
                     },
                     icon: const Icon(

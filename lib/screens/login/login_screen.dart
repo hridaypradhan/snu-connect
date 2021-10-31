@@ -1,24 +1,25 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/global/widgets/alert_popup.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
-import 'package:snu_connect/screens/login/widgets/email_field.dart';
-import 'package:snu_connect/screens/login/widgets/password_field.dart';
 import 'package:snu_connect/services/auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
-  final TextEditingController _netIdController = TextEditingController(),
-      _passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
-  LoginScreen({Key? key}) : super(key: key);
+
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final AuthService _authService = AuthService();
+  bool loadingSpinner = false;
+  @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    SizedBox division = SizedBox(height: size.height * 0.06);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -35,43 +36,70 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Hero(
-                  tag: 'icon',
-                  child: Image.asset('assets/images/logo_name.png'),
-                ),
-                division,
-                EmailField(controller: _netIdController),
-                division,
-                PasswordField(controller: _passwordController),
-                division,
-                LargeButton(
-                  onPressed: () {
-                    var result = _authService.signInWithGoogle().then(
-                      (loggedInUser) {
-                        String? email = loggedInUser.user?.email;
-                        if (email != null && !email.endsWith('@snu.edu.in')) {
-                          FirebaseAuth.instance.signOut();
-                          GoogleSignIn().disconnect();
-                        } else {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            BaseScreen.id,
-                            (route) => false,
-                          );
-                        }
+        body: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Hero(
+                    tag: 'icon',
+                    child: Image.asset('assets/images/logo_name.png'),
+                  ),
+                  DelayedDisplay(
+                    delay: const Duration(milliseconds: 500),
+                    child: LargeButton(
+                      text: 'GET STARTED',
+                      onPressed: () async {
+                        setState(
+                          () {
+                            loadingSpinner = true;
+                          },
+                        );
+                        await _authService.signInWithGoogle(
+                          () {
+                            setState(
+                              () {
+                                loadingSpinner = false;
+                              },
+                            );
+                          },
+                        ).then(
+                          (loggedInUser) {
+                            String? email = loggedInUser.user?.email;
+                            if (email != null &&
+                                !email.endsWith('@snu.edu.in')) {
+                              _authService.signOut();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                alertPopup('USE AN SNU ID'),
+                              );
+                            } else {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                BaseScreen.id,
+                                (route) => false,
+                              );
+                            }
+                          },
+                        );
+                        setState(
+                          () {
+                            loadingSpinner = false;
+                          },
+                        );
                       },
-                    );
-                  },
-                  text: 'LOG IN',
-                ),
-              ],
+                    ),
+                  ),
+                  Center(
+                    child: CircularProgressIndicator(
+                      color: loadingSpinner ? primaryPink : Colors.transparent,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

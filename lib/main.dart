@@ -31,13 +31,6 @@ class _MyAppState extends State<MyApp> {
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
-        // if (snapshot.hasError) {
-        //   return const Scaffold(
-        //     body: Center(
-        //       child: Text('Error.'),
-        //     ),
-        //   );
-        // }
         if (snapshot.connectionState == ConnectionState.done) {
           return MultiProvider(
             providers: [
@@ -58,7 +51,6 @@ class _MyAppState extends State<MyApp> {
                 bottomSheetTheme: const BottomSheetThemeData(
                     backgroundColor: Colors.transparent),
               ),
-              // Initial route should depend on login status
               home: StreamBuilder(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
@@ -70,16 +62,16 @@ class _MyAppState extends State<MyApp> {
               ),
               routes: {
                 OnboardingScreen.id: (context) => const OnboardingScreen(),
-                LoginScreen.id: (context) => LoginScreen(),
+                LoginScreen.id: (context) => const LoginScreen(),
                 BaseScreen.id: (context) => const BaseScreen(),
               },
             ),
           );
         }
-        return const MaterialApp(
+        return MaterialApp(
           home: Scaffold(
             body: Center(
-              child: Text('Loading...'),
+              child: Text(snapshot.hasError ? 'Error.' : 'Initializing...'),
             ),
           ),
         );

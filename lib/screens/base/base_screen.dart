@@ -1,7 +1,6 @@
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_bar_icon.dart';
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_expandable_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +25,7 @@ class _BaseScreenState extends State<BaseScreen> {
     var baseProvider = Provider.of<BaseProvider>(context);
     return SafeArea(
       child: Scaffold(
+        // TODO Remove drawer
         drawer: Drawer(
           child: TextButton(
             onPressed: () {
