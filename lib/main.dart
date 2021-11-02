@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    
     final ThemeData theme = ThemeData();
     return MultiProvider(
       providers: [
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+
         debugShowCheckedModeBanner: false,
         theme: theme.copyWith(
           colorScheme: theme.colorScheme.copyWith(secondary: primaryPink),
