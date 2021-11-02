@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/providers/event_provider.dart';
+import 'package:snu_connect/screens/Search/search_screen.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           BaseScreen.id: (context) => const BaseScreen(),
+          SearchScreen.id : (context) => SearchScreen(),
         },
       ),
     );

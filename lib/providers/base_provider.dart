@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:snu_connect/screens/Search/search_screen.dart';
 import 'package:snu_connect/screens/all_chats/all_chats_screen.dart';
 import 'package:snu_connect/screens/home/home_screen.dart';
 import 'package:snu_connect/screens/profile/profile_screen.dart';
@@ -12,6 +13,8 @@ class BaseProvider extends ChangeNotifier {
     switch (_currentPage) {
       case 0:
         return const HomeScreen();
+      case 1:
+        return SearchScreen();
       case 2:
         return const AllChatsScreen();
       case 3:
