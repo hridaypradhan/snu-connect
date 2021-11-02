@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:snu_connect/screens/all_chats/all_chats_screen.dart';
 import 'package:snu_connect/screens/home/home_screen.dart';
 import 'package:snu_connect/screens/profile/profile_screen.dart';
@@ -13,7 +13,7 @@ class BaseProvider extends ChangeNotifier {
       case 0:
         return const HomeScreen();
       case 2:
-        return const AllChatsScreen();
+        return AllChatsScreen();
       case 3:
         return const ProfileScreen();
       default:

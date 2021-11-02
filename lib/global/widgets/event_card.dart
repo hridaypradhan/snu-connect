@@ -32,7 +32,7 @@ class EventCard extends StatelessWidget {
                 );
               },
               child: CircleAvatar(
-                backgroundColor: getDarkerCodeColor(event.category),
+                backgroundColor: getCodeColor(event.category),
                 child: const Center(
                   child: Icon(
                     Icons.copy,
@@ -59,7 +59,7 @@ class EventCard extends StatelessWidget {
                 );
               },
               child: CircleAvatar(
-                backgroundColor: getDarkerCodeColor(event.category),
+                backgroundColor: getCodeColor(event.category),
                 child: const Center(
                   child: Icon(
                     Icons.app_registration,
@@ -197,7 +197,7 @@ class EventCard extends StatelessWidget {
                       ),
                       SizedBox(
                         height: size.height * 0.18,
-                        width: size.width * 0.5,
+                        width: size.width * 0.4,
                         child: getCategoryImage(event.category),
                       ),
                     ],

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/providers/all_chats_provider.dart';
 import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/providers/event_provider.dart';
+import 'package:snu_connect/screens/all_chats/all_chats_screen.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
@@ -76,6 +78,5 @@ class _MyAppState extends State<MyApp> {
           ),
         );
       },
-    );
   }
 }

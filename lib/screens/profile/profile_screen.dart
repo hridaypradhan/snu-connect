@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/models/user.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
 import 'package:snu_connect/screens/profile/widgets/registered_event_card.dart';
@@ -11,13 +11,57 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    User user = User(
+        name: 'Shraddha Arora', email: 'sa350@snu.edu.in', phone: '9911211379');
+
     var eventProvider = Provider.of<EventProvider>(context);
     return DefaultTabController(
       length: 2,
       child: Column(
         children: [
-          SizedBox(height: size.height * 0.45),
+          const SizedBox(
+            height: 10,
+          ),
+          // Image.asset('assets/images/name.png'),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset('assets/images/profilelogo.png'),
+              const CircleAvatar(
+                radius: 35,
+                //TODO fix logo, background image center
+                backgroundImage: NetworkImage(
+                    "https://th.bing.com/th/id/OIP.xzc47dQSt-cE3rX1BxxsNgHaFu?pid=ImgDet&rs=1"),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            user.name,
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // ignore: prefer_const_constructors
+              Text(
+                user.email + ' | ' + user.phone,
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+
+          // snu connect text
+          // logo
           Container(
             margin: const EdgeInsets.all(15.0),
             decoration: BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/enums.dart';
