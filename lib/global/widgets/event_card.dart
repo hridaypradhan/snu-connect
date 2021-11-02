@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/global/widgets/alert_popup.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/screens/more_info/more_info_screen.dart';
@@ -27,25 +28,7 @@ class EventCard extends StatelessWidget {
               onTap: () {
                 FlutterClipboard.copy(event.code.toString());
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: lightPink,
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 5.0,
-                    ),
-                    content: const Text(
-                      'EVENT CODE COPIED',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: primaryPink,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  alertPopup('EVENT CODE COPIED'),
                 );
               },
               child: CircleAvatar(
@@ -72,25 +55,7 @@ class EventCard extends StatelessWidget {
             InkWell(
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: lightPink,
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 5.0,
-                    ),
-                    content: const Text(
-                      'REGISTERED!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: primaryPink,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  alertPopup('REGISTERED!'),
                 );
               },
               child: CircleAvatar(
