@@ -37,12 +37,12 @@ class MyApp extends StatelessWidget {
               const BottomSheetThemeData(backgroundColor: Colors.transparent),
         ),
         // Initial route should depend on login status
-        initialRoute: OnboardingScreen.id,
+        initialRoute: IndividualChatScreen.id,
         routes: {
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           BaseScreen.id: (context) => const BaseScreen(),
-          IndividualChatScreen.id: (context) => const IndividualChatScreen(),
+          IndividualChatScreen.id: (context) => IndividualChatScreen(),
         },
       ),
     );
