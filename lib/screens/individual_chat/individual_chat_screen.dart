@@ -112,27 +112,26 @@ class IndividualChatScreen extends StatelessWidget {
                 0,
               ),
               child: Row(
-                children: const [
+                children: [
                   // TODO Add DP
                   Icon(
                     Icons.circle,
-                    size: 55,
+                    size: size.width * 0.1,
                     color: primaryPink,
                   ),
                   // TODO Add Name
                   Text(
                     'Friend',
-                    style: TextStyle(fontSize: 40),
+                    style: TextStyle(fontSize: size.width * 0.07),
                   ),
-                  // TODO Make size dependent
-                  SizedBox(width: 150),
+                  SizedBox(width: size.width * 0.4),
                 ],
               ),
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(size.width * 0.04),
+                padding: EdgeInsets.all(size.width * 0.04),
                 decoration: BoxDecoration(
                   color: lightPink,
                   borderRadius: BorderRadius.circular(15),
@@ -140,22 +139,23 @@ class IndividualChatScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ListView.builder(
-                        dragStartBehavior: DragStartBehavior.down,
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: dummyMessages.length,
-                        itemBuilder: (context, index) {
-                          // TODO Compare to user's email ID
-                          bool isMe =
-                              dummyMessages[index].senderEmail == myEmail;
-                          return MessageBubble(
-                            isMe: isMe,
-                            message: dummyMessages[index],
-                          );
-                        },
+                      SizedBox(
+                        height: size.height * 0.7,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: dummyMessages.length,
+                          itemBuilder: (context, index) {
+                            // TODO Compare to user's email ID
+                            bool isMe =
+                                dummyMessages[index].senderEmail == myEmail;
+                            return MessageBubble(
+                              isMe: isMe,
+                              message: dummyMessages[index],
+                            );
+                          },
+                        ),
                       ),
-                      const SizedBox(height: 10.0),
+                      // const SizedBox(height: 10.0),
                       TextField(
                         decoration: InputDecoration(
                           hintText: "Type a message",
@@ -165,12 +165,16 @@ class IndividualChatScreen extends StatelessWidget {
                           focusColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: Colors.white, width: 3.0),
+                              color: Colors.white,
+                              width: 3.0,
+                            ),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: Colors.white, width: 3.0),
+                              color: Colors.white,
+                              width: 3.0,
+                            ),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           suffixIcon: IconButton(
