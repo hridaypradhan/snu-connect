@@ -26,23 +26,23 @@ class _BaseScreenState extends State<BaseScreen> {
     return SafeArea(
       child: Scaffold(
         // TODO Remove drawer
-        drawer: Drawer(
-          child: TextButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut().then(
-                (value) {
-                  GoogleSignIn().disconnect();
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    OnboardingScreen.id,
-                    (route) => false,
-                  );
-                },
-              );
-            },
-            child: const Text('Log Out :('),
-          ),
-        ),
+        // drawer: Drawer(
+        //   child: TextButton(
+        //     onPressed: () {
+        //       FirebaseAuth.instance.signOut().then(
+        //         (value) {
+        //           GoogleSignIn().disconnect();
+        //           Navigator.pushNamedAndRemoveUntil(
+        //             context,
+        //             OnboardingScreen.id,
+        //             (route) => false,
+        //           );
+        //         },
+        //       );
+        //     },
+        //     child: const Text('Log Out :('),
+        //   ),
+        // ),
         extendBody: true,
         bottomNavigationBar: BottomBarSheet(
           bottomSheetHeight: size.height,

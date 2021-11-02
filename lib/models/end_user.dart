@@ -1,6 +1,6 @@
-class User {
+class EndUser {
   String name, email, phone;
-  User({
+  EndUser({
     required this.name,
     required this.email,
     required this.phone,

@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/models/user.dart';
+import 'package:snu_connect/models/end_user.dart';
 
-final List<User> _dummyUsers = [
-  User(
+final List<EndUser> _dummyUsers = [
+  EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
   ),
-  User(
+  EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
   ),
-  User(
+  EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
   ),
-  User(
+  EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
   ),
-  User(
+  EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
   ),
-  User(
+  EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
   ),
-  User(
+  EndUser(
     name: 'Mehak',
     email: 'sa350',
     phone: '123456789',
@@ -40,12 +40,12 @@ final List<User> _dummyUsers = [
 ];
 
 class AllChatsProvider extends ChangeNotifier {
-  List<User> filteredList = _dummyUsers;
+  List<EndUser> filteredList = _dummyUsers;
 
   void filterList(String query) {
-    List<User> matchingUsers = [];
+    List<EndUser> matchingUsers = [];
 
-    for (User u in _dummyUsers) {
+    for (EndUser u in _dummyUsers) {
       if (u.name.toLowerCase().startsWith(query.toLowerCase())) {
         matchingUsers.add(u);
       }
@@ -54,5 +54,5 @@ class AllChatsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<User> get dummyUsers => _dummyUsers;
+  List<EndUser> get dummyUsers => _dummyUsers;
 }

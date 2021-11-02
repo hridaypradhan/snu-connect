@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/models/user.dart';
+import 'package:snu_connect/models/end_user.dart';
 
 class EventProvider extends ChangeNotifier {
   Category? _selectedCategory;
@@ -25,7 +25,7 @@ class EventProvider extends ChangeNotifier {
     Event newEvent = Event(
       category: _selectedCategory,
       dateTime: _selectedDateTime,
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -101,7 +101,7 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       venue: 'Football Ground',
       description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -115,7 +115,7 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       venue: 'B315',
       description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -129,7 +129,7 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       venue: 'Mini Mart',
       description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -143,7 +143,7 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       description: 'Please join me. I need a team of 10. Match tomorrow',
       venue: '506 1A',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -157,7 +157,7 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       description: 'Please join me. I need a team of 10. Match tomorrow',
       venue: '506 1A',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -171,7 +171,7 @@ class EventProvider extends ChangeNotifier {
       description: 'Please join me. I need a team of 10. Match tomorrow',
       dateTime: DateTime.now(),
       venue: '1A Study Room',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
@@ -185,7 +185,7 @@ class EventProvider extends ChangeNotifier {
       description: 'Please join me. I need a team of 10. Match tomorrow',
       dateTime: DateTime.now(),
       venue: 'Inner Gate',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
