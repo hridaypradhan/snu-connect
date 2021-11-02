@@ -93,9 +93,24 @@ final List<Message> dummyMessages = [
   ),
 ];
 
-class IndividualChatScreen extends StatelessWidget {
+class IndividualChatScreen extends StatefulWidget {
   static const id = 'individual_chat';
   const IndividualChatScreen({Key? key}) : super(key: key);
+
+  @override
+  State<IndividualChatScreen> createState() => _IndividualChatScreenState();
+}
+
+class _IndividualChatScreenState extends State<IndividualChatScreen> {
+  final ScrollController _controller = ScrollController();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance?.addPostFrameCallback(
+      (_) => _controller.jumpTo(_controller.position.maxScrollExtent),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,11 +152,13 @@ class IndividualChatScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: SingleChildScrollView(
+                  reverse: true,
                   child: Column(
                     children: [
                       SizedBox(
-                        height: size.height * 0.7,
+                        height: size.height * 0.8,
                         child: ListView.builder(
+                          controller: _controller,
                           shrinkWrap: true,
                           itemCount: dummyMessages.length,
                           itemBuilder: (context, index) {
@@ -155,7 +172,7 @@ class IndividualChatScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                      // const SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       TextField(
                         decoration: InputDecoration(
                           hintText: "Type a message",
