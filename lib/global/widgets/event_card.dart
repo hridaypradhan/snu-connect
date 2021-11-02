@@ -232,7 +232,7 @@ class EventCard extends StatelessWidget {
                       ),
                       SizedBox(
                         height: size.height * 0.18,
-                        width: size.width * 0.5,
+                        width: size.width * 0.4,
                         child: getCategoryImage(event.category),
                       ),
                     ],
