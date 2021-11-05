@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/models/message.dart';
@@ -7,87 +6,92 @@ import 'package:snu_connect/screens/individual_chat/widgets/message_bubble.dart'
 String myEmail = 'km224';
 final List<Message> dummyMessages = [
   Message(
-    text: 'Hi hello much greetings to you my fellow person',
+    text: '1',
     senderEmail: 'km224',
     timestamp: DateTime.now(),
   ),
   Message(
-      text: 'Bye dear detestable human xyzabc asdjhfljf;asd;',
-      senderEmail: 'sa350',
-      timestamp: DateTime.now()),
-  Message(
-      text: 'Ok mother kill me then',
-      senderEmail: 'km224',
-      timestamp: DateTime.now()),
-  Message(
-    text: 'Hmm',
+    text: '2',
     senderEmail: 'sa350',
     timestamp: DateTime.now(),
   ),
   Message(
-    text: 'No',
+    text: '3',
     senderEmail: 'km224',
     timestamp: DateTime.now(),
   ),
   Message(
-    text: 'Why no?',
+    text: '4',
     senderEmail: 'sa350',
     timestamp: DateTime.now(),
   ),
   Message(
-      text: 'Ok mother kill me then',
-      senderEmail: 'km224',
-      timestamp: DateTime.now()),
-  Message(
-    text: 'Hmm',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: 'No',
+    text: '5',
     senderEmail: 'km224',
     timestamp: DateTime.now(),
   ),
   Message(
-    text: 'Why no?',
+    text: '6',
     senderEmail: 'sa350',
     timestamp: DateTime.now(),
   ),
   Message(
-      text: 'Ok mother kill me then',
-      senderEmail: 'km224',
-      timestamp: DateTime.now()),
-  Message(
-    text: 'Hmm',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: 'No',
+    text: '7',
     senderEmail: 'km224',
     timestamp: DateTime.now(),
   ),
   Message(
-    text: 'Why no?',
+    text: '8',
     senderEmail: 'sa350',
     timestamp: DateTime.now(),
   ),
   Message(
-      text: 'Ok mother kill me then',
-      senderEmail: 'km224',
-      timestamp: DateTime.now()),
-  Message(
-    text: 'Hmm',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: 'No',
+    text: '9',
     senderEmail: 'km224',
     timestamp: DateTime.now(),
   ),
   Message(
-    text: 'Why no?',
+    text: '10',
+    senderEmail: 'sa350',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '11',
+    senderEmail: 'km224',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '12',
+    senderEmail: 'sa350',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '13',
+    senderEmail: 'km224',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '14',
+    senderEmail: 'sa350',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '15',
+    senderEmail: 'km224',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '16',
+    senderEmail: 'sa350',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '17',
+    senderEmail: 'km224',
+    timestamp: DateTime.now(),
+  ),
+  Message(
+    text: '18',
     senderEmail: 'sa350',
     timestamp: DateTime.now(),
   ),
@@ -153,57 +157,54 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                 ),
                 child: SingleChildScrollView(
                   reverse: true,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: size.height * 0.8,
-                        child: ListView.builder(
-                          controller: _controller,
-                          shrinkWrap: true,
-                          itemCount: dummyMessages.length,
-                          itemBuilder: (context, index) {
-                            // TODO Compare to user's email ID
-                            bool isMe =
-                                dummyMessages[index].senderEmail == myEmail;
-                            return MessageBubble(
-                              isMe: isMe,
-                              message: dummyMessages[index],
-                            );
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 10.0),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "Type a message",
-                          hintStyle: const TextStyle(color: primaryPink),
-                          fillColor: Colors.pinkAccent,
-                          hoverColor: Colors.white,
-                          focusColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                              width: 3.0,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                              width: 3.0,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          suffixIcon: IconButton(
-                            icon: const Icon(
-                              Icons.send,
-                              color: primaryPink,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: ListView.builder(
+                    controller: _controller,
+                    shrinkWrap: true,
+                    itemCount: dummyMessages.length,
+                    itemBuilder: (context, index) {
+                      // TODO Compare to user's email ID
+                      bool isMe = dummyMessages[index].senderEmail == myEmail;
+                      return MessageBubble(
+                        isMe: isMe,
+                        message: dummyMessages[index],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                15.0,
+                0.0,
+                15.0,
+                15.0,
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Type a message",
+                  hintStyle: const TextStyle(color: primaryPink),
+                  focusColor: Colors.white,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: primaryPink,
+                      width: 3.0,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: primaryPink,
+                      width: 2.5,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(
+                      Icons.send,
+                      color: primaryPink,
+                    ),
+                    onPressed: () {},
                   ),
                 ),
               ),
