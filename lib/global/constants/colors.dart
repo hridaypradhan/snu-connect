@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 
 const Color primaryPink = Color(0xfff2005d);
-Color? lightPink = Colors.pink[100];
+Color lightPink = Colors.pink.shade100;
 
 Color getCategoryColor(Category? category) {
   switch (category) {

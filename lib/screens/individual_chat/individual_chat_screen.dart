@@ -181,13 +181,14 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                 15.0,
               ),
               child: TextField(
+                onSubmitted: (string) {},
                 decoration: InputDecoration(
                   hintText: "Type a message",
                   hintStyle: const TextStyle(color: primaryPink),
                   focusColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: primaryPink,
+                    borderSide: BorderSide(
+                      color: lightPink,
                       width: 3.0,
                     ),
                     borderRadius: BorderRadius.circular(15),
