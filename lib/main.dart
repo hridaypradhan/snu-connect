@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               const BottomSheetThemeData(backgroundColor: Colors.transparent),
         ),
         // Initial route should depend on login status
-        initialRoute: OnboardingScreen.id,
+        initialRoute: BaseScreen.id,
         routes: {
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           LoginScreen.id: (context) => LoginScreen(),
