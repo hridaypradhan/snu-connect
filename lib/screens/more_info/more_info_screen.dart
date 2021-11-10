@@ -138,7 +138,6 @@ class MoreInfoScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -164,14 +163,29 @@ class MoreInfoScreen extends StatelessWidget {
                             event.host.name,
                             textAlign: TextAlign.left,
                           ),
+                          const SizedBox(
+                            height: 3,
+                          ),
                           Text(
                             event.host.email,
                             textAlign: TextAlign.left,
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           Text(
                             event.host.phone,
                             textAlign: TextAlign.left,
                           ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          GestureDetector(child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [Text("Chat Now",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,)),
+                          SizedBox(
+                        width: 10,
+                      ),
+                      Icon(Icons.chat),],),onTap:() {print("Hello");} ,)
+                          
                         ],
                       ),
                     ),

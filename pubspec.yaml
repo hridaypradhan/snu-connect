@@ -24,8 +24,10 @@ dependencies:
   flip_card: ^0.5.0
   flutter:
     sdk: flutter
+  anim_search_bar: ^2.0.2
   flutter_slidable: ^0.6.0
   google_fonts: ^2.1.0
+  google_sign_in: ^5.2.0
   intl: ^0.17.0
   introduction_screen: ^2.1.0
   provider: ^5.0.0
