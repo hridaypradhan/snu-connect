@@ -15,7 +15,7 @@ class BaseProvider extends ChangeNotifier {
       case 2:
         return AllChatsScreen();
       case 3:
-        return const ProfileScreen();
+        return ProfileScreen();
       default:
         return const HomeScreen();
     }
