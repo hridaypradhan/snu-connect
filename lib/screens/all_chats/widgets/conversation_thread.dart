@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/models/user.dart';
+import 'package:snu_connect/models/end_user.dart';
 
 class ConversationThread extends StatefulWidget {
-  final User otherUser;
+  final EndUser otherUser;
   const ConversationThread({
     Key? key,
     required this.otherUser,
