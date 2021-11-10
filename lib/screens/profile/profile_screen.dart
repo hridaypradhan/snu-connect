@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
-// import 'package:snu_connect/models/user.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
 import 'package:snu_connect/screens/profile/widgets/registered_event_card.dart';
@@ -21,7 +20,6 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          // Image.asset('assets/images/name.png'),
           Stack(
             alignment: Alignment.center,
             children: [
@@ -32,17 +30,18 @@ class ProfileScreen extends StatelessWidget {
               ),
               CircleAvatar(
                 radius: 40,
-                //TODO fix logo, background image center
-                backgroundImage: NetworkImage(_auth.currentUser?.photoURL ??
-                    "https://th.bing.com/th/id/OIP.xzc47dQSt-cE3rX1BxxsNgHaFu?pid=ImgDet&rs=1"),
-              )
+                backgroundImage: NetworkImage(
+                  _auth.currentUser?.photoURL ??
+                      "https://th.bing.com/th/id/OIP.xzc47dQSt-cE3rX1BxxsNgHaFu?pid=ImgDet&rs=1",
+                ),
+              ),
             ],
           ),
           const SizedBox(
             height: 10,
           ),
           Text(
-            _auth.currentUser?.displayName ?? 'Abc Xyz',
+            _auth.currentUser?.displayName ?? 'SNU Student',
             style: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -54,11 +53,12 @@ class ProfileScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ignore: prefer_const_constructors
               Text(
                 _auth.currentUser?.email ?? 'ab123@snu.edu.in',
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
