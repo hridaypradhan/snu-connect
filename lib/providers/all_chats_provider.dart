@@ -6,36 +6,43 @@ final List<EndUser> _dummyUsers = [
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Mehak',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
 ];
 

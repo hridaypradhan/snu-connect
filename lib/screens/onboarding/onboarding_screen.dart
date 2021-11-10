@@ -138,7 +138,7 @@ class OnboardingScreen extends StatelessWidget {
           LoginScreen.id,
         ),
         done: const Text(
-          'Done',
+          "Let's Go",
           style: TextStyle(
             color: primaryPink,
             fontWeight: FontWeight.bold,

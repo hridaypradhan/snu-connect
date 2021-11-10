@@ -97,6 +97,8 @@ final List<Message> dummyMessages = [
   ),
 ];
 
+// TODO Add back button that pops
+
 class IndividualChatScreen extends StatefulWidget {
   static const id = 'individual_chat';
   const IndividualChatScreen({Key? key}) : super(key: key);
