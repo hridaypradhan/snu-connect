@@ -181,7 +181,10 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                 15.0,
               ),
               child: TextField(
+                textCapitalization: TextCapitalization.sentences,
                 onSubmitted: (string) {},
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
                 decoration: InputDecoration(
                   hintText: "Type a message",
                   hintStyle: const TextStyle(color: primaryPink),
