@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/models/end_user.dart';
+import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
 
 class ConversationThread extends StatefulWidget {
   final EndUser otherUser;
@@ -22,13 +23,19 @@ class _ConversationThreadState extends State<ConversationThread>
   void initState() {
     super.initState();
 
-    controller =
-        AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = ColorTween(begin: Colors.transparent, end: lightPink)
-        .animate(controller)
-      ..addListener(() {
-        setState(() {});
-      });
+    controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+    animation = ColorTween(
+      begin: Colors.transparent,
+      end: lightPink,
+    ).animate(controller)
+      ..addListener(
+        () {
+          setState(() {});
+        },
+      );
   }
 
   void animateColor() {
@@ -38,7 +45,16 @@ class _ConversationThreadState extends State<ConversationThread>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {animateColor()},
+      onTap: () {
+        animateColor();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            // TODO Individual chat screen should take the current user and build itself accordingly
+            builder: (context) => const IndividualChatScreen(),
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
