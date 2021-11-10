@@ -19,6 +19,7 @@ class DescriptionField extends StatelessWidget {
       },
       textCapitalization: TextCapitalization.sentences,
       textAlign: TextAlign.center,
+      keyboardType: TextInputType.multiline,
       maxLines: null,
       textAlignVertical: TextAlignVertical.center,
       controller: controller,

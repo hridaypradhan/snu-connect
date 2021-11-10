@@ -2,6 +2,7 @@ import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/global/widgets/event_card.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/base/widgets/category_card.dart';
@@ -123,23 +124,25 @@ class _CreateEventFormState extends State<CreateEventForm> {
             thin,
             LargeButton(
               onPressed: () {
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => SizedBox(
-                //     height: 500.0,
-                //     width: 500.0,
-                //     child: Center(
-                //       child: EventCard(
-                //         event: eventProvider.createEvent(),
-                //       ),
-                //     ),
-                //   ),
-                // );
-                // eventProvider.createEvent();
-                eventProvider.clearFields();
-                _eventNameController?.clear();
-                _descriptionController?.clear();
-                _venueController?.clear();
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: SizedBox(
+                      height: 200.0,
+                      width: 600.0,
+                      child: FittedBox(
+                        child: EventCard(
+                          event: eventProvider.createEvent(),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+                eventProvider.createEvent();
+                // eventProvider.clearFields();
+                // _eventNameController?.clear();
+                // _descriptionController?.clear();
+                // _venueController?.clear();
               },
               text: 'CREATE EVENT',
             ),
