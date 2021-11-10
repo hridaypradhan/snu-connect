@@ -180,12 +180,27 @@ class MoreInfoScreen extends StatelessWidget {
                           const SizedBox(
                             height: 12,
                           ),
-                          GestureDetector(child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [Text("Chat Now",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,)),
-                          SizedBox(
-                        width: 10,
-                      ),
-                      Icon(Icons.chat),],),onTap:() {print("Hello");} ,)
-                          
+                          GestureDetector(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "Chat Now",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(Icons.chat),
+                              ],
+                            ),
+                            onTap: () {
+                              print("Hello");
+                            },
+                          )
                         ],
                       ),
                     ),

@@ -39,9 +39,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           Text(
             _auth.currentUser?.displayName ?? 'SNU Student',
             style: const TextStyle(
@@ -49,46 +47,33 @@ class ProfileScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(
-            height: 5,
+          const SizedBox(height: 5),
+          Text(
+            _auth.currentUser?.email ?? 'ab123@snu.edu.in',
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _auth.currentUser?.email ?? 'ab123@snu.edu.in',
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-OutlinedButton(
-                child: const Text('Log Out'),
-                style: OutlinedButton.styleFrom(primary: Colors.pink),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut().then(
-                    (value) {
-                      GoogleSignIn().disconnect();
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        OnboardingScreen.id,
-                        (route) => false,
-                      );
-                    },
+          const SizedBox(height: 5),
+          OutlinedButton(
+            child: const Text('Log Out'),
+            style: OutlinedButton.styleFrom(primary: Colors.pink),
+            onPressed: () {
+              FirebaseAuth.instance.signOut().then(
+                (value) {
+                  GoogleSignIn().disconnect();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    OnboardingScreen.id,
+                    (route) => false,
                   );
                 },
-              ),
-            ],
+              );
+            },
           ),
-          // snu connect text
-          // logo
           Container(
-            margin: const EdgeInsets.all(15.0),
+            margin: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
               color: lightPink,
               borderRadius: BorderRadius.circular(25.0),
@@ -106,16 +91,18 @@ OutlinedButton(
               labelPadding: const EdgeInsets.all(5.0),
               padding: const EdgeInsets.all(5.0),
               tabs: const [
-                Expanded(
-                  child: ProfileTab(
-                    label: 'REGISTERED',
-                    icon: Icon(Icons.app_registration, size: 20.0),
+                ProfileTab(
+                  label: 'REGISTERED',
+                  icon: Icon(
+                    Icons.app_registration,
+                    size: 20.0,
                   ),
                 ),
-                Expanded(
-                  child: ProfileTab(
-                    label: 'CREATED',
-                    icon: Icon(Icons.create, size: 20.0),
+                ProfileTab(
+                  label: 'CREATED',
+                  icon: Icon(
+                    Icons.create,
+                    size: 20.0,
                   ),
                 )
               ],

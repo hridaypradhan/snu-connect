@@ -12,7 +12,7 @@ import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart'
 import 'package:snu_connect/screens/login/login_screen.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
 
-void main() {
+void main() { 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
               ),
               routes: {
                 OnboardingScreen.id: (context) => const OnboardingScreen(),
-                LoginScreen.id: (context) => LoginScreen(),
+                LoginScreen.id: (context) => const LoginScreen(),
                 BaseScreen.id: (context) => const BaseScreen(),
                 IndividualChatScreen.id: (context) =>
                     const IndividualChatScreen(),
