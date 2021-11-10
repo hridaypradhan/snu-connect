@@ -41,9 +41,6 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(
                 create: (context) => EventProvider(),
               ),
-              ChangeNotifierProvider(
-                create: (context) => AllChatsProvider(),
-              ),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

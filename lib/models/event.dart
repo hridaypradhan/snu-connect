@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/models/user.dart';
+import 'package:snu_connect/models/end_user.dart';
 
 class Event {
   String? image, code, description, name, venue;
   Category? category;
   DateTime dateTime;
-  User host;
+  EndUser host;
   int peopleCount, maxPeople;
 
   Event({
