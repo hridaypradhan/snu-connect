@@ -17,7 +17,7 @@ class Event {
     required this.venue,
     required this.peopleCount,
     required this.maxPeople,
-    this.description,
+    required this.description,
     this.image,
   }) {
     code = generateCode(4);
@@ -32,6 +32,6 @@ class Event {
 
   @override
   String toString() {
-    return '$name - $venue - $category';
+    return '$name - $venue - $category - $maxPeople - $description';
   }
 }

@@ -29,7 +29,7 @@ class _ConversationThreadState extends State<ConversationThread>
     );
     animation = ColorTween(
       begin: Colors.transparent,
-      end: lightPink,
+      end: lightRed,
     ).animate(controller)
       ..addListener(
         () {
@@ -64,7 +64,7 @@ class _ConversationThreadState extends State<ConversationThread>
         ),
         child: ListTile(
           leading: const CircleAvatar(),
-          title: Text(widget.otherUser.name),
+          title: Text(widget.otherUser.name ?? 'Name'),
           subtitle: const Text('read this ...'),
           trailing: const Icon(
             Icons.circle,

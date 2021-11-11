@@ -21,7 +21,7 @@ class DateTimePicker extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
-              color: lightPink,
+              color: lightRed,
               border: Border.all(
                 color: Colors.black,
               ),
@@ -40,7 +40,7 @@ class DateTimePicker extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: lightPink,
+            color: lightRed,
             border: Border.all(
               color: Colors.black,
             ),

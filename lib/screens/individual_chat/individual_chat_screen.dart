@@ -154,7 +154,7 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                 margin: EdgeInsets.all(size.width * 0.04),
                 padding: EdgeInsets.all(size.width * 0.04),
                 decoration: BoxDecoration(
-                  color: lightPink,
+                  color: lightRed,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: SingleChildScrollView(
@@ -193,7 +193,7 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                   focusColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: lightPink,
+                      color: lightRed,
                       width: 3.0,
                     ),
                     borderRadius: BorderRadius.circular(15),

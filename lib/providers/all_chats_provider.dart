@@ -53,7 +53,7 @@ class AllChatsProvider extends ChangeNotifier {
     List<EndUser> matchingUsers = [];
 
     for (EndUser u in _dummyUsers) {
-      if (u.name.toLowerCase().startsWith(query.toLowerCase())) {
+      if (u.name?.toLowerCase().startsWith(query.toLowerCase()) ?? false) {
         matchingUsers.add(u);
       }
     }

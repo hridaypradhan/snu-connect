@@ -160,21 +160,21 @@ class MoreInfoScreen extends StatelessWidget {
                             height: 5,
                           ),
                           Text(
-                            event.host.name,
+                            event.host.name ?? 'Name',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(
                             height: 3,
                           ),
                           Text(
-                            event.host.email,
+                            event.host.email ?? 'Email',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(
                             height: 3,
                           ),
                           Text(
-                            event.host.phone,
+                            event.host.phone ?? 'Phone',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(
