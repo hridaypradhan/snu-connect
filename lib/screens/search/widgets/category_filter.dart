@@ -25,7 +25,7 @@ class CategoryFilter extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         color: getCategoryColor(category),
       ),
-      width: size.width * 0.4,
+      width: size.width * 0.46,
       height: size.width * 0.4,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
