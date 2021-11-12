@@ -12,8 +12,8 @@ class HomeScreen extends StatelessWidget {
     var eventProvider = Provider.of<EventProvider>(context);
     return ListView(
       children: List.generate(
-        eventProvider.dummyEvents.length,
-        (index) => EventCard(event: eventProvider.dummyEvents[index]),
+        eventProvider.activeEvents.length,
+        (index) => EventCard(event: eventProvider.activeEvents[index]),
       ),
     );
   }
