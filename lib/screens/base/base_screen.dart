@@ -1,6 +1,5 @@
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_bar_icon.dart';
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_expandable_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';

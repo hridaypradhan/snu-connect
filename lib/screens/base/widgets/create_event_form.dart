@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/global/constants/extensions.dart';
 import 'package:snu_connect/global/widgets/event_card.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/models/end_user.dart';
@@ -116,13 +117,24 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 const Duration(days: 10),
               ),
               type: DateTimePickerType.Date,
-              onDateChanged: (newDate) {},
+              onDateChanged: (newDate) {
+                _selectedDateTime = _selectedDateTime.copyWith(
+                  day: newDate.day,
+                  month: newDate.month,
+                  year: newDate.year,
+                );
+              },
             ),
             DateTimePicker(
               timePickerTitle: 'Time',
               timeInterval: const Duration(minutes: 15),
               type: DateTimePickerType.Time,
-              onTimeChanged: (newTime) {},
+              onTimeChanged: (newTime) {
+                _selectedDateTime = _selectedDateTime.copyWith(
+                  hour: newTime.hour,
+                  minute: newTime.minute,
+                );
+              },
             ),
             divider,
             thin,
@@ -164,6 +176,9 @@ class _CreateEventFormState extends State<CreateEventForm> {
                       TextButton(
                         onPressed: () {
                           print(newEvent);
+                          eventProvider.uploadEvent(newEvent).then(
+                                (value) => Navigator.pop(context),
+                              );
                         },
                         child: const Text(
                           'Confirm',

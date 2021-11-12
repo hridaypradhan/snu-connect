@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/enums.dart';
@@ -5,16 +6,28 @@ import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/models/end_user.dart';
 
 class EventProvider extends ChangeNotifier {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Category? _selectedCategory;
   int _peopleCount = 1;
-  DateTime _selectedDateTime = DateTime.now();
   bool _buttonIsPressed = false;
 
   bool get buttonIsPressed => _buttonIsPressed;
   Category? get selectedCategory => _selectedCategory;
   int get peopleCount => _peopleCount;
-  DateTime? get selectedDateTime => _selectedDateTime;
+
+  Future<void> uploadEvent(Event event) async {
+    await _firestore
+        .collection('users')
+        .doc(_auth.currentUser?.email)
+        .collection('created')
+        .add(
+          event.toMap(),
+        );
+    await _firestore.collection('events').add(
+          event.toMap(),
+        );
+  }
 
   pressButton() {
     _buttonIsPressed = true;
