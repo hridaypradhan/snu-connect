@@ -9,6 +9,7 @@ import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/providers/event_provider.dart';
+import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/base/widgets/category_card.dart';
 import 'package:snu_connect/screens/base/widgets/description_field.dart';
 import 'package:snu_connect/screens/base/widgets/event_name_field.dart';
@@ -175,9 +176,12 @@ class _CreateEventFormState extends State<CreateEventForm> {
                       ),
                       TextButton(
                         onPressed: () {
-                          print(newEvent);
                           eventProvider.uploadEvent(newEvent).then(
-                                (value) => Navigator.pop(context),
+                                (value) => Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  BaseScreen.id,
+                                  (route) => false,
+                                ),
                               );
                         },
                         child: const Text(

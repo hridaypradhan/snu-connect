@@ -27,6 +27,9 @@ class EventProvider extends ChangeNotifier {
     await _firestore.collection('events').add(
           event.toMap(),
         );
+    _peopleCount = 1;
+    _selectedCategory = null;
+    notifyListeners();
   }
 
   Future<void> deleteEvent(Event event) async {
@@ -34,6 +37,7 @@ class EventProvider extends ChangeNotifier {
         .collection('users')
         .doc(_auth.currentUser?.email)
         .collection('created');
+    var generalCollection = _firestore.collection('events');
     await personalCollection
         .where(
           'code',
@@ -43,10 +47,19 @@ class EventProvider extends ChangeNotifier {
         .then(
       (value) {
         personalCollection.doc(value.docs[0].id).delete();
-        _firestore.collection('events').doc(value.docs[0].id).delete();
       },
     );
-    // print(queries);
+    await generalCollection
+        .where(
+          'code',
+          isEqualTo: event.code,
+        )
+        .get()
+        .then(
+      (value) {
+        generalCollection.doc(value.docs[0].id).delete();
+      },
+    );
   }
 
   pressButton() {
