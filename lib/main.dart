@@ -80,8 +80,6 @@ class _MyAppState extends State<MyApp> {
                 OnboardingScreen.id: (context) => const OnboardingScreen(),
                 LoginScreen.id: (context) => const LoginScreen(),
                 BaseScreen.id: (context) => const BaseScreen(),
-                IndividualChatScreen.id: (context) =>
-                    const IndividualChatScreen(),
               },
             ),
           );

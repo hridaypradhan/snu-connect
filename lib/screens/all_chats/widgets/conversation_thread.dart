@@ -24,7 +24,7 @@ class _ConversationThreadState extends State<ConversationThread>
     super.initState();
 
     controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 400),
       vsync: this,
     );
     animation = ColorTween(
@@ -47,12 +47,23 @@ class _ConversationThreadState extends State<ConversationThread>
     return GestureDetector(
       onTap: () {
         animateColor();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            // TODO Individual chat screen should take the current user and build itself accordingly
-            builder: (context) => const IndividualChatScreen(),
+        Future.delayed(
+          const Duration(
+            milliseconds: 450,
           ),
+          () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                // TODO Individual chat screen should take the current user and build itself accordingly
+                builder: (context) => IndividualChatScreen(
+                  otherUser: widget.otherUser,
+                ),
+              ),
+            );
+          },
+        ).then(
+          (value) => controller.reset(),
         );
       },
       child: Container(

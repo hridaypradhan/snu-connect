@@ -1,107 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/message.dart';
 import 'package:snu_connect/screens/individual_chat/widgets/message_bubble.dart';
-
-String myEmail = 'km224';
-final List<Message> dummyMessages = [
-  Message(
-    text: '1',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '2',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '3',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '4',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '5',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '6',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '7',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '8',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '9',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '10',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '11',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '12',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '13',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '14',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '15',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '16',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '17',
-    senderEmail: 'km224',
-    timestamp: DateTime.now(),
-  ),
-  Message(
-    text: '18',
-    senderEmail: 'sa350',
-    timestamp: DateTime.now(),
-  ),
-];
 
 // TODO Add back button that pops
 
 class IndividualChatScreen extends StatefulWidget {
   static const id = 'individual_chat';
-  const IndividualChatScreen({Key? key}) : super(key: key);
+  final EndUser otherUser;
+  const IndividualChatScreen({
+    Key? key,
+    required this.otherUser,
+  }) : super(key: key);
 
   @override
   State<IndividualChatScreen> createState() => _IndividualChatScreenState();
@@ -109,18 +22,29 @@ class IndividualChatScreen extends StatefulWidget {
 
 class _IndividualChatScreenState extends State<IndividualChatScreen> {
   final ScrollController _controller = ScrollController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  TextEditingController? _textController;
 
   @override
   void initState() {
     WidgetsBinding.instance?.addPostFrameCallback(
       (_) => _controller.jumpTo(_controller.position.maxScrollExtent),
     );
+    _textController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textController?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -134,16 +58,16 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
               ),
               child: Row(
                 children: [
-                  // TODO Add DP
-                  Icon(
-                    Icons.circle,
-                    size: size.width * 0.1,
-                    color: primaryPink,
-                  ),
-                  // TODO Add Name
+                  // CircleAvatar(
+                  //   backgroundImage: NetworkImage(
+                  //     widget.otherUser.photoUrl ?? '',
+                  //   ),
+                  //   radius: size.width * 0.05,
+                  // ),
+                  // SizedBox(width: size.width * 0.02),
                   Text(
-                    'Friend',
-                    style: TextStyle(fontSize: size.width * 0.07),
+                    '${widget.otherUser.name}',
+                    style: TextStyle(fontSize: size.width * 0.06),
                   ),
                   SizedBox(width: size.width * 0.4),
                 ],
@@ -159,17 +83,34 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                 ),
                 child: SingleChildScrollView(
                   reverse: true,
-                  child: ListView.builder(
-                    controller: _controller,
-                    shrinkWrap: true,
-                    itemCount: dummyMessages.length,
-                    itemBuilder: (context, index) {
-                      // TODO Compare to user's email ID
-                      bool isMe = dummyMessages[index].senderEmail == myEmail;
-                      return MessageBubble(
-                        isMe: isMe,
-                        message: dummyMessages[index],
-                      );
+                  child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    stream: _firestore
+                        .collection('chats')
+                        .doc(_auth.currentUser?.email)
+                        .collection(widget.otherUser.email.toString())
+                        .orderBy('timestamp')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          controller: _controller,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            bool isMe = snapshot.data!.docs[index]
+                                    .data()['senderEmail'] ==
+                                _auth.currentUser?.email;
+                            return MessageBubble(
+                              isMe: isMe,
+                              message: Message.fromMap(
+                                snapshot.data!.docs[index].data(),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Container();
+                      }
                     },
                   ),
                 ),
@@ -210,9 +151,33 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                       Icons.send,
                       color: primaryPink,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (_textController!.text.isNotEmpty) {
+                        var toSend = Message(
+                          senderEmail: _auth.currentUser?.email ?? '',
+                          text: _textController!.text,
+                          timestamp: DateTime.now(),
+                        );
+                        _firestore
+                            .collection('chats')
+                            .doc(_auth.currentUser?.email)
+                            .collection(widget.otherUser.email.toString())
+                            .add(
+                              toSend.toMap(),
+                            );
+                        _firestore
+                            .collection('chats')
+                            .doc(widget.otherUser.email)
+                            .collection(_auth.currentUser?.email ?? '')
+                            .add(
+                              toSend.toMap(),
+                            );
+                        _textController?.clear();
+                      }
+                    },
                   ),
                 ),
+                controller: _textController,
               ),
             ),
           ],

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,8 @@ import 'package:snu_connect/screens/all_chats/widgets/conversation_thread.dart';
 class AllChatsScreen extends StatelessWidget {
   AllChatsScreen({Key? key}) : super(key: key);
   final TextEditingController textController = TextEditingController();
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   static const String id = 'all_chats';
 
   @override
@@ -38,16 +41,41 @@ class AllChatsScreen extends StatelessWidget {
             },
           ),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: allChatsProvider.filteredList.length,
-              itemBuilder: (context, index) => ConversationThread(
-                otherUser: allChatsProvider.filteredList[index],
-              ),
+            child: StreamBuilder<DocumentSnapshot>(
+              stream: _firestore
+                  .collection('chats')
+                  .doc(_auth.currentUser?.email)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  var chatNumber = _firestore
+                      .collection('chats')
+                      .doc(_auth.currentUser?.email)
+                      .snapshots()
+                      .length;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: allChatsProvider.filteredList.length,
+                    itemBuilder: (context, index) => ConversationThread(
+                      otherUser: allChatsProvider.filteredList[index],
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<int> getSize() async {
+    return await _firestore
+        .collection('chats')
+        .doc(_auth.currentUser?.email)
+        .snapshots()
+        .length;
   }
 }

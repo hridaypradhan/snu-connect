@@ -41,7 +41,7 @@ class CreatedEventCard extends StatelessWidget {
           },
           child: Card(
             elevation: 5.0,
-            color: Colors.orange[300],
+            color: Colors.orange[200],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

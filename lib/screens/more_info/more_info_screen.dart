@@ -3,11 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
+import 'package:snu_connect/services/chat_service.dart';
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
   final Event event;
-  const MoreInfoScreen({
+  final ChatService _chatService = ChatService();
+  MoreInfoScreen({
     Key? key,
     required this.event,
   }) : super(key: key);
@@ -198,7 +201,14 @@ class MoreInfoScreen extends StatelessWidget {
                               ],
                             ),
                             onTap: () {
-                              print("Hello");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => IndividualChatScreen(
+                                    otherUser: event.host,
+                                  ),
+                                ),
+                              );
                             },
                           )
                         ],
@@ -217,16 +227,6 @@ class MoreInfoScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   children: const [
-                  //     SizedBox(
-                  //       width: 40,
-                  //     ),
-                  //     Text("Need partners? Team up!"),
-                  //     Icon(Icons.add),
-                  //   ],
-                  // ),
                 ],
               ),
             ),
