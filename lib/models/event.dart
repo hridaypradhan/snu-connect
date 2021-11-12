@@ -20,7 +20,7 @@ class Event {
     required this.description,
     this.code,
   }) {
-    if (code == null) generateCode(4);
+    code ??= generateCode(4);
   }
 
   factory Event.fromMap(Map<String, dynamic> json) => Event(
@@ -56,6 +56,6 @@ class Event {
 
   @override
   String toString() {
-    return '$name - $venue - $category - $maxPeople - $description';
+    return '$name - $venue - $category - $maxPeople - $description - $code';
   }
 }

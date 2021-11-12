@@ -1,16 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
+import 'package:snu_connect/screens/profile/widgets/created_event_card.dart';
 import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
 import 'package:snu_connect/screens/profile/widgets/registered_event_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -121,15 +125,35 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                GridView.count(
-                  childAspectRatio: 1.7,
-                  crossAxisCount: 2,
-                  children: List.generate(
-                    eventProvider.dummyEvents.length,
-                    (index) => RegisteredEventCard(
-                      event: eventProvider.dummyEvents[index],
-                    ),
-                  ),
+                StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream: _firestore
+                      .collection('users')
+                      .doc(_auth.currentUser?.email)
+                      .collection('created')
+                      .orderBy('dateTime')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          'You don\'t have any events. Create one now!',
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }
+                    return GridView.count(
+                      childAspectRatio: 1.7,
+                      crossAxisCount: 2,
+                      children: List.generate(
+                        snapshot.data!.docs.length,
+                        (index) => CreatedEventCard(
+                          event: Event.fromMap(
+                            snapshot.data!.docs[index].data(),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

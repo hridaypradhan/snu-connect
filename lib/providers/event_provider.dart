@@ -29,6 +29,26 @@ class EventProvider extends ChangeNotifier {
         );
   }
 
+  Future<void> deleteEvent(Event event) async {
+    var personalCollection = _firestore
+        .collection('users')
+        .doc(_auth.currentUser?.email)
+        .collection('created');
+    await personalCollection
+        .where(
+          'code',
+          isEqualTo: event.code,
+        )
+        .get()
+        .then(
+      (value) {
+        personalCollection.doc(value.docs[0].id).delete();
+        _firestore.collection('events').doc(value.docs[0].id).delete();
+      },
+    );
+    // print(queries);
+  }
+
   pressButton() {
     _buttonIsPressed = true;
     notifyListeners();

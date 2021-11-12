@@ -2,8 +2,10 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:snu_connect/global/widgets/alert_popup.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 
 class CreatedEventCard extends StatelessWidget {
@@ -17,6 +19,7 @@ class CreatedEventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var eventProvider = Provider.of<EventProvider>(context);
     return FlipCard(
       key: cardKey,
       flipOnTouch: false,
@@ -104,7 +107,9 @@ class CreatedEventCard extends StatelessWidget {
                 backgroundColor: Colors.orange,
                 child: Center(
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      eventProvider.deleteEvent(event);
+                    },
                     icon: const Icon(
                       Icons.delete_outline,
                       color: Colors.black,
