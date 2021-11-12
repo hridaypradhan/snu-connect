@@ -19,6 +19,9 @@ class HomeScreen extends StatelessWidget {
         Row(
           children: [
             const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
               width: 10,
             ),
             const Text(
