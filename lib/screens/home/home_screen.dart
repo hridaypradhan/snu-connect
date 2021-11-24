@@ -17,14 +17,14 @@ class HomeScreen extends StatelessWidget {
           height: 20,
         ),
         Row(
-          children: [
-            const SizedBox(
+          children: const [
+            SizedBox(
               height: 20,
             ),
             SizedBox(
               width: 10,
             ),
-            const Text(
+            Text(
               'Home',
               style: TextStyle(
                 fontSize: 47,
@@ -33,9 +33,6 @@ class HomeScreen extends StatelessWidget {
               textAlign: TextAlign.right,
             ),
           ],
-        ),
-        const SizedBox(
-          height: 40,
         ),
         Expanded(
           child: ListView(

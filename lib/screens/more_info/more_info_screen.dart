@@ -92,21 +92,55 @@ class MoreInfoScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "${event.peopleCount} / ${event.maxPeople}",
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                  InkWell(
+                    borderRadius: BorderRadius.circular(15.0),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.0),
+                              topRight: Radius.circular(15.0),
+                            ),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: const [
+                              Icon(Icons.drag_handle),
+                              // TODO Add heading and list of registered people here with name and email and option to start chat
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      elevation: 1.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      color: getCodeColor(event.category),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${event.peopleCount} / ${event.maxPeople}",
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Icon(Icons.people),
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Icon(Icons.people),
-                    ],
+                    ),
                   ),
                   Card(
                     margin: const EdgeInsets.all(10.0),
@@ -115,7 +149,7 @@ class MoreInfoScreen extends StatelessWidget {
                     ),
                     color: getCodeColor(event.category),
                     child: Container(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -127,9 +161,7 @@ class MoreInfoScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           Text(
                             event.description.toString(),
                             textAlign: TextAlign.center,
@@ -144,7 +176,7 @@ class MoreInfoScreen extends StatelessWidget {
                     ),
                     color: getCodeColor(event.category),
                     child: Container(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -156,32 +188,25 @@ class MoreInfoScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           Text(
                             event.host.name,
                             textAlign: TextAlign.left,
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
+                          const SizedBox(height: 3),
                           Text(
                             event.host.email,
                             textAlign: TextAlign.left,
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
+                          const SizedBox(height: 3),
                           Text(
                             event.host.phone,
                             textAlign: TextAlign.left,
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
+                          const SizedBox(height: 12),
                           GestureDetector(
                             child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
                                 Text(
@@ -191,9 +216,7 @@ class MoreInfoScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                SizedBox(width: 10),
                                 Icon(Icons.chat),
                               ],
                             ),
