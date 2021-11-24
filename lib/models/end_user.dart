@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class EndUser {
   String? name, email, phone, photoUrl;
+  
   EndUser({
     required this.name,
     required this.email,

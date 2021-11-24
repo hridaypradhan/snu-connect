@@ -4,13 +4,11 @@ import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
-import 'package:snu_connect/services/chat_service.dart';
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
   final Event event;
-  final ChatService _chatService = ChatService();
-  MoreInfoScreen({
+  const MoreInfoScreen({
     Key? key,
     required this.event,
   }) : super(key: key);

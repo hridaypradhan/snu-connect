@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/providers/all_chats_provider.dart';
 import 'package:snu_connect/screens/all_chats/widgets/conversation_thread.dart';
 
@@ -41,27 +42,38 @@ class AllChatsScreen extends StatelessWidget {
             },
           ),
           Expanded(
-            child: StreamBuilder<DocumentSnapshot>(
+            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: _firestore
-                  .collection('chats')
+                  .collection('users')
                   .doc(_auth.currentUser?.email)
+                  .collection('chats')
+                  .orderBy('unread')
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  var chatNumber = _firestore
-                      .collection('chats')
-                      .doc(_auth.currentUser?.email)
-                      .snapshots()
-                      .length;
+                  if (snapshot.data!.docs.isEmpty) {
+                    return const Center(
+                      child: Text('No chats yet!'),
+                    );
+                  }
+
                   return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: allChatsProvider.filteredList.length,
-                    itemBuilder: (context, index) => ConversationThread(
-                      otherUser: allChatsProvider.filteredList[index],
-                    ),
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (context, index) =>
+                        Builder(builder: (context) {                    
+                      return ConversationThread(
+                        otherUser: EndUser.fromMap(
+                          snapshot.data!.docs[index].data(),
+                        ),
+                        unread: snapshot.data!.docs[index].data()['unread'],
+                      );
+                    }),
                   );
                 } else {
-                  return Container();
+                  return const Center(
+                    child: Text('No chats yet!'),
+                  );
                 }
               },
             ),
