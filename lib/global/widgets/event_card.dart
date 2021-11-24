@@ -10,9 +10,11 @@ import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
+  final bool isPreview;
   const EventCard({
     Key? key,
     required this.event,
+    this.isPreview = false,
   }) : super(key: key);
 
   @override
@@ -25,12 +27,14 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {
-                FlutterClipboard.copy(event.code.toString());
-                ScaffoldMessenger.of(context).showSnackBar(
-                  alertPopup('EVENT CODE COPIED'),
-                );
-              },
+              onTap: !isPreview
+                  ? () {
+                      FlutterClipboard.copy(event.code.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        alertPopup('EVENT CODE COPIED'),
+                      );
+                    }
+                  : null,
               child: CircleAvatar(
                 backgroundColor: getCodeColor(event.category),
                 child: const Center(
@@ -53,11 +57,13 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  alertPopup('REGISTERED!'),
-                );
-              },
+              onTap: !isPreview
+                  ? () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        alertPopup('REGISTERED!'),
+                      );
+                    }
+                  : null,
               child: CircleAvatar(
                 backgroundColor: getCodeColor(event.category),
                 child: const Center(
@@ -78,18 +84,20 @@ class EventCard extends StatelessWidget {
         ),
       ],
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return MoreInfoScreen(
-                  event: event,
+        onTap: !isPreview
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MoreInfoScreen(
+                        event: event,
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
-          );
-        },
+              }
+            : null,
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: Card(

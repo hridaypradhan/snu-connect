@@ -6,36 +6,43 @@ final List<EndUser> _dummyUsers = [
     name: 'Shraddha',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
-    name: 'Shraddha',
+    name: 'Hriday',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
-    name: 'Shraddha',
+    name: 'Shivam',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
-    name: 'Shraddha',
+    name: 'Shrey',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
-    name: 'Shraddha',
+    name: 'Sankalp',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
-    name: 'Shraddha',
+    name: 'Saurabh',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
   EndUser(
     name: 'Mehak',
     email: 'sa350',
     phone: '123456789',
+    photoUrl: 'sample',
   ),
 ];
 
@@ -46,7 +53,7 @@ class AllChatsProvider extends ChangeNotifier {
     List<EndUser> matchingUsers = [];
 
     for (EndUser u in _dummyUsers) {
-      if (u.name.toLowerCase().startsWith(query.toLowerCase())) {
+      if (u.name?.toLowerCase().startsWith(query.toLowerCase()) ?? false) {
         matchingUsers.add(u);
       }
     }

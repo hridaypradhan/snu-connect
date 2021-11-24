@@ -1,9 +1,15 @@
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/global/constants/extensions.dart';
+import 'package:snu_connect/global/widgets/event_card.dart';
 import 'package:snu_connect/global/widgets/large_button.dart';
+import 'package:snu_connect/models/end_user.dart';
+import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/providers/event_provider.dart';
+import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/base/widgets/category_card.dart';
 import 'package:snu_connect/screens/base/widgets/description_field.dart';
 import 'package:snu_connect/screens/base/widgets/event_name_field.dart';
@@ -30,6 +36,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
   TextEditingController? _venueController,
       _eventNameController,
       _descriptionController;
+  DateTime _selectedDateTime = DateTime.now();
   @override
   void initState() {
     super.initState();
@@ -111,35 +118,95 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 const Duration(days: 10),
               ),
               type: DateTimePickerType.Date,
-              onDateChanged: (newDate) {},
+              onDateChanged: (newDate) {
+                _selectedDateTime = _selectedDateTime.copyWith(
+                  day: newDate.day,
+                  month: newDate.month,
+                  year: newDate.year,
+                );
+              },
             ),
             DateTimePicker(
               timePickerTitle: 'Time',
               timeInterval: const Duration(minutes: 15),
               type: DateTimePickerType.Time,
-              onTimeChanged: (newTime) {},
+              onTimeChanged: (newTime) {
+                _selectedDateTime = _selectedDateTime.copyWith(
+                  hour: newTime.hour,
+                  minute: newTime.minute,
+                );
+              },
             ),
             divider,
             thin,
             LargeButton(
               onPressed: () {
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => SizedBox(
-                //     height: 500.0,
-                //     width: 500.0,
-                //     child: Center(
-                //       child: EventCard(
-                //         event: eventProvider.createEvent(),
-                //       ),
-                //     ),
-                //   ),
-                // );
-                // eventProvider.createEvent();
-                eventProvider.clearFields();
-                _eventNameController?.clear();
-                _descriptionController?.clear();
-                _venueController?.clear();
+                Event newEvent = Event(
+                  name: _eventNameController?.text ?? 'N/A',
+                  description: _descriptionController?.text ?? 'N/A',
+                  peopleCount: 1,
+                  venue: _venueController?.text ?? 'N/A',
+                  host: EndUser.fromAuth(),
+                  maxPeople: eventProvider.peopleCount,
+                  category: eventProvider.selectedCategory,
+                  dateTime: _selectedDateTime,
+                );
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    insetPadding: const EdgeInsets.all(10.0),
+                    title: const Text(
+                      'Preview',
+                      textAlign: TextAlign.center,
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          'Back',
+                          style: TextStyle(
+                            color: primaryPink,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          eventProvider.uploadEvent(newEvent).then(
+                                (value) => Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  BaseScreen.id,
+                                  (route) => false,
+                                ),
+                              );
+                        },
+                        child: const Text(
+                          'Confirm',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: primaryPink,
+                          ),
+                        ),
+                      ),
+                    ],
+                    content: SizedBox(
+                      height: size.height * 0.32,
+                      width: size.width,
+                      child: EventCard(
+                        event: newEvent,
+                        isPreview: true,
+                      ),
+                    ),
+                  ),
+                );
+                // eventProvider.clearFields();
+                // _eventNameController?.clear();
+                // _descriptionController?.clear();
+                // _venueController?.clear();
               },
               text: 'CREATE EVENT',
             ),
