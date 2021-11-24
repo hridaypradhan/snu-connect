@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/models/user.dart';
 import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/search/widgets/category_filter.dart';
@@ -36,6 +34,7 @@ class SearchScreen extends StatelessWidget {
           hideHeaderText: true,
           selectedItemsText: 'selected categories',
           applyButonTextBackgroundColor: primaryPink,
+          // TODO Reset + Apply should show all events
           onApplyButtonClick: (list) {
             if (list != null) {
               if (eventProvider.searchBoxText!.isEmpty) {
