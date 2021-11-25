@@ -23,10 +23,11 @@ class AllChatsScreen extends StatelessWidget {
       },
     );
     return Container(
-      margin: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 20.0),
           const Text(
             'Chats',
             style: TextStyle(

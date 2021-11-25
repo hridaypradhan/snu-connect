@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
                 textTheme: GoogleFonts.spartanTextTheme(),
                 textSelectionTheme: TextSelectionThemeData(
                   cursorColor: primaryPink,
-                  selectionColor: lightRed,
+                  selectionColor: lightPink,
                 ),
                 bottomSheetTheme: const BottomSheetThemeData(
                   backgroundColor: Colors.transparent,

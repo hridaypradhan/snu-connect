@@ -9,11 +9,36 @@ import 'package:snu_connect/screens/more_info/widgets/registered_user_card.dart'
 import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
 
 List<EndUser> dummyEndUsers = [
-  EndUser(name: 'Shraddha', email: 'sa350', phone: '1234567890'),
-  EndUser(name: 'Mehak', email: 'ma350', phone: '1234567890'),
-  EndUser(name: 'Kritika', email: 'km224', phone: '1234567890'),
-  EndUser(name: 'Hriday', email: 'hp103', phone: '1234567890'),
-  EndUser(name: 'Narjis', email: 'nn782', phone: '1234567890'),
+  EndUser(
+    name: 'Shraddha',
+    email: 'sa350',
+    phone: '1234567890',
+    photoUrl: 'photoUrl',
+  ),
+  EndUser(
+    name: 'Mehak',
+    email: 'ma350',
+    phone: '1234567890',
+    photoUrl: 'photoUrl',
+  ),
+  EndUser(
+    name: 'Kritika',
+    email: 'km224',
+    phone: '1234567890',
+    photoUrl: 'photoUrl',
+  ),
+  EndUser(
+    name: 'Hriday',
+    email: 'hp103',
+    phone: '1234567890',
+    photoUrl: 'photoUrl',
+  ),
+  EndUser(
+    name: 'Narjis',
+    email: 'nn782',
+    phone: '1234567890',
+    photoUrl: 'photoUrl',
+  ),
 ];
 
 class MoreInfoScreen extends StatelessWidget {
@@ -134,8 +159,9 @@ class MoreInfoScreen extends StatelessWidget {
                                 itemBuilder: (BuildContext context, int index) {
                                   return RegisteredUserCard(
                                     serialNumber: index + 1,
-                                    name: dummyEndUsers[index].name,
-                                    email: dummyEndUsers[index].email,
+                                    name: dummyEndUsers[index].name ?? 'Name',
+                                    email:
+                                        dummyEndUsers[index].email ?? 'Email',
                                   );
                                 },
                               ),

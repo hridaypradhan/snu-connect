@@ -33,7 +33,7 @@ class _ConversationThreadState extends State<ConversationThread>
     );
     animation = ColorTween(
       begin: Colors.transparent,
-      end: lightRed,
+      end: lightPink,
     ).animate(controller)
       ..addListener(
         () {

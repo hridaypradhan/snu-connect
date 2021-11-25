@@ -13,58 +13,54 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventProvider>(context);
-// TODO Home heading
-//     return Column(
-//       children: [
-//         const SizedBox(
-//           height: 20,
-//         ),
-//         Row(
-//           children: const [
-//             SizedBox(
-//               height: 20,
-//             ),
-//             SizedBox(
-//               width: 10,
-//             ),
-//             Text(
-//               'Home',
-//               style: TextStyle(
-//                 fontSize: 47,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//               textAlign: TextAlign.right,
-//             ),
-//           ],
-//         ),
-//       ],
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: _firestore.collection('events').orderBy('dateTime').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Center(
-            child: Text(
-              'No events created yet. \nMake your own!',
-              textAlign: TextAlign.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 20.0),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Text(
+            'Home',
+            style: TextStyle(
+              fontSize: 47,
+              fontWeight: FontWeight.bold,
             ),
-          );
-        }
-        return ListView(
-          children: List.generate(
-            snapshot.data!.docs.length,
-            (index) {
-              Event toBuild = Event.fromMap(snapshot.data!.docs[index].data());
-              if (eventProvider.filterEvent(toBuild)) {
-                return EventCard(
-                  event: toBuild,
-                );
-              } else {
-                return Container();
-              }
-            },
+            textAlign: TextAlign.right,
           ),
-        );
-      },
+        ),
+        StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream:
+              _firestore.collection('events').orderBy('dateTime').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text(
+                  'No events created yet. \nMake your own!',
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }
+            return Expanded(
+              child: ListView(
+                children: List.generate(
+                  snapshot.data!.docs.length,
+                  (index) {
+                    Event toBuild =
+                        Event.fromMap(snapshot.data!.docs[index].data());
+                    if (eventProvider.filterEvent(toBuild)) {
+                      return EventCard(
+                        event: toBuild,
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

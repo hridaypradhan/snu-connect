@@ -97,7 +97,7 @@ class EventCard extends StatelessWidget {
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: lightRed,
+                                  color: lightPink,
                                   width: 3.0,
                                 ),
                                 borderRadius: BorderRadius.circular(15),
