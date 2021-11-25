@@ -154,6 +154,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
+                    contentPadding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -203,10 +204,6 @@ class _CreateEventFormState extends State<CreateEventForm> {
                     ),
                   ),
                 );
-                // eventProvider.clearFields();
-                // _eventNameController?.clear();
-                // _descriptionController?.clear();
-                // _venueController?.clear();
               },
               text: 'CREATE EVENT',
             ),

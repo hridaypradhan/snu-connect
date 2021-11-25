@@ -50,6 +50,7 @@ class EventCard extends StatelessWidget {
             ),
             const Text(
               "Copy Code",
+              textAlign: TextAlign.center,
             ),
           ],
         ),
