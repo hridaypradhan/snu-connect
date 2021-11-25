@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
@@ -5,6 +6,7 @@ import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/screens/more_info/widgets/registered_user_card.dart';
+import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
 
 List<EndUser> dummyEndUsers = [
   EndUser(name: 'Shraddha', email: 'sa350', phone: '1234567890'),
@@ -219,17 +221,17 @@ class MoreInfoScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            event.host.name,
+                            event.host.name ?? 'Name',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(height: 3),
                           Text(
-                            event.host.email,
+                            event.host.email ?? 'Email',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(height: 3),
                           Text(
-                            event.host.phone,
+                            event.host.phone ?? 'Phone',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(height: 12),
@@ -250,7 +252,17 @@ class MoreInfoScreen extends StatelessWidget {
                               ],
                             ),
                             onTap: () {
-                              print("Hello");
+                              if (FirebaseAuth.instance.currentUser?.email !=
+                                  event.host.email) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => IndividualChatScreen(
+                                      otherUser: event.host,
+                                    ),
+                                  ),
+                                );
+                              }
                             },
                           )
                         ],
@@ -265,20 +277,10 @@ class MoreInfoScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: getCategoryImage(event.category),
                     ),
-                  ), //why
+                  ),
                   const SizedBox(
                     height: 5,
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   children: const [
-                  //     SizedBox(
-                  //       width: 40,
-                  //     ),
-                  //     Text("Need partners? Team up!"),
-                  //     Icon(Icons.add),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

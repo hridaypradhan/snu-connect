@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/models/end_user.dart';
@@ -5,9 +7,11 @@ import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart'
 
 class ConversationThread extends StatefulWidget {
   final EndUser otherUser;
+  final bool unread;
   const ConversationThread({
     Key? key,
     required this.otherUser,
+    required this.unread,
   }) : super(key: key);
 
   @override
@@ -24,12 +28,12 @@ class _ConversationThreadState extends State<ConversationThread>
     super.initState();
 
     controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 400),
       vsync: this,
     );
     animation = ColorTween(
       begin: Colors.transparent,
-      end: lightPink,
+      end: lightRed,
     ).animate(controller)
       ..addListener(
         () {
@@ -44,15 +48,37 @@ class _ConversationThreadState extends State<ConversationThread>
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    FirebaseAuth _auth = FirebaseAuth.instance;
     return GestureDetector(
       onTap: () {
         animateColor();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            // TODO Individual chat screen should take the current user and build itself accordingly
-            builder: (context) => const IndividualChatScreen(),
+        Future.delayed(
+          const Duration(
+            milliseconds: 450,
           ),
+          () {
+            _firestore
+                .collection('users')
+                .doc(_auth.currentUser?.email)
+                .collection('chats')
+                .doc(widget.otherUser.email)
+                .update(
+              {
+                'unread': false,
+              },
+            );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => IndividualChatScreen(
+                  otherUser: widget.otherUser,
+                ),
+              ),
+            );
+          },
+        ).then(
+          (value) => controller.reset(),
         );
       },
       child: Container(
@@ -63,13 +89,41 @@ class _ConversationThreadState extends State<ConversationThread>
           borderRadius: BorderRadius.circular(35),
         ),
         child: ListTile(
-          leading: const CircleAvatar(),
-          title: Text(widget.otherUser.name),
-          subtitle: const Text('read this ...'),
-          trailing: const Icon(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(widget.otherUser.photoUrl.toString()),
+          ),
+          title: Text(
+            widget.otherUser.name ?? 'Name',
+            style: TextStyle(
+              fontWeight: widget.unread ? FontWeight.bold : null,
+            ),
+          ),
+          subtitle: FutureBuilder<QuerySnapshot>(
+            future: _firestore
+                .collection('users')
+                .doc(_auth.currentUser?.email)
+                .collection('chats')
+                .doc(widget.otherUser.email)
+                .collection('messages')
+                .orderBy('timestamp')
+                .get(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                String lastMessage = snapshot.data?.docs.last['text'];
+                if (lastMessage.length >= 25) {
+                  lastMessage = lastMessage.substring(0, 15);
+                  lastMessage += '...';
+                }
+                return Text(lastMessage);
+              } else {
+                return const Text('Loading...');
+              }
+            },
+          ),
+          trailing: Icon(
             Icons.circle,
             size: 15.0,
-            color: primaryPink,
+            color: widget.unread ? primaryPink : Colors.transparent,
           ),
         ),
       ),

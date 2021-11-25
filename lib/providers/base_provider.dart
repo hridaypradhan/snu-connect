@@ -1,3 +1,4 @@
+import 'package:snu_connect/screens/Search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/screens/all_chats/all_chats_screen.dart';
 import 'package:snu_connect/screens/home/home_screen.dart';
@@ -11,13 +12,15 @@ class BaseProvider extends ChangeNotifier {
   Widget get getPage {
     switch (_currentPage) {
       case 0:
-        return const HomeScreen();
+        return HomeScreen();
+      case 1:
+        return SearchScreen();
       case 2:
         return AllChatsScreen();
       case 3:
         return ProfileScreen();
       default:
-        return const HomeScreen();
+        return HomeScreen();
     }
   }
 

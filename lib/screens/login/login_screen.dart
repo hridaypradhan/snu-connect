@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 alertPopup('USE AN SNU ID'),
                               );
                             } else {
+                              _authService.writeUserData();
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 BaseScreen.id,

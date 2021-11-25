@@ -1,4 +1,6 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -10,14 +12,17 @@ import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
+  final bool isPreview;
   const EventCard({
     Key? key,
     required this.event,
+    this.isPreview = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Slidable(
       actionPane: const SlidableScrollActionPane(),
       actions: [
@@ -25,12 +30,122 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {
-                FlutterClipboard.copy(event.code.toString());
-                ScaffoldMessenger.of(context).showSnackBar(
-                  alertPopup('EVENT CODE COPIED'),
-                );
-              },
+              onTap: !isPreview
+                  ? () {
+                      TextEditingController reportController =
+                          TextEditingController();
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          title: const Icon(
+                            Icons.report,
+                            size: 40.0,
+                            color: primaryPink,
+                          ),
+                          actions: [
+                            TextButton(
+                              child: const Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  color: primaryPink,
+                                ),
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            TextButton(
+                              child: const Text(
+                                'Report',
+                                style: TextStyle(
+                                  color: primaryPink,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              onPressed: () {
+                                var toReport = event.toMap();
+                                toReport.addAll(
+                                  {
+                                    'reason': reportController.text,
+                                    'reporterName': FirebaseAuth
+                                        .instance.currentUser?.displayName,
+                                    'reporterEmail': FirebaseAuth
+                                        .instance.currentUser?.email,
+                                    'reportTime': DateTime.now(),
+                                  },
+                                );
+                                _firestore
+                                    .collection('reportedEvents')
+                                    .doc(event.code)
+                                    .set(toReport)
+                                    .then(
+                                  (value) {
+                                    Navigator.pop(context);
+                                    reportController.clear();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      alertPopup('EVENT REPORTED'),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                          content: TextField(
+                            textCapitalization: TextCapitalization.sentences,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: lightRed,
+                                  width: 3.0,
+                                ),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: primaryPink,
+                                  width: 2.5,
+                                ),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              hintText: 'What\'s wrong with this event?',
+                            ),
+                            controller: reportController,
+                          ),
+                        ),
+                      );
+                    }
+                  : null,
+              child: CircleAvatar(
+                backgroundColor: getCodeColor(event.category),
+                child: const Center(
+                  child: Icon(
+                    Icons.report,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              "Report",
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: !isPreview
+                  ? () {
+                      FlutterClipboard.copy(event.code.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        alertPopup('EVENT CODE COPIED'),
+                      );
+                    }
+                  : null,
               child: CircleAvatar(
                 backgroundColor: getCodeColor(event.category),
                 child: const Center(
@@ -46,6 +161,7 @@ class EventCard extends StatelessWidget {
             ),
             const Text(
               "Copy Code",
+              textAlign: TextAlign.center,
             ),
           ],
         ),
@@ -53,11 +169,13 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  alertPopup('REGISTERED!'),
-                );
-              },
+              onTap: !isPreview
+                  ? () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        alertPopup('REGISTERED!'),
+                      );
+                    }
+                  : null,
               child: CircleAvatar(
                 backgroundColor: getCodeColor(event.category),
                 child: const Center(
@@ -78,18 +196,20 @@ class EventCard extends StatelessWidget {
         ),
       ],
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return MoreInfoScreen(
-                  event: event,
+        onTap: !isPreview
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MoreInfoScreen(
+                        event: event,
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
-          );
-        },
+              }
+            : null,
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: Card(

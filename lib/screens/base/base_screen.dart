@@ -27,8 +27,8 @@ class _BaseScreenState extends State<BaseScreen> {
           bottomSheetHeight: size.height,
           currentIndex: baseProvider.currentPage,
           bottomBarHeight: 70.0,
-          backgroundColor: lightPink,
-          backgroundBarColor: lightPink,
+          backgroundColor: lightRed,
+          backgroundBarColor: lightRed,
           iconExpand: const Icon(
             Icons.add,
             size: 40.0,
