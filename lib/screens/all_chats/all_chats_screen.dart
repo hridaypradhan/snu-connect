@@ -56,19 +56,21 @@ class AllChatsScreen extends StatelessWidget {
                       child: Text('No chats yet!'),
                     );
                   }
-
                   return ListView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data?.docs.length,
-                    itemBuilder: (context, index) =>
-                        Builder(builder: (context) {                    
-                      return ConversationThread(
-                        otherUser: EndUser.fromMap(
-                          snapshot.data!.docs[index].data(),
-                        ),
-                        unread: snapshot.data!.docs[index].data()['unread'],
-                      );
-                    }),
+                    itemBuilder: (context, index) => snapshot.data!.docs[index]
+                            .data()['name']
+                            .toString()
+                            .toLowerCase()
+                            .startsWith(textController.text.toLowerCase())
+                        ? ConversationThread(
+                            otherUser: EndUser.fromMap(
+                              snapshot.data!.docs[index].data(),
+                            ),
+                            unread: snapshot.data!.docs[index].data()['unread'],
+                          )
+                        : Container(),
                   );
                 } else {
                   return const Center(
