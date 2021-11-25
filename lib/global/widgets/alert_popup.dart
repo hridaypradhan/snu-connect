@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 
 SnackBar alertPopup(String text) => SnackBar(
+      dismissDirection: DismissDirection.horizontal,
       backgroundColor: lightRed,
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(

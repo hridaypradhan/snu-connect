@@ -125,7 +125,11 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                             },
                           );
                         } else {
-                          return Container();
+                          return const Center(
+                            child: Text(
+                              'No messages yet. Send the first one! \n(Long press to copy a message)',
+                            ),
+                          );
                         }
                       },
                     ),
@@ -171,7 +175,7 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                         if (_textController!.text.isNotEmpty) {
                           var toSend = Message(
                             senderEmail: _auth.currentUser?.email ?? '',
-                            text: _textController!.text,
+                            text: _textController!.text.trim(),
                             timestamp: DateTime.now(),
                           );
                           var receiverData = widget.otherUser.toMap();

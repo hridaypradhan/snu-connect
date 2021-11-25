@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
@@ -199,14 +200,17 @@ class MoreInfoScreen extends StatelessWidget {
                               ],
                             ),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => IndividualChatScreen(
-                                    otherUser: event.host,
+                              if (FirebaseAuth.instance.currentUser?.email !=
+                                  event.host.email) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => IndividualChatScreen(
+                                      otherUser: event.host,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
                             },
                           )
                         ],
