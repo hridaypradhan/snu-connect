@@ -88,7 +88,20 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                       ],
                     ),
                     IconButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () async {
+                        await _firestore
+                            .collection('users')
+                            .doc(_auth.currentUser?.email)
+                            .collection('chats')
+                            .doc(widget.otherUser.email)
+                            .update(
+                          {
+                            'unread': false,
+                          },
+                        ).then(
+                          (value) => Navigator.pop(context),
+                        );
+                      },
                       icon: Icon(
                         Icons.close,
                         size: size.width * 0.06,

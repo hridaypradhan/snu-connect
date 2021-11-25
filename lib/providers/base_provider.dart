@@ -12,7 +12,7 @@ class BaseProvider extends ChangeNotifier {
   Widget get getPage {
     switch (_currentPage) {
       case 0:
-        return const HomeScreen();
+        return HomeScreen();
       case 1:
         return SearchScreen();
       case 2:

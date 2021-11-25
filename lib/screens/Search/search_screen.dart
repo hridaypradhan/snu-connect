@@ -34,7 +34,6 @@ class SearchScreen extends StatelessWidget {
           hideHeaderText: true,
           selectedItemsText: 'selected categories',
           applyButonTextBackgroundColor: primaryPink,
-          // TODO Reset + Apply should show all events
           onApplyButtonClick: (list) {
             if (list != null) {
               if (eventProvider.searchBoxText!.isEmpty) {

@@ -10,11 +10,25 @@ class EventProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Category? _selectedCategory;
   int _peopleCount = 1;
+  List<Category> _selectedCategoryFilters = [];
+  String? _searchBoxText = "";
   bool _buttonIsPressed = false;
 
   bool get buttonIsPressed => _buttonIsPressed;
   Category? get selectedCategory => _selectedCategory;
   int get peopleCount => _peopleCount;
+  List<Category> get selectedCategoryFilters => _selectedCategoryFilters;
+  String? get searchBoxText => _searchBoxText;
+
+  setCategoryFilters(List<Category> newList) {
+    _selectedCategoryFilters = newList;
+    notifyListeners();
+  }
+
+  setSearchBoxText(String newText) {
+    _searchBoxText = newText;
+    notifyListeners();
+  }
 
   Future<void> uploadEvent(Event event) async {
     await _firestore
@@ -82,14 +96,10 @@ class EventProvider extends ChangeNotifier {
     _peopleCount += toAdd;
     notifyListeners();
   }
-  
+
   clearData() {
     _selectedCategory = null;
     notifyListeners();
-  }
-
-  setSearchBoxText(String? newText) {
-    _searchBoxText = newText;
   }
 
   List<Event> get dummyEvents => _dummyEvents;
@@ -210,10 +220,11 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       venue: 'Football Ground',
       description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'Football Match',
     ),
@@ -224,10 +235,11 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       venue: 'B315',
       description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'TEDxSNU',
     ),
@@ -238,10 +250,11 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       venue: 'Mini Mart',
       description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'Detergent Run',
     ),
@@ -252,10 +265,11 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       description: 'Please join me. I need a team of 10. Match tomorrow',
       venue: '506 1A',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'Hair Dryer',
     ),
@@ -266,10 +280,11 @@ class EventProvider extends ChangeNotifier {
       dateTime: DateTime.now(),
       description: 'Please join me. I need a team of 10. Match tomorrow',
       venue: '506 1A',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'Bose Speakers',
     ),
@@ -280,10 +295,11 @@ class EventProvider extends ChangeNotifier {
       description: 'Please join me. I need a team of 10. Match tomorrow',
       dateTime: DateTime.now(),
       venue: '1A Study Room',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'CSD319 Doubts',
     ),
@@ -294,10 +310,11 @@ class EventProvider extends ChangeNotifier {
       description: 'Please join me. I need a team of 10. Match tomorrow',
       dateTime: DateTime.now(),
       venue: 'Inner Gate',
-      host: User(
+      host: EndUser(
         email: 'hp103',
         phone: '1234567890',
         name: 'Hriday',
+        photoUrl: 'sample',
       ),
       name: 'Metro',
     ),
