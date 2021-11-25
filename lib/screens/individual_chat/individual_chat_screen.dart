@@ -7,8 +7,6 @@ import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/message.dart';
 import 'package:snu_connect/screens/individual_chat/widgets/message_bubble.dart';
 
-// TODO Add back button that pops
-
 class IndividualChatScreen extends StatefulWidget {
   static const id = 'individual_chat';
   final EndUser otherUser;
@@ -72,19 +70,31 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                   0,
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        widget.otherUser.photoUrl ?? '',
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            widget.otherUser.photoUrl ?? '',
+                          ),
+                          radius: size.width * 0.05,
+                        ),
+                        SizedBox(width: size.width * 0.02),
+                        Text(
+                          '${widget.otherUser.name}',
+                          style: TextStyle(fontSize: size.width * 0.06),
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.close,
+                        size: size.width * 0.06,
+                        color: primaryPink,
                       ),
-                      radius: size.width * 0.05,
                     ),
-                    SizedBox(width: size.width * 0.02),
-                    Text(
-                      '${widget.otherUser.name}',
-                      style: TextStyle(fontSize: size.width * 0.06),
-                    ),
-                    SizedBox(width: size.width * 0.4),
                   ],
                 ),
               ),
