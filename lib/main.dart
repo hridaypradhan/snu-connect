@@ -80,6 +80,7 @@ class _MyAppState extends State<MyApp> {
                   return const OnboardingScreen();
                 },
               ),
+              initialRoute: BaseScreen.id,
               routes: {
                 OnboardingScreen.id: (context) => const OnboardingScreen(),
                 LoginScreen.id: (context) => const LoginScreen(),

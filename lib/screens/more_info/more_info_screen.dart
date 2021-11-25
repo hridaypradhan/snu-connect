@@ -3,8 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/screens/more_info/widgets/registered_user_card.dart';
 import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
+
+List<EndUser> dummyEndUsers = [
+  EndUser(name: 'Shraddha', email: 'sa350', phone: '1234567890'),
+  EndUser(name: 'Mehak', email: 'ma350', phone: '1234567890'),
+  EndUser(name: 'Kritika', email: 'km224', phone: '1234567890'),
+  EndUser(name: 'Hriday', email: 'hp103', phone: '1234567890'),
+  EndUser(name: 'Narjis', email: 'nn782', phone: '1234567890'),
+];
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
@@ -94,21 +104,74 @@ class MoreInfoScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "${event.peopleCount} / ${event.maxPeople}",
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                  InkWell(
+                    borderRadius: BorderRadius.circular(15.0),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15.0),
+                            topRight: Radius.circular(15.0),
+                          ),
+                        ),
+                        backgroundColor: Colors.white,
+                        builder: (context) => Column(
+                          children: [
+                            const Icon(Icons.drag_handle),
+                            const Text(
+                              'Registrations',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10.0),
+                            Expanded(
+                              child: ListView.builder(
+                                padding: const EdgeInsets.all(8),
+                                itemCount: dummyEndUsers.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return RegisteredUserCard(
+                                    serialNumber: index + 1,
+                                    name: dummyEndUsers[index].name,
+                                    email: dummyEndUsers[index].email,
+                                  );
+                                },
+                              ),
+                            ),
+                            // TODO Remove person option for the creator only
+                          ],
+                        ),
+                      );
+                    },
+                    child: Card(
+                      elevation: 1.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      color: getCodeColor(event.category),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${event.peopleCount} / ${event.maxPeople}",
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Icon(Icons.people),
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Icon(Icons.people),
-                    ],
+                    ),
                   ),
                   Card(
                     margin: const EdgeInsets.all(10.0),
@@ -117,7 +180,7 @@ class MoreInfoScreen extends StatelessWidget {
                     ),
                     color: getCodeColor(event.category),
                     child: Container(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -129,9 +192,7 @@ class MoreInfoScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           Text(
                             event.description.toString(),
                             textAlign: TextAlign.center,
@@ -146,7 +207,7 @@ class MoreInfoScreen extends StatelessWidget {
                     ),
                     color: getCodeColor(event.category),
                     child: Container(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -158,32 +219,25 @@ class MoreInfoScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           Text(
                             event.host.name ?? 'Name',
                             textAlign: TextAlign.left,
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
+                          const SizedBox(height: 3),
                           Text(
                             event.host.email ?? 'Email',
                             textAlign: TextAlign.left,
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
+                          const SizedBox(height: 3),
                           Text(
                             event.host.phone ?? 'Phone',
                             textAlign: TextAlign.left,
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
+                          const SizedBox(height: 12),
                           GestureDetector(
                             child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
                                 Text(
@@ -193,9 +247,7 @@ class MoreInfoScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                SizedBox(width: 10),
                                 Icon(Icons.chat),
                               ],
                             ),
@@ -225,7 +277,7 @@ class MoreInfoScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: getCategoryImage(event.category),
                     ),
-                  ), //why
+                  ),
                   const SizedBox(
                     height: 5,
                   ),

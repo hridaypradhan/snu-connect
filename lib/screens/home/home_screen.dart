@@ -13,11 +13,31 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventProvider>(context);
-//     return ListView(
-//       children: List.generate(
-//         eventProvider.activeEvents.length,
-//         (index) => EventCard(event: eventProvider.activeEvents[index]),
-//       ),
+// TODO Home heading
+//     return Column(
+//       children: [
+//         const SizedBox(
+//           height: 20,
+//         ),
+//         Row(
+//           children: const [
+//             SizedBox(
+//               height: 20,
+//             ),
+//             SizedBox(
+//               width: 10,
+//             ),
+//             Text(
+//               'Home',
+//               style: TextStyle(
+//                 fontSize: 47,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//               textAlign: TextAlign.right,
+//             ),
+//           ],
+//         ),
+//       ],
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: _firestore.collection('events').orderBy('dateTime').snapshots(),
       builder: (context, snapshot) {
