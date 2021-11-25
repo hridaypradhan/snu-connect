@@ -7,6 +7,7 @@ import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/providers/all_chats_provider.dart';
 import 'package:snu_connect/providers/base_provider.dart';
 import 'package:snu_connect/providers/event_provider.dart';
+import 'package:snu_connect/screens/Search/search_screen.dart';
 import 'package:snu_connect/screens/base/base_screen.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
@@ -28,7 +29,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    
     final ThemeData theme = ThemeData();
+
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
@@ -81,6 +84,7 @@ class _MyAppState extends State<MyApp> {
                 OnboardingScreen.id: (context) => const OnboardingScreen(),
                 LoginScreen.id: (context) => const LoginScreen(),
                 BaseScreen.id: (context) => const BaseScreen(),
+                SearchScreen.id : (context) => SearchScreen(),
               },
             ),
           );

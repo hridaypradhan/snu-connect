@@ -10,6 +10,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//     var eventProvider = Provider.of<EventProvider>(context);
+//     return ListView(
+//       children: List.generate(
+//         eventProvider.activeEvents.length,
+//         (index) => EventCard(event: eventProvider.activeEvents[index]),
+//       ),
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: _firestore.collection('events').orderBy('dateTime').snapshots(),
       builder: (context, snapshot) {
