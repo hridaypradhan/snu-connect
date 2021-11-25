@@ -1,5 +1,6 @@
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
@@ -141,11 +142,20 @@ class _CreateEventFormState extends State<CreateEventForm> {
             thin,
             LargeButton(
               onPressed: () {
+                final ProfanityFilter filter = ProfanityFilter();
+
                 Event newEvent = Event(
-                  name: _eventNameController?.text ?? 'N/A',
-                  description: _descriptionController?.text ?? 'N/A',
+                  name: filter.hasProfanity(_eventNameController?.text ?? 'N/A')
+                      ? filter.censor(_eventNameController?.text ?? 'N/A')
+                      : _eventNameController?.text ?? 'N/A',
+                  description:
+                      filter.hasProfanity(_descriptionController?.text ?? 'N/A')
+                          ? filter.censor(_descriptionController?.text ?? 'N/A')
+                          : _descriptionController?.text ?? 'N/A',
                   peopleCount: 1,
-                  venue: _venueController?.text ?? 'N/A',
+                  venue: filter.hasProfanity(_venueController?.text ?? 'N/A')
+                      ? filter.censor(_venueController?.text ?? 'N/A')
+                      : _venueController?.text ?? 'N/A',
                   host: EndUser.fromAuth(),
                   maxPeople: eventProvider.peopleCount,
                   category: eventProvider.selectedCategory,

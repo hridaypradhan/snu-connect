@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/message.dart';
@@ -173,9 +174,13 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
                       ),
                       onPressed: () async {
                         if (_textController!.text.isNotEmpty) {
+                          final ProfanityFilter filter = ProfanityFilter();
                           var toSend = Message(
                             senderEmail: _auth.currentUser?.email ?? '',
-                            text: _textController!.text.trim(),
+                            text: filter
+                                    .hasProfanity(_textController!.text.trim())
+                                ? filter.censor(_textController!.text.trim())
+                                : _textController!.text.trim(),
                             timestamp: DateTime.now(),
                           );
                           var receiverData = widget.otherUser.toMap();

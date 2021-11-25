@@ -50,8 +50,10 @@ class _MyAppState extends State<MyApp> {
               theme: theme.copyWith(
                 colorScheme: theme.colorScheme.copyWith(secondary: primaryPink),
                 textTheme: GoogleFonts.spartanTextTheme(),
-                textSelectionTheme:
-                    const TextSelectionThemeData(cursorColor: primaryPink),
+                textSelectionTheme: TextSelectionThemeData(
+                  cursorColor: primaryPink,
+                  selectionColor: lightRed,
+                ),
                 bottomSheetTheme: const BottomSheetThemeData(
                   backgroundColor: Colors.transparent,
                 ),
