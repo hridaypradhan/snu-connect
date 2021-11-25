@@ -109,6 +109,7 @@ class MoreInfoScreen extends StatelessWidget {
                             children: const [
                               Icon(Icons.drag_handle),
                               // TODO Add heading and list of registered people here with name and email and option to start chat
+                              // TODO Remove person option for the creator only
                             ],
                           ),
                         ),
