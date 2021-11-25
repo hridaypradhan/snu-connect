@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/providers/event_provider.dart';
 
 class VenueField extends StatelessWidget {
   final TextEditingController? controller;
@@ -12,11 +10,7 @@ class VenueField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var eventProvider = Provider.of<EventProvider>(context);
     return TextField(
-      onSubmitted: (text) {
-        eventProvider.setVenue(text);
-      },
       textCapitalization: TextCapitalization.words,
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.center,

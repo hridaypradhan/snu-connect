@@ -4,11 +4,11 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/widgets/text_logo.dart';
 import 'package:snu_connect/screens/login/login_screen.dart';
-import 'package:snu_connect/global/widgets/large_button.dart';
 import 'package:snu_connect/screens/onboarding/widgets/onboarding_item.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const String id = 'onboarding_screen';
+
   const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
@@ -102,23 +102,12 @@ class OnboardingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset('assets/images/login.png'),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 50.0),
                     const Text(
                       'login with just your snu id and password.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
-                      ),
-                    ),
-                    const SizedBox(height: 50.0),
-                    DelayedDisplay(
-                      delay: const Duration(seconds: 1),
-                      child: LargeButton(
-                        text: 'GET STARTED',
-                        onPressed: () => Navigator.pushNamed(
-                          context,
-                          LoginScreen.id,
-                        ),
                       ),
                     ),
                   ],
@@ -127,10 +116,9 @@ class OnboardingScreen extends StatelessWidget {
             ],
           ),
         ],
-        showDoneButton: false,
-        onSkip: () => Navigator.pushNamed(
-          context,
-          LoginScreen.id,
+        next: const Icon(
+          Icons.chevron_right,
+          size: 40.0,
         ),
         showSkipButton: true,
         skip: TextButton(
@@ -145,9 +133,16 @@ class OnboardingScreen extends StatelessWidget {
             LoginScreen.id,
           ),
         ),
-        next: const Icon(
-          Icons.chevron_right,
-          size: 40.0,
+        onDone: () => Navigator.pushNamed(
+          context,
+          LoginScreen.id,
+        ),
+        done: const Text(
+          "Let's Go",
+          style: TextStyle(
+            color: primaryPink,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

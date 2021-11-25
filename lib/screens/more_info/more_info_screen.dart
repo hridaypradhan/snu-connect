@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
@@ -113,7 +115,7 @@ class MoreInfoScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    color: getDarkerCodeColor(event.category),
+                    color: getCodeColor(event.category),
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
@@ -138,12 +140,11 @@ class MoreInfoScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    color: getDarkerCodeColor(event.category),
+                    color: getCodeColor(event.category),
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
@@ -161,32 +162,57 @@ class MoreInfoScreen extends StatelessWidget {
                             height: 5,
                           ),
                           Text(
-                            event.host.name,
+                            event.host.name ?? 'Name',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(
                             height: 3,
                           ),
                           Text(
-                            event.host.email,
+                            event.host.email ?? 'Email',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(
                             height: 3,
                           ),
                           Text(
-                            event.host.phone,
+                            event.host.phone ?? 'Phone',
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(
                             height: 12,
                           ),
-                          GestureDetector(child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [Text("Chat Now",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,)),
-                          SizedBox(
-                        width: 10,
-                      ),
-                      Icon(Icons.chat),],),onTap:() {print("Hello");} ,)
-                          
+                          GestureDetector(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "Chat Now",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(Icons.chat),
+                              ],
+                            ),
+                            onTap: () {
+                              if (FirebaseAuth.instance.currentUser?.email !=
+                                  event.host.email) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => IndividualChatScreen(
+                                      otherUser: event.host,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -203,16 +229,6 @@ class MoreInfoScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   children: const [
-                  //     SizedBox(
-                  //       width: 40,
-                  //     ),
-                  //     Text("Need partners? Team up!"),
-                  //     Icon(Icons.add),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

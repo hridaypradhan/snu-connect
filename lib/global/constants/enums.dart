@@ -10,6 +10,27 @@ enum Category {
   errands,
 }
 
+Category categoryFromText(String text) {
+  switch (text) {
+    case 'Sports':
+      return Category.sports;
+    case 'Studies':
+      return Category.studies;
+    case 'Transport':
+      return Category.transport;
+    case 'Events':
+      return Category.events;
+    case 'Lost & Found':
+      return Category.lostFound;
+    case 'Items':
+      return Category.items;
+    case 'Errands':
+      return Category.errands;
+    default:
+      return Category.errands;
+  }
+}
+
 String categoryToText(Category? category) {
   String? snippet = category?.toString().substring(9);
   switch (snippet) {
