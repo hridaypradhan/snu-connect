@@ -205,7 +205,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                       ),
                     ],
                     content: SizedBox(
-                      height: size.height * 0.32,
+                      height: size.height * 0.33,
                       width: size.width,
                       child: EventCard(
                         event: newEvent,

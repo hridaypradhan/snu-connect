@@ -30,21 +30,18 @@ class SearchScreen extends StatelessWidget {
         child: FilterListWidget<Category>(
           selectedListData: eventProvider.selectedCategoryFilters,
           searchFieldHintText: "Event code",
+          resetButtonText: 'Clear',
           listData: _categories,
           hideHeaderText: true,
           selectedItemsText: 'selected categories',
           applyButonTextBackgroundColor: primaryPink,
           onApplyButtonClick: (list) {
             if (list != null) {
-              if (eventProvider.searchBoxText!.isEmpty) {
+              if (list.isNotEmpty) {
+                eventProvider.setSearchBoxText('');
                 eventProvider.setCategoryFilters(list);
-                if (list.isNotEmpty) {
-                  eventProvider.filterEvents(list);
-                  baseProvider.changePage(0);
-                }
-              } else {
-                eventProvider.searchEvents(eventProvider.searchBoxText);
-                eventProvider.setSearchBoxText("");
+                baseProvider.changePage(0);
+              } else if (eventProvider.searchBoxText!.isNotEmpty) {
                 baseProvider.changePage(0);
               }
             }
@@ -61,9 +58,6 @@ class SearchScreen extends StatelessWidget {
           },
           onItemSearch: (list, text) {
             eventProvider.setSearchBoxText(text);
-            //eventProvider.searchEvents(text);
-            //baseProvider.changePage(0);
-
             return [];
           },
         ),

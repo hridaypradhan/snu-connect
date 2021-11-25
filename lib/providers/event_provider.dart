@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/models/end_user.dart';
 
 class EventProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -19,6 +18,32 @@ class EventProvider extends ChangeNotifier {
   int get peopleCount => _peopleCount;
   List<Category> get selectedCategoryFilters => _selectedCategoryFilters;
   String? get searchBoxText => _searchBoxText;
+
+  bool checkEventByCategory(Event event) {
+    if (_selectedCategoryFilters.isEmpty) {
+      return true;
+    }
+    for (Category? category in _selectedCategoryFilters) {
+      if (category == event.category) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool checkEventByCode(Event event) {
+    return event.code!
+        .toLowerCase()
+        .startsWith(_searchBoxText!.toLowerCase().trim());
+  }
+
+  bool filterEvent(Event event) {
+    if (_searchBoxText!.isEmpty) {
+      return checkEventByCategory(event);
+    } else {
+      return checkEventByCode(event);
+    }
+  }
 
   setCategoryFilters(List<Category> newList) {
     _selectedCategoryFilters = newList;
@@ -99,259 +124,6 @@ class EventProvider extends ChangeNotifier {
 
   clearData() {
     _selectedCategory = null;
-    notifyListeners();
-  }
-
-  List<Event> get dummyEvents => _dummyEvents;
-  final _dummyEvents = [
-    Event(
-      maxPeople: 10,
-      peopleCount: 5,
-      category: Category.sports,
-      dateTime: DateTime.now(),
-      venue: 'Football Ground',
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Football Match',
-    ),
-    Event(
-      maxPeople: 100,
-      peopleCount: 54,
-      category: Category.events,
-      dateTime: DateTime.now(),
-      venue: 'B315',
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        photoUrl: 'sample',
-        name: 'Hriday',
-      ),
-      name: 'TEDxSNU',
-    ),
-    Event(
-      maxPeople: 1,
-      peopleCount: 0,
-      category: Category.errands,
-      dateTime: DateTime.now(),
-      venue: 'Mini Mart',
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Detergent Run',
-    ),
-    Event(
-      maxPeople: 1,
-      peopleCount: 0,
-      category: Category.items,
-      dateTime: DateTime.now(),
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      venue: '506 1A',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Hair Dryer',
-    ),
-    Event(
-      maxPeople: 1,
-      peopleCount: 0,
-      category: Category.lostFound,
-      dateTime: DateTime.now(),
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      venue: '506 1A',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Bose Speakers',
-    ),
-    Event(
-      maxPeople: 2,
-      peopleCount: 0,
-      category: Category.studies,
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      dateTime: DateTime.now(),
-      venue: '1A Study Room',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'CSD319 Doubts',
-    ),
-    Event(
-      maxPeople: 10,
-      peopleCount: 5,
-      category: Category.transport,
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      dateTime: DateTime.now(),
-      venue: 'Inner Gate',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Metro',
-    ),
-  ];
-
-  List<Event> get activeEvents => _activeEvents;
-  var _activeEvents = [
-    Event(
-      maxPeople: 10,
-      peopleCount: 5,
-      category: Category.sports,
-      dateTime: DateTime.now(),
-      venue: 'Football Ground',
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Football Match',
-    ),
-    Event(
-      maxPeople: 100,
-      peopleCount: 54,
-      category: Category.events,
-      dateTime: DateTime.now(),
-      venue: 'B315',
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'TEDxSNU',
-    ),
-    Event(
-      maxPeople: 1,
-      peopleCount: 0,
-      category: Category.errands,
-      dateTime: DateTime.now(),
-      venue: 'Mini Mart',
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Detergent Run',
-    ),
-    Event(
-      maxPeople: 1,
-      peopleCount: 0,
-      category: Category.items,
-      dateTime: DateTime.now(),
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      venue: '506 1A',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Hair Dryer',
-    ),
-    Event(
-      maxPeople: 1,
-      peopleCount: 0,
-      category: Category.lostFound,
-      dateTime: DateTime.now(),
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      venue: '506 1A',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Bose Speakers',
-    ),
-    Event(
-      maxPeople: 2,
-      peopleCount: 0,
-      category: Category.studies,
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      dateTime: DateTime.now(),
-      venue: '1A Study Room',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'CSD319 Doubts',
-    ),
-    Event(
-      maxPeople: 10,
-      peopleCount: 5,
-      category: Category.transport,
-      description: 'Please join me. I need a team of 10. Match tomorrow',
-      dateTime: DateTime.now(),
-      venue: 'Inner Gate',
-      host: EndUser(
-        email: 'hp103',
-        phone: '1234567890',
-        name: 'Hriday',
-        photoUrl: 'sample',
-      ),
-      name: 'Metro',
-    ),
-  ];
-
-  filterEvents(List<Category> selectedCategories) {
-    if (selectedCategories.isEmpty) {
-      _activeEvents = _dummyEvents;
-      notifyListeners();
-      return;
-    }
-    _activeEvents = [];
-    List selectedCategoriesText = [];
-    for (int i = 0; i < selectedCategories.length; i++) {
-      selectedCategoriesText.add(categoryToText(selectedCategories[i]));
-    }
-    for (Event e in _dummyEvents) {
-      if (selectedCategoriesText.contains(categoryToText(e.category))) {
-        _activeEvents.add(e);
-      }
-    }
-
-    notifyListeners();
-  }
-
-  searchEvents(String? text) {
-    if (text!.isEmpty) {
-      _activeEvents = _dummyEvents;
-      notifyListeners();
-      return;
-    }
-    _activeEvents = [];
-    for (Event e in _dummyEvents) {
-      if (e.code!.startsWith(text.toUpperCase())) {
-        _activeEvents.add(e);
-      }
-    }
     notifyListeners();
   }
 }
