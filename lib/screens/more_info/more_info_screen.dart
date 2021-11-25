@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
+
+List<EndUser> dummyEndUsers = [
+  EndUser(name: 'Shraddha', email: 'sa350', phone: '1234567890'),
+  EndUser(name: 'Mehak', email: 'ma350', phone: '1234567890'),
+  EndUser(name: 'Kritika', email: 'km224', phone: '1234567890'),
+  EndUser(name: 'Hriday', email: 'hp103', phone: '1234567890'),
+  EndUser(name: 'Narjis', email: 'nn782', phone: '1234567890'),
+];
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
@@ -106,9 +115,64 @@ class MoreInfoScreen extends StatelessWidget {
                             color: Colors.white,
                           ),
                           child: Column(
-                            children: const [
-                              Icon(Icons.drag_handle),
+                            children: [
+                              const Icon(Icons.drag_handle),
                               // TODO Add heading and list of registered people here with name and email and option to start chat
+                              const Text(
+                                'Registrations',
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                    padding: const EdgeInsets.all(8),
+                                    itemCount: dummyEndUsers.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Card(
+                                          color: lightPink,
+                                          child: ListTile(
+                                            leading: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text((index + 1).toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 20,
+                                                    )),
+                                              ],
+                                            ),
+                                            title:
+                                                Text(dummyEndUsers[index].name),
+                                            subtitle: Text(
+                                                dummyEndUsers[index].email),
+                                            trailing: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: const [
+                                                Icon(
+                                                  Icons.message,
+                                                  color: Colors.black,
+                                                ),
+                                                SizedBox(
+                                                  width: 50,
+                                                ),
+                                                Icon(
+                                                  Icons.delete,
+                                                  color: Colors.black,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
                               // TODO Remove person option for the creator only
                             ],
                           ),
