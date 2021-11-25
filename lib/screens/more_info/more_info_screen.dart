@@ -4,6 +4,7 @@ import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/screens/more_info/widgets/registered_user_card.dart';
 
 List<EndUser> dummyEndUsers = [
   EndUser(name: 'Shraddha', email: 'sa350', phone: '1234567890'),
@@ -106,76 +107,39 @@ class MoreInfoScreen extends StatelessWidget {
                     onTap: () {
                       showModalBottomSheet(
                         context: context,
-                        builder: (context) => Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15.0),
-                              topRight: Radius.circular(15.0),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15.0),
+                            topRight: Radius.circular(15.0),
+                          ),
+                        ),
+                        backgroundColor: Colors.white,
+                        builder: (context) => Column(
+                          children: [
+                            const Icon(Icons.drag_handle),
+                            const Text(
+                              'Registrations',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            children: [
-                              const Icon(Icons.drag_handle),
-                              // TODO Add heading and list of registered people here with name and email and option to start chat
-                              const Text(
-                                'Registrations',
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
+                            const SizedBox(height: 10.0),
+                            Expanded(
+                              child: ListView.builder(
+                                padding: const EdgeInsets.all(8),
+                                itemCount: dummyEndUsers.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return RegisteredUserCard(
+                                    serialNumber: index + 1,
+                                    name: dummyEndUsers[index].name,
+                                    email: dummyEndUsers[index].email,
+                                  );
+                                },
                               ),
-                              Expanded(
-                                child: ListView.builder(
-                                    padding: const EdgeInsets.all(8),
-                                    itemCount: dummyEndUsers.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Card(
-                                          color: lightPink,
-                                          child: ListTile(
-                                            leading: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text((index + 1).toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                    )),
-                                              ],
-                                            ),
-                                            title:
-                                                Text(dummyEndUsers[index].name),
-                                            subtitle: Text(
-                                                dummyEndUsers[index].email),
-                                            trailing: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: const [
-                                                Icon(
-                                                  Icons.message,
-                                                  color: Colors.black,
-                                                ),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                Icon(
-                                                  Icons.delete,
-                                                  color: Colors.black,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              ),
-                              // TODO Remove person option for the creator only
-                            ],
-                          ),
+                            ),
+                            // TODO Remove person option for the creator only
+                          ],
                         ),
                       );
                     },
