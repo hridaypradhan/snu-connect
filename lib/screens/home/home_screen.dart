@@ -25,7 +25,16 @@ class HomeScreen extends StatelessWidget {
               fontSize: 47,
               fontWeight: FontWeight.bold,
             ),
-            textAlign: TextAlign.right,
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 15.0),
+          child: Text(
+            'Swipe right to register',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12.0,
+            ),
           ),
         ),
         StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

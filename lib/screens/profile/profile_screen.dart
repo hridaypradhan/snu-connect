@@ -109,6 +109,13 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
+          const Text(
+            'Long press an event for the menu',
+            style: TextStyle(
+              fontSize: 12.0,
+              color: Colors.grey,
+            ),
+          ),
           Expanded(
             child: TabBarView(
               children: [
