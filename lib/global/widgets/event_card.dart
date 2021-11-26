@@ -193,10 +193,14 @@ class _EventCardState extends State<EventCard> {
 
                             _registrationService.register(
                                 context, widget.event);
-
-                            setState(
+                            Future.delayed(
+                              const Duration(seconds: 1),
                               () {
-                                isRegistering = false;
+                                setState(
+                                  () {
+                                    isRegistering = false;
+                                  },
+                                );
                               },
                             );
                           }

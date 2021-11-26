@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
+import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/screens/more_info/widgets/registered_user_card.dart';
 import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
@@ -145,12 +146,9 @@ class MoreInfoScreen extends StatelessWidget {
                                       return RegisteredUserCard(
                                         event: event,
                                         serialNumber: index + 1,
-                                        name: snapshot.data!.docs[index]
-                                                ['name'] ??
-                                            'Name',
-                                        email: snapshot.data!.docs[index]
-                                                ['email'] ??
-                                            'Email',
+                                        registeredUser: EndUser.fromMap(
+                                          snapshot.data!.docs[index].data(),
+                                        ),
                                       );
                                     },
                                   ),

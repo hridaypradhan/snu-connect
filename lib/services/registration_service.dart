@@ -48,8 +48,6 @@ class RegistrationService {
 
   register(BuildContext context, Event event) async {
     EndUser currentUser = EndUser.fromAuth();
-    print(currentUser.email);
-    print(event.host.email);
     if (currentUser.email != event.host.email) {
       var alreadyRegistered = await _firestore
           .collection('users')
@@ -65,10 +63,7 @@ class RegistrationService {
             await _firestore.collection('events').doc(event.code).get();
 
         if (currentEventState['peopleCount'] < currentEventState['maxPeople']) {
-          var newRegistration = {
-            'name': currentUser.name,
-            'email': currentUser.email,
-          };
+          var newRegistration = currentUser.toMap();
           await _firestore
               .collection('events')
               .doc(event.code)
