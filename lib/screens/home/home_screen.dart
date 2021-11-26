@@ -33,10 +33,16 @@ class HomeScreen extends StatelessWidget {
               _firestore.collection('events').orderBy('dateTime').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return const Center(
-                child: Text(
-                  'No events created yet. \nMake your own!',
-                  textAlign: TextAlign.center,
+              return Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: const [
+                    Text(
+                      'No events created yet. \nMake your own!',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               );
             }

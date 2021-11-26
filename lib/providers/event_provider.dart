@@ -60,10 +60,11 @@ class EventProvider extends ChangeNotifier {
         .collection('users')
         .doc(_auth.currentUser?.email)
         .collection('created')
-        .add(
+        .doc(event.code)
+        .set(
           event.toMap(),
         );
-    await _firestore.collection('events').add(
+    await _firestore.collection('events').doc(event.code).set(
           event.toMap(),
         );
     _peopleCount = 1;

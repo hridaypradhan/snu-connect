@@ -116,16 +116,16 @@ class ProfileScreen extends StatelessWidget {
             child: TabBarView(
               children: [
                 // TODO Registered events view
-                // GridView.count(
-                //   childAspectRatio: 1.7,
-                //   crossAxisCount: 2,
-                //   children: List.generate(
-                //     eventProvider.dummyEvents.length,
-                //     (index) => RegisteredEventCard(
-                //       event: eventProvider.dummyEvents[index],
-                //     ),
-                //   ),
-                // ),
+                GridView.count(
+                  childAspectRatio: 1.7,
+                  crossAxisCount: 2,
+                  // children: List.generate(
+                  //   eventProvider.dummyEvents.length,
+                  //   (index) => RegisteredEventCard(
+                  //     event: eventProvider.dummyEvents[index],
+                  //   ),
+                  // ),
+                ),
                 StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: _firestore
                       .collection('users')
