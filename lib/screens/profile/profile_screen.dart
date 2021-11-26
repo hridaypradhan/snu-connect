@@ -115,16 +115,35 @@ class ProfileScreen extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                // TODO Registered events view
-                GridView.count(
-                  childAspectRatio: 1.7,
-                  crossAxisCount: 2,
-                  // children: List.generate(
-                  //   eventProvider.dummyEvents.length,
-                  //   (index) => RegisteredEventCard(
-                  //     event: eventProvider.dummyEvents[index],
-                  //   ),
-                  // ),
+                StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream: _firestore
+                      .collection('users')
+                      .doc(_auth.currentUser?.email)
+                      .collection('registered')
+                      .orderBy('dateTime')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          'You haven\'t registered for any events. \nJoin one now!',
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }
+                    return GridView.count(
+                      childAspectRatio: 1.7,
+                      crossAxisCount: 2,
+                      children: List.generate(
+                        snapshot.data!.docs.length,
+                        (index) => RegisteredEventCard(
+                          event: Event.fromMap(
+                            snapshot.data!.docs[index].data(),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: _firestore
@@ -137,7 +156,7 @@ class ProfileScreen extends StatelessWidget {
                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                       return const Center(
                         child: Text(
-                          'You don\'t have any events. Create one now!',
+                          'You don\'t have any events. \nCreate one now!',
                           textAlign: TextAlign.center,
                         ),
                       );

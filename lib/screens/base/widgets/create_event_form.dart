@@ -146,16 +146,16 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
                 Event newEvent = Event(
                   name: filter.hasProfanity(_eventNameController?.text ?? 'N/A')
-                      ? filter.censor(_eventNameController?.text ?? 'N/A')
-                      : _eventNameController?.text ?? 'N/A',
+                      ? filter.censor(_eventNameController?.text.trim() ?? 'N/A')
+                      : _eventNameController?.text.trim() ?? 'N/A',
                   description:
                       filter.hasProfanity(_descriptionController?.text ?? 'N/A')
-                          ? filter.censor(_descriptionController?.text ?? 'N/A')
-                          : _descriptionController?.text ?? 'N/A',
-                  peopleCount: 1,
+                          ? filter.censor(_descriptionController?.text.trim() ?? 'N/A')
+                          : _descriptionController?.text.trim() ?? 'N/A',
+                  peopleCount: 0,
                   venue: filter.hasProfanity(_venueController?.text ?? 'N/A')
-                      ? filter.censor(_venueController?.text ?? 'N/A')
-                      : _venueController?.text ?? 'N/A',
+                      ? filter.censor(_venueController?.text.trim() ?? 'N/A')
+                      : _venueController?.text.trim() ?? 'N/A',
                   host: EndUser.fromAuth(),
                   maxPeople: eventProvider.peopleCount,
                   category: eventProvider.selectedCategory,

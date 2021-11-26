@@ -95,7 +95,6 @@ class MoreInfoScreen extends StatelessWidget {
                     children: [
                       Text(
                         DateFormat.MMMEd().format(event.dateTime),
-                        //e.dateTime.toString(),
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -103,7 +102,6 @@ class MoreInfoScreen extends StatelessWidget {
                       ),
                       Text(
                         DateFormat.jm().format(event.dateTime),
-                        //e.dateTime.toString(),
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -144,6 +142,7 @@ class MoreInfoScreen extends StatelessWidget {
                         builder: (context) => Column(
                           children: [
                             const Icon(Icons.drag_handle),
+                            const SizedBox(height: 8.0),
                             const Text(
                               'Registrations',
                               style: TextStyle(
@@ -151,7 +150,6 @@ class MoreInfoScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 10.0),
                             Expanded(
                               child: ListView.builder(
                                 padding: const EdgeInsets.all(8),
