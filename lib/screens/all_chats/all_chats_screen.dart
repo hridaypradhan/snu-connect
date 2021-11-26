@@ -36,6 +36,7 @@ class AllChatsScreen extends StatelessWidget {
             ),
           ),
           AnimSearchBar(
+            autoFocus: true,
             width: 400,
             textController: textController,
             onSuffixTap: () {
