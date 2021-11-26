@@ -99,19 +99,6 @@ class RegisteredEventCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 10.0),
-              CircleAvatar(
-                backgroundColor: Colors.orange,
-                child: Center(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.delete_outline,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

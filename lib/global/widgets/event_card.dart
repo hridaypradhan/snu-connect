@@ -6,10 +6,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/widgets/alert_popup.dart';
-import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/screens/more_info/more_info_screen.dart';
+import 'package:snu_connect/services/registration_service.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
@@ -171,63 +171,10 @@ class EventCard extends StatelessWidget {
           children: [
             InkWell(
               onTap: !isPreview
-                  ? () async {
-                      EndUser currentUser = EndUser.fromAuth();
-                      if (currentUser.email != event.host.email) {
-                        var currentEventState = await _firestore
-                            .collection('events')
-                            .doc(event.code)
-                            .get();
-
-                        if (currentEventState['peopleCount'] <
-                            currentEventState['maxPeople']) {
-                          var newRegistration = {
-                            'name': currentUser.name,
-                            'email': currentUser.email,
-                          };
-                          await _firestore
-                              .collection('events')
-                              .doc(event.code)
-                              .collection('registered')
-                              .doc(currentUser.email)
-                              .set(newRegistration);
-                          await _firestore
-                              .collection('users')
-                              .doc(event.host.email)
-                              .collection('created')
-                              .doc(event.code)
-                              .collection('registered')
-                              .doc(currentUser.email)
-                              .set(newRegistration);
-                          await _firestore
-                              .collection('events')
-                              .doc(event.code)
-                              .update(
-                            {
-                              'peopleCount': FieldValue.increment(1),
-                            },
-                          );
-                          await _firestore
-                              .collection('users')
-                              .doc(event.host.email)
-                              .collection('created')
-                              .doc(event.code)
-                              .update(
-                            {
-                              'peopleCount': FieldValue.increment(1),
-                            },
-                          );
-                          await _firestore
-                              .collection('users')
-                              .doc(currentUser.email)
-                              .collection('registered')
-                              .doc(event.code)
-                              .set(event.toMap());
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            alertPopup('REGISTERED!'),
-                          );
-                        }
-                      }
+                  ? () {
+                      RegistrationService _registrationService =
+                          RegistrationService();
+                      _registrationService.register(context, event);
                     }
                   : null,
               child: CircleAvatar(
