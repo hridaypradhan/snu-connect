@@ -78,28 +78,19 @@ class EventProvider extends ChangeNotifier {
         .doc(_auth.currentUser?.email)
         .collection('created');
     var generalCollection = _firestore.collection('events');
-    await personalCollection
-        .where(
-          'code',
-          isEqualTo: event.code,
-        )
-        .get()
-        .then(
-      (value) {
-        personalCollection.doc(value.docs[0].id).delete();
-      },
-    );
-    await generalCollection
-        .where(
-          'code',
-          isEqualTo: event.code,
-        )
-        .get()
-        .then(
-      (value) {
-        generalCollection.doc(value.docs[0].id).delete();
-      },
-    );
+    var registeredUsers =
+        (await generalCollection.doc(event.code).collection('registered').get())
+            .docs;
+    for (var registeredUser in registeredUsers) {
+      await _firestore
+          .collection('users')
+          .doc(registeredUser.data()['email'])
+          .collection('registered')
+          .doc(event.code)
+          .delete();
+    }
+    await generalCollection.doc(event.code).delete();
+    await personalCollection.doc(event.code).delete();
   }
 
   pressButton() {

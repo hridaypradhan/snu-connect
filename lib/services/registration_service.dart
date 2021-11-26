@@ -7,6 +7,45 @@ import 'package:snu_connect/models/event.dart';
 
 class RegistrationService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  removeRegisteredUser(String emailToRemove, Event event) async {
+    await _firestore
+        .collection('events')
+        .doc(event.code)
+        .collection('registered')
+        .doc(emailToRemove)
+        .delete();
+    await _firestore
+        .collection('users')
+        .doc(event.host.email)
+        .collection('created')
+        .doc(event.code)
+        .collection('registered')
+        .doc(emailToRemove)
+        .delete();
+    await _firestore.collection('events').doc(event.code).update(
+      {
+        'peopleCount': FieldValue.increment(-1),
+      },
+    );
+    await _firestore
+        .collection('users')
+        .doc(event.host.email)
+        .collection('created')
+        .doc(event.code)
+        .update(
+      {
+        'peopleCount': FieldValue.increment(-1),
+      },
+    );
+    await _firestore
+        .collection('users')
+        .doc(emailToRemove)
+        .collection('registered')
+        .doc(event.code)
+        .delete();
+  }
+
   register(BuildContext context, Event event) async {
     EndUser currentUser = EndUser.fromAuth();
     if (currentUser.email != event.host.email) {

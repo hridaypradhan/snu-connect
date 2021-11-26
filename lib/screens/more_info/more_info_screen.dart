@@ -1,45 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/models/end_user.dart';
 import 'package:snu_connect/models/event.dart';
 import 'package:snu_connect/screens/more_info/widgets/registered_user_card.dart';
 import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
-
-List<EndUser> dummyEndUsers = [
-  EndUser(
-    name: 'Shraddha',
-    email: 'sa350',
-    phone: '1234567890',
-    photoUrl: 'photoUrl',
-  ),
-  EndUser(
-    name: 'Mehak',
-    email: 'ma350',
-    phone: '1234567890',
-    photoUrl: 'photoUrl',
-  ),
-  EndUser(
-    name: 'Kritika',
-    email: 'km224',
-    phone: '1234567890',
-    photoUrl: 'photoUrl',
-  ),
-  EndUser(
-    name: 'Hriday',
-    email: 'hp103',
-    phone: '1234567890',
-    photoUrl: 'photoUrl',
-  ),
-  EndUser(
-    name: 'Narjis',
-    email: 'nn782',
-    phone: '1234567890',
-    photoUrl: 'photoUrl',
-  ),
-];
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';
@@ -150,21 +117,46 @@ class MoreInfoScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                padding: const EdgeInsets.all(8),
-                                itemCount: dummyEndUsers.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return RegisteredUserCard(
-                                    serialNumber: index + 1,
-                                    name: dummyEndUsers[index].name ?? 'Name',
-                                    email:
-                                        dummyEndUsers[index].email ?? 'Email',
+                            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('events')
+                                  .doc(event.code)
+                                  .collection('registered')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData ||
+                                    snapshot.data!.docs.isEmpty) {
+                                  return Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Text('Nobody has registered yet.'),
+                                      ],
+                                    ),
                                   );
-                                },
-                              ),
+                                }
+                                return Expanded(
+                                  child: ListView.builder(
+                                    padding: const EdgeInsets.all(8),
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return RegisteredUserCard(
+                                        event: event,
+                                        serialNumber: index + 1,
+                                        name: snapshot.data!.docs[index]
+                                                ['name'] ??
+                                            'Name',
+                                        email: snapshot.data!.docs[index]
+                                                ['email'] ??
+                                            'Email',
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
                             ),
-                            // TODO Remove person option for the creator only
                           ],
                         ),
                       );

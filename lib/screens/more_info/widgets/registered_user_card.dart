@@ -1,14 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snu_connect/global/constants/colors.dart';
+import 'package:snu_connect/models/event.dart';
+import 'package:snu_connect/services/registration_service.dart';
 
 class RegisteredUserCard extends StatelessWidget {
   final int serialNumber;
   final String name, email;
+  final Event event;
   const RegisteredUserCard({
     required this.serialNumber,
     Key? key,
     required this.name,
     required this.email,
+    required this.event,
   }) : super(key: key);
 
   @override
@@ -41,14 +46,18 @@ class RegisteredUserCard extends StatelessWidget {
                 ),
                 onPressed: () {},
               ),
-              const SizedBox(width: 10),
-              IconButton(
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.black,
+              if (event.host.email == FirebaseAuth.instance.currentUser?.email)
+                const SizedBox(width: 10),
+              if (event.host.email == FirebaseAuth.instance.currentUser?.email)
+                IconButton(
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    RegistrationService().removeRegisteredUser(email, event);
+                  },
                 ),
-                onPressed: () {},
-              ),
             ],
           ),
         ),
