@@ -46,14 +46,17 @@ class RegisteredUserCard extends StatelessWidget {
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => IndividualChatScreen(
-                        otherUser: registeredUser,
+                  if (registeredUser.email !=
+                      FirebaseAuth.instance.currentUser?.email) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => IndividualChatScreen(
+                          otherUser: registeredUser,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 },
               ),
               if (event.host.email == FirebaseAuth.instance.currentUser?.email)
