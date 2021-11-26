@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
 import 'package:snu_connect/global/constants/colors.dart';
 import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/providers/event_provider.dart';
 import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
 import 'package:snu_connect/screens/profile/widgets/created_event_card.dart';
 import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
@@ -18,7 +16,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var eventProvider = Provider.of<EventProvider>(context);
     return DefaultTabController(
       length: 2,
       child: Column(

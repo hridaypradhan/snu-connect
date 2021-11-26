@@ -70,7 +70,6 @@ class _MyAppState extends State<MyApp> {
                       ConnectionState.waiting) {
                     return const Scaffold(
                       body: Center(
-                        // TODO Change to login image
                         child: CircularProgressIndicator(
                           color: primaryPink,
                         ),
