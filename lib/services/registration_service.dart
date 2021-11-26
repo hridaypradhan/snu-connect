@@ -48,6 +48,8 @@ class RegistrationService {
 
   register(BuildContext context, Event event) async {
     EndUser currentUser = EndUser.fromAuth();
+    print(currentUser.email);
+    print(event.host.email);
     if (currentUser.email != event.host.email) {
       var alreadyRegistered = await _firestore
           .collection('users')

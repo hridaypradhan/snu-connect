@@ -11,7 +11,7 @@ import 'package:snu_connect/global/constants/enums.dart';
 import 'package:snu_connect/screens/more_info/more_info_screen.dart';
 import 'package:snu_connect/services/registration_service.dart';
 
-class EventCard extends StatelessWidget {
+class EventCard extends StatefulWidget {
   final Event event;
   final bool isPreview;
   const EventCard({
@@ -20,6 +20,12 @@ class EventCard extends StatelessWidget {
     this.isPreview = false,
   }) : super(key: key);
 
+  @override
+  State<EventCard> createState() => _EventCardState();
+}
+
+class _EventCardState extends State<EventCard> {
+  bool isRegistering = false;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -31,7 +37,7 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: !isPreview
+              onTap: !widget.isPreview
                   ? () {
                       TextEditingController reportController =
                           TextEditingController();
@@ -65,7 +71,7 @@ class EventCard extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                var toReport = event.toMap();
+                                var toReport = widget.event.toMap();
                                 toReport.addAll(
                                   {
                                     'reason': reportController.text,
@@ -78,7 +84,7 @@ class EventCard extends StatelessWidget {
                                 );
                                 _firestore
                                     .collection('reportedEvents')
-                                    .doc(event.code)
+                                    .doc(widget.event.code)
                                     .set(toReport)
                                     .then(
                                   (value) {
@@ -119,7 +125,7 @@ class EventCard extends StatelessWidget {
                     }
                   : null,
               child: CircleAvatar(
-                backgroundColor: getCodeColor(event.category),
+                backgroundColor: getCodeColor(widget.event.category),
                 child: const Center(
                   child: Icon(
                     Icons.report,
@@ -139,16 +145,16 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: !isPreview
+              onTap: !widget.isPreview
                   ? () {
-                      FlutterClipboard.copy(event.code.toString());
+                      FlutterClipboard.copy(widget.event.code.toString());
                       ScaffoldMessenger.of(context).showSnackBar(
                         alertPopup('EVENT CODE COPIED'),
                       );
                     }
                   : null,
               child: CircleAvatar(
-                backgroundColor: getCodeColor(event.category),
+                backgroundColor: getCodeColor(widget.event.category),
                 child: const Center(
                   child: Icon(
                     Icons.copy,
@@ -169,24 +175,42 @@ class EventCard extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: !isPreview
-                  ? () {
-                      RegistrationService _registrationService =
-                          RegistrationService();
-                      _registrationService.register(context, event);
-                    }
-                  : null,
-              child: CircleAvatar(
-                backgroundColor: getCodeColor(event.category),
-                child: const Center(
-                  child: Icon(
-                    Icons.app_registration,
-                    color: Colors.black,
+            isRegistering
+                ? CircularProgressIndicator(
+                    color: getCodeColor(widget.event.category),
+                  )
+                : InkWell(
+                    onTap: !widget.isPreview
+                        ? () {
+                            RegistrationService _registrationService =
+                                RegistrationService();
+
+                            setState(
+                              () {
+                                isRegistering = true;
+                              },
+                            );
+
+                            _registrationService.register(
+                                context, widget.event);
+
+                            setState(
+                              () {
+                                isRegistering = false;
+                              },
+                            );
+                          }
+                        : null,
+                    child: CircleAvatar(
+                      backgroundColor: getCodeColor(widget.event.category),
+                      child: const Center(
+                        child: Icon(
+                          Icons.app_registration,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
             const SizedBox(
               height: 10,
             ),
@@ -197,14 +221,14 @@ class EventCard extends StatelessWidget {
         ),
       ],
       child: InkWell(
-        onTap: !isPreview
+        onTap: !widget.isPreview
             ? () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
                       return MoreInfoScreen(
-                        event: event,
+                        event: widget.event,
                       );
                     },
                   ),
@@ -217,7 +241,7 @@ class EventCard extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            color: getCategoryColor(event.category),
+            color: getCategoryColor(widget.event.category),
             elevation: 10,
             child: Column(
               children: [
@@ -228,7 +252,7 @@ class EventCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: Text(
-                        event.name ?? '',
+                        widget.event.name ?? '',
                         style: const TextStyle(
                           fontSize: 30.0,
                         ),
@@ -239,10 +263,10 @@ class EventCard extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
-                        color: getCodeColor(event.category),
+                        color: getCodeColor(widget.event.category),
                       ),
                       child: Text(
-                        event.code.toString(),
+                        widget.event.code.toString(),
                         style: const TextStyle(
                           fontSize: 15.0,
                         ),
@@ -260,21 +284,21 @@ class EventCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            DateFormat.MMMEd().format(event.dateTime),
+                            DateFormat.MMMEd().format(widget.event.dateTime),
                             style: const TextStyle(
                               fontSize: 15.0,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            DateFormat.jm().format(event.dateTime),
+                            DateFormat.jm().format(widget.event.dateTime),
                             style: const TextStyle(
                               fontSize: 15.0,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            event.venue ?? '',
+                            widget.event.venue ?? '',
                             style: const TextStyle(
                               fontSize: 15.0,
                             ),
@@ -286,7 +310,7 @@ class EventCard extends StatelessWidget {
                             textBaseline: TextBaseline.alphabetic,
                             children: [
                               Text(
-                                '${event.peopleCount} / ${event.maxPeople} ',
+                                '${widget.event.peopleCount} / ${widget.event.maxPeople} ',
                                 style: const TextStyle(
                                   fontSize: 15.0,
                                 ),
@@ -303,11 +327,11 @@ class EventCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
-                              color: getCodeColor(event.category),
+                              color: getCodeColor(widget.event.category),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             child: Text(
-                              categoryToText(event.category),
+                              categoryToText(widget.event.category),
                               style: const TextStyle(
                                 fontSize: 15.0,
                               ),
@@ -319,7 +343,7 @@ class EventCard extends StatelessWidget {
                       SizedBox(
                         height: size.height * 0.18,
                         width: size.width * 0.4,
-                        child: getCategoryImage(event.category),
+                        child: getCategoryImage(widget.event.category),
                       ),
                     ],
                   ),
