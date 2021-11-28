@@ -21,4 +21,4 @@ Flutter's [online documentation](https://flutter.dev/docs) should help you get F
 
 ## Read more
 
-Page-by-page and feature-by-feature documentation can be found [here](https://docs.google.com/document/d/1joqisilq5tEgUPnRQE87k81e-rgBnuSVXh75rOGlzaE/edit?usp=sharing)
+Page-by-page and feature-by-feature documentation can be found [here](https://github.com/hridaypradhan/snu-connect/files/7614107/Project.Report.pdf).
