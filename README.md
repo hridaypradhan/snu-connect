@@ -17,7 +17,7 @@ Flutter's [online documentation](https://flutter.dev/docs) should help you get F
 2. Register for events across campus
 3. Chat with the host and attendees of any event you create or register for
 4. Filter events by category / Search for events by a unique (shareable) 4 digit code 
-5. View all registered / create events on your profile screen
+5. View and manage all registered / created events on your profile screen
 
 ## Read more
 
