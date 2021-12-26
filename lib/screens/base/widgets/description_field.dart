@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
+import '../../../global/constants/colors.dart';
 
 class DescriptionField extends StatelessWidget {
   final TextEditingController? controller;

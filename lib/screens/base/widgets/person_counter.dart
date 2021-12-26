@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/providers/event_provider.dart';
+import '../../../providers/event_provider.dart';
 
 class PersonCounter extends StatelessWidget {
   const PersonCounter({Key? key}) : super(key: key);

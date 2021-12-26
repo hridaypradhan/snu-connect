@@ -3,14 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/providers/all_chats_provider.dart';
-import 'package:snu_connect/providers/base_provider.dart';
-import 'package:snu_connect/providers/event_provider.dart';
-import 'package:snu_connect/screens/Search/search_screen.dart';
-import 'package:snu_connect/screens/base/base_screen.dart';
-import 'package:snu_connect/screens/login/login_screen.dart';
-import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
+import 'global/constants/colors.dart';
+import 'providers/all_chats_provider.dart';
+import 'providers/base_provider.dart';
+import 'providers/event_provider.dart';
+import 'screens/Search/search_screen.dart';
+import 'screens/base/base_screen.dart';
+import 'screens/login/login_screen.dart';
+import 'screens/onboarding/onboarding_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

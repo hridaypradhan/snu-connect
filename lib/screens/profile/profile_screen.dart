@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/screens/onboarding/onboarding_screen.dart';
-import 'package:snu_connect/screens/profile/widgets/created_event_card.dart';
-import 'package:snu_connect/screens/profile/widgets/profile_tab.dart';
-import 'package:snu_connect/screens/profile/widgets/registered_event_card.dart';
+import '../../global/constants/colors.dart';
+import '../../models/event.dart';
+import '../onboarding/onboarding_screen.dart';
+import 'widgets/created_event_card.dart';
+import 'widgets/profile_tab.dart';
+import 'widgets/registered_event_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);

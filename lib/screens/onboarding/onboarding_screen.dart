@@ -1,10 +1,10 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/global/widgets/text_logo.dart';
-import 'package:snu_connect/screens/login/login_screen.dart';
-import 'package:snu_connect/screens/onboarding/widgets/onboarding_item.dart';
+import '../../global/constants/colors.dart';
+import '../../global/widgets/text_logo.dart';
+import '../login/login_screen.dart';
+import 'widgets/onboarding_item.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const String id = 'onboarding_screen';

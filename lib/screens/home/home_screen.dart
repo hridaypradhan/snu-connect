@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/global/widgets/event_card.dart';
-import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/providers/event_provider.dart';
+import '../../global/widgets/event_card.dart';
+import '../../models/event.dart';
+import '../../providers/event_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';

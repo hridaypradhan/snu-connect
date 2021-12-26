@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/models/event.dart';
+import '../global/constants/enums.dart';
+import '../models/event.dart';
 
 class EventProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

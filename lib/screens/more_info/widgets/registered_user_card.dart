@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/models/end_user.dart';
-import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
-import 'package:snu_connect/services/registration_service.dart';
+import '../../../global/constants/colors.dart';
+import '../../../models/end_user.dart';
+import '../../../models/event.dart';
+import '../../individual_chat/individual_chat_screen.dart';
+import '../../../services/registration_service.dart';
 
 class RegisteredUserCard extends StatelessWidget {
   final int serialNumber;

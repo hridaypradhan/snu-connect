@@ -4,16 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/global/widgets/alert_popup.dart';
-import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/screens/more_info/more_info_screen.dart';
-import 'package:snu_connect/services/registration_service.dart';
+import '../constants/colors.dart';
+import 'alert_popup.dart';
+import '../../models/event.dart';
+import '../constants/enums.dart';
+import '../../screens/more_info/more_info_screen.dart';
+import '../../services/registration_service.dart';
 
 class EventCard extends StatefulWidget {
   final Event event;
   final bool isPreview;
+
   const EventCard({
     Key? key,
     required this.event,
@@ -26,10 +27,13 @@ class EventCard extends StatefulWidget {
 
 class _EventCardState extends State<EventCard> {
   bool isRegistering = false;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
     return Slidable(
       actionPane: const SlidableScrollActionPane(),
       actions: [
@@ -72,16 +76,17 @@ class _EventCardState extends State<EventCard> {
                               ),
                               onPressed: () {
                                 var toReport = widget.event.toMap();
+
                                 toReport.addAll(
                                   {
                                     'reason': reportController.text,
-                                    'reporterName': FirebaseAuth
-                                        .instance.currentUser?.displayName,
-                                    'reporterEmail': FirebaseAuth
-                                        .instance.currentUser?.email,
+                                    'reporterName':
+                                        _auth.currentUser?.displayName,
+                                    'reporterEmail': _auth.currentUser?.email,
                                     'reportTime': DateTime.now(),
                                   },
                                 );
+
                                 _firestore
                                     .collection('reportedEvents')
                                     .doc(widget.event.code)
@@ -163,9 +168,7 @@ class _EventCardState extends State<EventCard> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             const Text(
               "Copy Code",
               textAlign: TextAlign.center,
@@ -192,7 +195,10 @@ class _EventCardState extends State<EventCard> {
                             );
 
                             _registrationService.register(
-                                context, widget.event);
+                              context,
+                              widget.event,
+                            );
+
                             Future.delayed(
                               const Duration(seconds: 1),
                               () {
@@ -215,12 +221,8 @@ class _EventCardState extends State<EventCard> {
                       ),
                     ),
                   ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Register",
-            ),
+            const SizedBox(height: 10),
+            const Text('Register'),
           ],
         ),
       ],
@@ -257,9 +259,7 @@ class _EventCardState extends State<EventCard> {
                       padding: const EdgeInsets.only(left: 20.0),
                       child: Text(
                         widget.event.name ?? '',
-                        style: const TextStyle(
-                          fontSize: 30.0,
-                        ),
+                        style: const TextStyle(fontSize: 30.0),
                       ),
                     ),
                     Container(
@@ -271,9 +271,7 @@ class _EventCardState extends State<EventCard> {
                       ),
                       child: Text(
                         widget.event.code.toString(),
-                        style: const TextStyle(
-                          fontSize: 15.0,
-                        ),
+                        style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
                   ],
@@ -289,23 +287,17 @@ class _EventCardState extends State<EventCard> {
                         children: [
                           Text(
                             DateFormat.MMMEd().format(widget.event.dateTime),
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                            ),
+                            style: const TextStyle(fontSize: 15.0),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             DateFormat.jm().format(widget.event.dateTime),
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                            ),
+                            style: const TextStyle(fontSize: 15.0),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             widget.event.venue ?? '',
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                            ),
+                            style: const TextStyle(fontSize: 15.0),
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(height: 10),
@@ -315,9 +307,7 @@ class _EventCardState extends State<EventCard> {
                             children: [
                               Text(
                                 '${widget.event.peopleCount} / ${widget.event.maxPeople} ',
-                                style: const TextStyle(
-                                  fontSize: 15.0,
-                                ),
+                                style: const TextStyle(fontSize: 15.0),
                                 textAlign: TextAlign.left,
                               ),
                               const SizedBox(width: 5.0),
@@ -336,9 +326,7 @@ class _EventCardState extends State<EventCard> {
                             ),
                             child: Text(
                               categoryToText(widget.event.category),
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                              ),
+                              style: const TextStyle(fontSize: 15.0),
                             ),
                           ),
                           const SizedBox(height: 10),

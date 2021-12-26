@@ -1,9 +1,9 @@
 import 'package:bubble/bubble.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/global/widgets/alert_popup.dart';
-import 'package:snu_connect/models/message.dart';
+import '../../../global/constants/colors.dart';
+import '../../../global/widgets/alert_popup.dart';
+import '../../../models/message.dart';
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble({

@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:snu_connect/global/constants/enums.dart';
-import 'package:snu_connect/models/end_user.dart';
+import '../global/constants/enums.dart';
+import 'end_user.dart';
 
 class Event {
   String? code, description, name, venue;

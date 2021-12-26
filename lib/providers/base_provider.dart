@@ -1,8 +1,8 @@
-import 'package:snu_connect/screens/Search/search_screen.dart';
+import '../screens/Search/search_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/screens/all_chats/all_chats_screen.dart';
-import 'package:snu_connect/screens/home/home_screen.dart';
-import 'package:snu_connect/screens/profile/profile_screen.dart';
+import '../screens/all_chats/all_chats_screen.dart';
+import '../screens/home/home_screen.dart';
+import '../screens/profile/profile_screen.dart';
 
 class BaseProvider extends ChangeNotifier {
   int _currentPage = 0;

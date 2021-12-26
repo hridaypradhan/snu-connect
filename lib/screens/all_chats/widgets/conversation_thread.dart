@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/models/end_user.dart';
-import 'package:snu_connect/screens/individual_chat/individual_chat_screen.dart';
+import '../../../global/constants/colors.dart';
+import '../../../models/end_user.dart';
+import '../../individual_chat/individual_chat_screen.dart';
 
 class ConversationThread extends StatefulWidget {
   final EndUser otherUser;
   final bool unread;
+
   const ConversationThread({
     Key? key,
     required this.otherUser,
@@ -31,6 +32,7 @@ class _ConversationThreadState extends State<ConversationThread>
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
+
     animation = ColorTween(
       begin: Colors.transparent,
       end: lightPink,
@@ -50,6 +52,7 @@ class _ConversationThreadState extends State<ConversationThread>
   Widget build(BuildContext context) {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     FirebaseAuth _auth = FirebaseAuth.instance;
+    
     return GestureDetector(
       onTap: () {
         animateColor();

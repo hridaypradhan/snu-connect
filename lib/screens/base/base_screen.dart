@@ -2,9 +2,9 @@ import 'package:bottom_sheet_expandable_bar/bottom_sheet_bar_icon.dart';
 import 'package:bottom_sheet_expandable_bar/bottom_sheet_expandable_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/providers/base_provider.dart';
-import 'package:snu_connect/screens/base/widgets/create_event_form.dart';
+import '../../global/constants/colors.dart';
+import '../../providers/base_provider.dart';
+import 'widgets/create_event_form.dart';
 
 class BaseScreen extends StatefulWidget {
   static const String id = 'base_screen';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
+import '../constants/colors.dart';
 
 SnackBar alertPopup(String text) => SnackBar(
       dismissDirection: DismissDirection.horizontal,

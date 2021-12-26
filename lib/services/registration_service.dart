@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/widgets/alert_popup.dart';
-import 'package:snu_connect/models/end_user.dart';
-import 'package:snu_connect/models/event.dart';
+import '../global/widgets/alert_popup.dart';
+import '../models/end_user.dart';
+import '../models/event.dart';
 
 class RegistrationService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

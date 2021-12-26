@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/global/constants/enums.dart';
+import '../../../global/constants/colors.dart';
+import '../../../global/constants/enums.dart';
 
 class CategoryFilter extends StatelessWidget {
   final Category? category;

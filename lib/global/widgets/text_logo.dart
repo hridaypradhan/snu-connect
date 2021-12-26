@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
+import '../constants/colors.dart';
 
 class TextLogo extends StatelessWidget {
   final double? height;
+  
   const TextLogo({
     Key? key,
     this.height,

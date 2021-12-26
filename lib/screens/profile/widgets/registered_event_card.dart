@@ -2,9 +2,9 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:snu_connect/global/widgets/alert_popup.dart';
-import 'package:snu_connect/models/event.dart';
-import 'package:snu_connect/screens/more_info/more_info_screen.dart';
+import '../../../global/widgets/alert_popup.dart';
+import '../../../models/event.dart';
+import '../../more_info/more_info_screen.dart';
 
 class RegisteredEventCard extends StatelessWidget {
   final Event event;

@@ -1,10 +1,10 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/global/widgets/alert_popup.dart';
-import 'package:snu_connect/global/widgets/large_button.dart';
-import 'package:snu_connect/screens/base/base_screen.dart';
-import 'package:snu_connect/services/auth_service.dart';
+import '../../global/constants/colors.dart';
+import '../../global/widgets/alert_popup.dart';
+import '../../global/widgets/large_button.dart';
+import '../base/base_screen.dart';
+import '../../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';

@@ -3,16 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:snu_connect/models/end_user.dart';
-import 'package:snu_connect/providers/all_chats_provider.dart';
-import 'package:snu_connect/screens/all_chats/widgets/conversation_thread.dart';
+import '../../models/end_user.dart';
+import '../../providers/all_chats_provider.dart';
+import 'widgets/conversation_thread.dart';
 
 class AllChatsScreen extends StatelessWidget {
-  AllChatsScreen({Key? key}) : super(key: key);
   final TextEditingController textController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   static const String id = 'all_chats';
+
+  AllChatsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +86,5 @@ class AllChatsScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Future<int> getSize() async {
-    return await _firestore
-        .collection('chats')
-        .doc(_auth.currentUser?.email)
-        .snapshots()
-        .length;
   }
 }

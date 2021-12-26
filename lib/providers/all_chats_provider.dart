@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snu_connect/models/end_user.dart';
+import '../models/end_user.dart';
 
 final List<EndUser> _dummyUsers = [
   EndUser(
@@ -52,9 +52,9 @@ class AllChatsProvider extends ChangeNotifier {
   void filterList(String query) {
     List<EndUser> matchingUsers = [];
 
-    for (EndUser u in _dummyUsers) {
-      if (u.name?.toLowerCase().startsWith(query.toLowerCase()) ?? false) {
-        matchingUsers.add(u);
+    for (EndUser user in _dummyUsers) {
+      if (user.name?.toLowerCase().startsWith(query.toLowerCase()) ?? false) {
+        matchingUsers.add(user);
       }
     }
     filteredList = matchingUsers;

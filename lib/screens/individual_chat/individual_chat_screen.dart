@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profanity_filter/profanity_filter.dart';
-import 'package:snu_connect/global/constants/colors.dart';
-import 'package:snu_connect/models/end_user.dart';
-import 'package:snu_connect/models/message.dart';
-import 'package:snu_connect/screens/individual_chat/widgets/message_bubble.dart';
+import '../../global/constants/colors.dart';
+import '../../models/end_user.dart';
+import '../../models/message.dart';
+import 'widgets/message_bubble.dart';
 
 class IndividualChatScreen extends StatefulWidget {
   static const id = 'individual_chat';
