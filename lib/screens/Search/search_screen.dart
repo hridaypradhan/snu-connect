@@ -29,12 +29,9 @@ class SearchScreen extends StatelessWidget {
       body: SafeArea(
         child: FilterListWidget<Category>(
           selectedListData: eventProvider.selectedCategoryFilters,
-          searchFieldHintText: "Event code",
           resetButtonText: 'Clear',
           listData: _categories,
-          hideHeaderText: true,
           selectedItemsText: 'selected categories',
-          applyButonTextBackgroundColor: primaryPink,
           onApplyButtonClick: (list) {
             if (list != null) {
               if (list.isNotEmpty) {
@@ -58,7 +55,7 @@ class SearchScreen extends StatelessWidget {
           },
           onItemSearch: (list, text) {
             eventProvider.setSearchBoxText(text);
-            return [];
+            return true;
           },
         ),
       ),
