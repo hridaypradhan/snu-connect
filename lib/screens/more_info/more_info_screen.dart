@@ -2,12 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../global/constants/colors.dart';
 import '../../global/constants/enums.dart';
 import '../../models/end_user.dart';
 import '../../models/event.dart';
-import 'widgets/registered_user_card.dart';
 import '../individual_chat/individual_chat_screen.dart';
+import 'widgets/registered_user_card.dart';
 
 class MoreInfoScreen extends StatelessWidget {
   static const String id = 'more_info';

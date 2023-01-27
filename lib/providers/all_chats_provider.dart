@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/end_user.dart';
 
 final List<EndUser> _dummyUsers = [

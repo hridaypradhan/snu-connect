@@ -4,12 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import '../constants/colors.dart';
-import 'alert_popup.dart';
+
 import '../../models/event.dart';
-import '../constants/enums.dart';
 import '../../screens/more_info/more_info_screen.dart';
 import '../../services/registration_service.dart';
+import '../constants/colors.dart';
+import '../constants/enums.dart';
+import 'alert_popup.dart';
 
 class EventCard extends StatefulWidget {
   final Event event;

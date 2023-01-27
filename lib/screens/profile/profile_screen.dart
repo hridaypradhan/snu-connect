@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../global/constants/colors.dart';
 import '../../models/event.dart';
 import '../onboarding/onboarding_screen.dart';
@@ -59,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 5),
           OutlinedButton(
             child: const Text('Log Out'),
-            style: OutlinedButton.styleFrom(primary: Colors.pink),
+            style: OutlinedButton.styleFrom(foregroundColor: Colors.pink),
             onPressed: () {
               FirebaseAuth.instance.signOut().then(
                 (value) {

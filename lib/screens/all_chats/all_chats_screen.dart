@@ -40,6 +40,7 @@ class AllChatsScreen extends StatelessWidget {
             autoFocus: true,
             width: 400,
             textController: textController,
+            onSubmitted: (s) {},
             onSuffixTap: () {
               textController.clear();
             },

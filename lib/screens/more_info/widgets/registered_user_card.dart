@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import '../../../global/constants/colors.dart';
 import '../../../models/end_user.dart';
 import '../../../models/event.dart';
-import '../../individual_chat/individual_chat_screen.dart';
 import '../../../services/registration_service.dart';
+import '../../individual_chat/individual_chat_screen.dart';
 
 class RegisteredUserCard extends StatelessWidget {
   final int serialNumber;

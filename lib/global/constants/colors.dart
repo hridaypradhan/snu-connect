@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'enums.dart';
 
 const Color primaryPink = Color(0xfff2005d);

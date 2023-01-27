@@ -27,7 +27,7 @@ class _IndividualChatScreenState extends State<IndividualChatScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) => _controller.jumpTo(_controller.position.maxScrollExtent),
     );
     _textController = TextEditingController();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../global/constants/colors.dart';
 import '../../../global/constants/enums.dart';
 import '../../../providers/event_provider.dart';
