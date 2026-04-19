@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/hridaypradhan/snu-connect)
+
 # SNU Connect
 
 An app to help you connect with people with similar interests across the Shiv Nadar University campus that you otherwise might never meet. 
